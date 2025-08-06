@@ -1,13 +1,16 @@
-# Co### Estructura del Proyecto
-- **Documento principal**: `main.tex`
-- **Plantilla de estilo**: `pucv_inf_2024.sty`
-- **Portada**: `common/portada.tex`
-- **Contenido**: `content/` (abstract.tex, introduction.tex)
-- **Referencias**: `referencias.bib`
-- **Glosario**: `glosario.tex`
-- **Proyecto secundario**: `registration_formulation/` - Bases temporales para presentación de seminario de títulonstructions - Seminario de Título
+# Copilot Instructions - Seminario de Título
 
 ## Información del Proyecto
+
+### Descripción del Proyecto
+El proyecto "Análisis de la Experiencia del Turista" se centra en investigar cómo los turistas interactúan con aplicaciones web durante sus viajes y cómo estas plataformas afectan su experiencia general. El proyecto comprende:
+
+- **Webscraping**: Recopilación automatizada de opiniones, reseñas y comentarios de turistas en diversas plataformas.
+- **Análisis con IA**: Uso de modelos supervisados y no supervisados para etiquetar, categorizar y analizar datos de experiencias turísticas.
+- **UX Research**: Investigación sobre técnicas para mejorar la experiencia del usuario en aplicaciones turísticas.
+- **Optimización**: Desarrollo de recomendaciones para mejorar las plataformas digitales del sector turístico.
+
+El objetivo principal es entender los factores que influyen en la satisfacción del turista con las herramientas digitales y proponer mejoras que beneficien tanto a los viajeros como a las empresas del sector.
 
 ### Estructura del Proyecto
 - **Documento principal**: `main.tex`
@@ -16,6 +19,8 @@
 - **Contenido**: `content/` (abstract.tex, introduction.tex)
 - **Referencias**: `references.bib`
 - **Glosario**: `glossary.tex`
+- **PDFs con reglas de seminario**: `pdfs/seminar_info` (contiene documentos PDF con las reglas del seminario de título)
+- **PDFs de Papers de Referencia**: `pdfs/papers` (contiene documentos PDF de referencia para el seminario de título)
 
 ### Configuración de LaTeX
 - **Distribución**: TeX Live 2025 (versión básica)
@@ -61,6 +66,13 @@
 - **Proyecto dual**: 
   - Directorio raíz: Documento final del seminario de título
   - `registration_formulation/`: Bases temporales para la presentación inicial del seminario
+
+### Tecnologías y Métodos de Investigación
+- **Webscraping**: Python con BeautifulSoup, Scrapy
+- **Procesamiento de Lenguaje Natural**: NLTK, spaCy, Transformers
+- **Análisis de Sentimientos**: BERT, RoBERTa
+- **Clustering y Clasificación**: Scikit-learn, TensorFlow
+- **Visualización de Datos**: Matplotlib, Seaborn, Tableau
 
 ### Comandos de Compilación
 ```bash
