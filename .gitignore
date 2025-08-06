@@ -1,0 +1,8 @@
+# Visual Studio Code settings
+.vscode/
+
+# Latex Compilation
+out/
+
+# MacOS specific files
+.DS_Store
