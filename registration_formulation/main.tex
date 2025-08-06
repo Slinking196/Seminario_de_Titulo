@@ -1,19 +1,124 @@
 \documentclass[12pt, letterpaper]{report} % Usa la clase report para documentos divididos en capítulos
 
 % Paquete que da el formato al documento
-\usepackage{pucv_inf_2024}
+\usepackage{../pucv_inf_2024}
 \usepackage{lipsum}
 \usepackage{indentfirst}
 \usepackage{verbatim}
 \usepackage{pdfpages}
 \usepackage[table]{xcolor}
 
+\addbibresource{../references.bib}
+\usepackage{hyperref}
+
+% Configurar biblatex para que no haga salto de página
+\defbibheading{bibliography}[\refname]{\section*{#1}}
+
 \begin{document}
+    \pagenumbering{gobble}
+    
+    %% Portada para informe de Inscripción del Proyecto
+    \begin{center}
+        \textbf{PONTIFICIA UNIVERSIDAD CATÓLICA DE VALPARAÍSO}\\
+        \textbf{FACULTAD DE INGENIERÍA}\\
+        \textbf{ESCUELA DE INGENIERÍA INFORMÁTICA}
+
+        \vspace{1cm}
+        \textbf{ANÁLISIS DE LA EXPERIENCIA DEL TURISTA}\\
+        \vspace{1cm}
+        Fabrizzio Andrés Mura Lavarello, Matías Hernán Bugueño Bugueño
+    \end{center}
+
+    %% Introducción al Proyecto
+    El uso de la tecnología en los últimos años ha aumentado considerablemente en la vida cotidiana de las personas,
+    esto es debido a diversos factores como la globalización, el avance de la tecnología y la creciente necesidad de las 
+    personas de acceder a información de manera rápida y eficiente. Según un estudio de McKinsey and Company, la pandemia 
+    del COVID-19 aceleró la digitalización de las interacciones con clientes y operaciones internas en un promedio de tres a 
+    cuatro años, y el desarrollo de productos digitales avanzó siete años en tan solo unos meses\cite{mckinsey2020}.\\
+
+    Por esta misma razón se ha visto un aumento considerable del uso de plataformas digitales para la búsqueda de hospedaje, 
+    viajes, sitios túristicos para visitar y otros servicios relacionados con el turismo una vez fue finalizada la pandemia,
+    esto provoca que las plataformas de turismo online tengan que mejorar la experiencia de los usuarios contantemente para poder
+    mantenerse competitivos en un mercado tan volátil y cambiante.
+
+    %% Descripción del Proyecto
+    \section*{Descripción del Proyecto}
+    
+    Actualmente las personas utilizan plataformas digitales como Booking\cite{booking2025}, 
+    TripAdvisor \cite{tripadvisor2025}, Trivago\cite{trivago2025}, entre otras, para buscar y reservar servicios 
+    de alojamiento, transporte, atracciones, vuelos y muchos otros servicios enfocados a todo lo que buscan 
+    los turistas en sus viajes, ya sea por comodidad, entretención, seguridad, apuro o simplemente ocio.\\
+
+    Es por esto que en este proyecto buscaremos realizar analisis de reseñas de estas plataformas, 
+    obteniendo información con técnicas como webScrapping para recolectar datos de las reseñas de usuarios de 
+    manera masiva de páginas como las anteriormente mencionadas, para luego aplicar técnicas para etiquetado 
+    de datos con modelos de inteligencia artificial, y así poder identificar patrones, sentimientos, necesidades 
+    o en general un analisis de datos que nos entregue información relevante, además de técnicas de procesamiento de lenguaje natural (NLP), todo con el objetivo final de poder sugerir mejoras en la 
+    experiencia de usuario (UX) enfocada al turista (TX) .\\
+
+    Se ha planteado la idea de que, con esta información cualitativa, se podria recabar información para 
+    mejorar o generar una nueva plataforma/aplicación que mejore la experiencia del turista (TX) de muchas formas y que tal vez esto
+    pueda tener repercusiones en la industria del turismo, preferente y esperablemente de manera positiva, teniendo además en cuenta que en esta industria se mueven muchas personas y dinero 
+    constantemente y que sobre todo buscan la mejor experiencia en estos servicios y en caso de no cumplirse las expectativas simplemente se pierde 
+    el cliente por mucho tiempo o para siempre, por lo que es un mercado muy volatil y donde hay que ser cautelosos.
+
+    %% Objetivos del Proyecto
+    \section*{Objetivos del proyecto:}
+    
+    A modo general, mejorar las recomendaciones de viajes, hospedaje y servicios relacionados al turismo, gracias a un 
+    analisis exhaustivo de las reseñas de usuarios en plataformas como las mencionadas en el punto 
+    \textbf{Descripción del proyecto} utilizando técnicas de procesamiento de lenguaje natural.
+
+    Entrando mas a detalle en este proyecto, buscamos recolectar reseñas de usuarios de plataformas 
+    turísticas digitales tales como Booking, TripAdvisor y/o Trivago utilizando técnicas de web 
+    scraping de forma automatizada y masiva; preprocesar y limpiar los datos recolectados, aplicando 
+    técnicas de normalización y filtrado para garantizar su calidad y utilidad en el análisis; 
+    aplicar técnicas de procesamiento de lenguaje natural (NLP) para analizar el contenido textual 
+    de las reseñas y extraer patrones lingüísticos relevantes; realizar el etiquetado y posterior 
+    clasificación de las reseñas utilizando modelos de inteligencia artificial; realizar análisis de datos,
+    identificando puntos críticos y oportunidades de mejora en la experiencia del turista (TX); y, 
+    finalmente, proponer recomendaciones o mejoras para un posible diseño o rediseño de 
+    plataformas/aplicaciones que mejoren la experiencia del turista.
+
+
+    %% Cronograma Tentativo de Trabajo
+    \section*{Plan de trabajo tentativo}
+
+    El Proyecto se desarrollará en un periodo estimado de 4 meses, distribuyendo las actividades principales en las siguientes
+    etapas:
+
+    \begin{enumerate}
+        \item \textbf{Investigación del Estado del Arte:} En esta etapa se llevará a cabo una revisión exhaustiva de los estudios
+               previos y el análisis que han realizados diversos investigadores y empresas con respecto a la experiencia del usuario 
+               en las plataoformas digitales de turismo, así como las técnicas de procesamiento de lenguaje natural y análisis de sentimientos 
+               aplicadas en este contexto. Esta etapa tendrá una duración estimada de 2 semanas.
+
+        \item \textbf{Recolección de Datos:} En esta etapa se llevará a cabo la recolección de reseñas de usuarios de plataformas turísticas 
+               digitales utilizando técnicas de web scraping. Esta etapa tendrá una duración estimada de 2 semanas.
+
+        \item \textbf{Preprocesamiento de Datos:} En esta etapa se realizará la limpieza de los datos recolectados, se llevará a cabo la normalización,
+              la tokenización y la eliminación del ruido en los datos, esto para luego poder aplicar diversas técnicas de procesamiento de lenguaje natural.
+              Esta etapa tendrá una duración estimada de 1.5 semanas.
+
+        \item \textbf{Etiquetado Automático de Datos:} En esta etapa se aplicarán distintos modelos para el procesamiento de datos, como modelos de inteligencia
+                artificial no supervisados para la clasificación de sentimientos y tópicos relacionados directamente a la experiencia del usuario. Esta etapa tendrá
+                una duración estimada de 2 semanas.
+
+        \item \textbf{Análisis de Resultados:} En esta etapa se realizará el análisis de los datos limpios y etiquetados, identificando patrones claves con apoyo de 
+                modelos de inteligencia artificial supervisados para la predicción de las opiniones de los usuarios a la hora de ofrecer un servicio, como también
+                modelos estadísticos para la identificación de tendencias y correlaciones en los datos. Esta etapa tendrá una duración estimada de 1.5 semanas.
+
+        \item \textbf{Propuestas y Conclusiones:} En esta etapa se redactarán las recomendaciones basadas en los hallazgos de los análsis realizados, como también
+                se diseñará un prototipo tentativo de mejoras o un nuevo software que mejore la experiencia del usuario en las plataformas digitales de turismo. 
+                Esta etapa tendrá una duración estimada de 5 días.
+                
+        \item \textbf{Redacción del Informe Final:} En esta etapa se integrarán los resultados obtenidos, las conclusiones y las futuras líneas de desarrollo del proyecto,
+                redactando el informe final del proyecto. Esta etapa tendrá una duración estimada de 2 semanas.
+    \end{enumerate}
+
+    %% Bibliografía
+    \printbibliography[title={Referencias}, heading=bibliography]
 
 \end{document}
-
-
-
-
 
 
