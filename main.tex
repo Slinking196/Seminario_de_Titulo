@@ -11,16 +11,16 @@
 % Archivo de Referencias
 
 % Glosario
-\loadglsentries{glosario}
+\loadglsentries{glossary}
 \makeglossaries
-\addbibresource{referencias.bib}
+\addbibresource{references.bib}
 \usepackage{hyperref}
 
 % Parte el Documento
 \begin{document}
 %% TEX CON PORTADA DEL INFORME
 % Portada para informes en asignaturas
-\include{common/portada}
+\include{common/front_page}
 
 % Portada para informes de TFT a excepción del final de Proyecto
 %\include{Portadas/portada_TFT_nofinal.tex}
@@ -36,10 +36,12 @@
 
 %% INDICE, LISTAS de FIGURAS/TABLAS/ALGORITMOS, GLOSARIO, ETC.
 %% COMENTAR EN CASO DE NO QUERER INCLUIR ALGUNA DE ESTAS LISTAS/INDICES
-\newpage\addcontentsline{toc}{chapter}{Índice General\vspace{-0.5cm}}
+\newpage
+\addcontentsline{toc}{chapter}{Índice General\vspace{-0.5cm}}
 \tableofcontents % Este comando genera el índice
 
-\newpage\addcontentsline{toc}{chapter}{Lista de Figuras\vspace{-0.5cm}}
+\newpage
+\addcontentsline{toc}{chapter}{Lista de Figuras\vspace{-0.5cm}}
 \listoffigures % Índice de figuras
 \listoftables
 \newpage\addcontentsline{toc}{chapter}{Lista de Tablas\vspace{-0.5cm}}
