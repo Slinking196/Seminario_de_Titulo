@@ -1,55 +1,57 @@
-\documentclass[12pt]{article}
+\documentclass[12pt, letterpaper]{report} % Usa la clase report para documentos divididos en capítulos
 
-% Paquetes comunes
-\usepackage[utf8]{inputenc}     % Codificación UTF-8
-\usepackage[T1]{fontenc}        % Codificación de fuentes
-\usepackage[spanish]{babel}     % Idioma español
-\usepackage{amsmath, amssymb}   % Matemáticas avanzadas
-\usepackage{graphicx}           % Imágenes
-\usepackage{hyperref}           % Enlaces
+%Paquete que da el formato al documento
+\usepackage{pucv_inf_2024}
+\usepackage{lipsum}
+\usepackage{indentfirst}
+\usepackage{verbatim}
+\usepackage{pdfpages}
+\usepackage[table]{xcolor}
 
-\title{Mi Primer Documento en \LaTeX}
-\author{Tu Nombre}
-\date{\today}
+% Archivo de Referencias
 
+% Glosario
+\loadglsentries{glosario}
+\makeglossaries
+\addbibresource{referencias.bib}
+\usepackage{hyperref}
+
+% Parte el Documento
 \begin{document}
+%% TEX CON PORTADA DEL INFORME
+% Portada para informes en asignaturas
+\include{common/portada}
 
-\maketitle
+% Portada para informes de TFT a excepción del final de Proyecto
+%\include{Portadas/portada_TFT_nofinal.tex}
 
-\section{Introducción}
+% Portada informe final de proyecto 
+%\include{Portadas/portada_TFT_final.tex}
 
-Este es un documento de ejemplo creado con \LaTeX{} en macOS usando la terminal. Puedes compilarlo con:
+% Portada para informe de Tesis de Posgrado
+%\include{Portadas/portada_Tesis.tex}
 
-\begin{verbatim}
-pdflatex ejemplo.tex
-\end{verbatim}
+%% RESUMEN/ABSTRACT DEL INFORME
+\include{content/abstract}
 
-\section{Fórmulas matemáticas}
+%% INDICE, LISTAS de FIGURAS/TABLAS/ALGORITMOS, GLOSARIO, ETC.
+%% COMENTAR EN CASO DE NO QUERER INCLUIR ALGUNA DE ESTAS LISTAS/INDICES
+\newpage\addcontentsline{toc}{chapter}{Índice General\vspace{-0.5cm}}
+\tableofcontents % Este comando genera el índice
 
-Aquí tienes una fórmula famosa:
+\newpage\addcontentsline{toc}{chapter}{Lista de Figuras\vspace{-0.5cm}}
+\listoffigures % Índice de figuras
+\listoftables
+\newpage\addcontentsline{toc}{chapter}{Lista de Tablas\vspace{-0.5cm}}
+%\listoftables  % Índice de tablas
 
-\[
-e^{i\pi} + 1 = 0
-\]
+% Imprimir Glosario
+\newpage\addcontentsline{toc}{chapter}{Glosario}
+\printglossary[type=\acronymtype]
+\newpage
+\pagenumbering{arabic} % Cambia a numeración arábiga para el resto del documento
 
-También puedes incluir ecuaciones numeradas:
-
-\begin{equation}
-a^2 + b^2 = c^2
-\end{equation}
-
-\section{Imágenes}
-
-Puedes insertar imágenes si tienes un archivo como `imagen.jpg` en el mismo directorio:
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.4\textwidth]{imagen.jpg}
-  \caption{Una imagen de ejemplo.}
-\end{figure}
-
-\section{Enlaces}
-
-Aquí un enlace a \href{https://www.latex-project.org/}{LaTeX Project}.
+% CONTENIDO PRINCIPAL DEL DOCUMENTO
+\include{content/introduction}
 
 \end{document}
