@@ -1,6 +1,7 @@
 % Este es un archivo de estilo LaTeX para informes de la Escuela de Ing. Informática (PUCV)
 % Autor: Escuela de Ingeniería Informática
 % Versión: 1.0
+% Fecha: 2024-03-07
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{pucv_inf_2024}[2024/03/07 Paquete para informes PUCV\_INF]
@@ -12,8 +13,6 @@
 \usepackage{titlesec} % Para personalizar los títulos de secciones
 \usepackage{lipsum} % Para texto de relleno. Puedes eliminarlo en tu documento final
 \usepackage{algorithm}
-\usepackage[table]{xcolor}
-\usepackage{makecell}
 \usepackage{algpseudocode}
 \usepackage{times} % Times New Roman. Para Open Sans o Verdana, necesitarás paquetes adicionales
 \usepackage{xcolor}
@@ -26,7 +25,7 @@
 
 \usepackage{graphicx}
 \usepackage{etoolbox}
-\usepackage[style=numeric, backend=biber]{biblatex} %% Estaba en APA XD
+\usepackage[style=apa, backend=biber]{biblatex}
 
 
 \usepackage{enumitem} % Para controlar el espaciado en listas
@@ -83,30 +82,3 @@
 \setlength{\parindent}{1cm} % Sangría de 1 cm
 \renewcommand{\baselinestretch}{1} % Interlineado sencillo
 \setlength{\parskip}{10pt}
-
-% Comandos para la portada
-\newcommand{\membrete}[1]{%
-    \textbf{\large #1}%
-}
-
-\newcommand{\tituloPortada}[1]{%
-    \textbf{\huge #1}%
-}
-
-\newcommand{\alumnos}[1]{%
-    \textbf{\Large #1}%
-}
-
-\newcommand{\datosPortada}[1]{%
-    \begin{tabular}{l l}
-        #1
-    \end{tabular}%
-}
-
-\newcommand{\datoPortada}[2]{%
-    \textbf{#1:} & #2 \\%
-}
-
-\newcommand{\fechaPortada}[1]{%
-    \textbf{\large #1}%
-}
