@@ -2,7 +2,10 @@
 .vscode/
 
 # Latex Compilation
-out/
+# Ignore any 'out' folder across the repo (e.g., tesis/out)
+**/out/
+latexmkrc
+main.synctex.gz
 
 # MacOS specific files
 .DS_Store
@@ -11,3 +14,4 @@ out/
 *.pyc
 __pycache__/
 .venv/
+
