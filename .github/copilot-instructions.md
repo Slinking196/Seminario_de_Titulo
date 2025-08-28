@@ -15,12 +15,12 @@ El objetivo principal es entender los factores que influyen en la satisfacción 
 ### Estructura del Proyecto
 - **Documento principal**: `main.tex`
 - **Plantilla de estilo**: `pucv_inf_2024.sty`
-- **Portada**: `common/front-page.tex`
-- **Contenido**: `content/` (abstract.tex, introduction.tex)
-- **Referencias**: `references.bib`
-- **Glosario**: `glossary.tex`
-- **PDFs con reglas de seminario**: `pdfs/seminar_info` (contiene documentos PDF con las reglas del seminario de título)
-- **PDFs de Papers de Referencia**: `pdfs/papers` (contiene documentos PDF de referencia para el seminario de título)
+- **Portada**: `tesis/Portadas/portada_principal.tex`
+- **Contenido**: `tesis/body/` (abstract.tex, introduction.tex)
+- **Referencias**: `tesis/references.bib`
+- **Glosario**: `tesis/glossary.tex`
+- **PDFs con reglas de seminario**: `tesis/pdfs/seminar_info` (contiene documentos PDF con las reglas del seminario de título)
+- **PDFs de Papers de Referencia**: `tesis/pdfs/papers` (contiene documentos PDF de referencia para el seminario de título)
 
 ### Configuración de LaTeX
 - **Distribución**: TeX Live 2025 (versión básica)
