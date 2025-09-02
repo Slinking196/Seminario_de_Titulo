@@ -1,4 +1,1 @@
-pdfplumber>=0.7.5
-PyPDF2>=3.0.0
-pymupdf>=1.26.3
-layoutparser>=0.3.4
+pandas>=2.3.2
