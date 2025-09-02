@@ -1,7 +1,6 @@
 # Visual Studio Code settings
 .vscode/
 
-# Latex Compilation
 # Ignore any 'out' folder across the repo (e.g., tesis/out)
 **/out/
 latexmkrc
