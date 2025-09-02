@@ -13,14 +13,19 @@ El proyecto "Análisis de la Experiencia del Turista" se centra en investigar c�
 El objetivo principal es entender los factores que influyen en la satisfacción del turista con las herramientas digitales y proponer mejoras que beneficien tanto a los viajeros como a las empresas del sector.
 
 ### Estructura del Proyecto
-- **Documento principal**: `main.tex`
-- **Plantilla de estilo**: `pucv_inf_2024.sty`
-- **Portada**: `tesis/Portadas/portada_principal.tex`
-- **Contenido**: `tesis/body/` (abstract.tex, introduction.tex)
-- **Referencias**: `tesis/references.bib`
-- **Glosario**: `tesis/glossary.tex`
-- **PDFs con reglas de seminario**: `tesis/pdfs/seminar_info` (contiene documentos PDF con las reglas del seminario de título)
-- **PDFs de Papers de Referencia**: `tesis/pdfs/papers` (contiene documentos PDF de referencia para el seminario de título)
+- **Documento principal (Tesis)**: `tesis/main.tex`
+- **Plantilla de estilo de la tesis**: `tesis/pucv_inf_2024.sty`
+- **Portada de la tesis**: `tesis/Portadas/portada_principal.tex`
+- **Contenido de la tesis**: `tesis/body/`
+  - `abstract.tex`
+  - `introduction.tex`
+  - `theoretical_framework.tex`
+  - `objectives.tex`
+- **Referencias de la tesis**: `tesis/references.bib`
+- **Glosario de la tesis**: `tesis/glossary.tex`
+- **PDFs con reglas de seminario**: `pdfs/seminar_info` (contiene documentos PDF con las reglas del seminario de título)
+- **PDFs de Papers de Referencia**: `pdfs/papers` o `markdowns/papers` (contiene documentos PDF de referencia para el seminario de título)
+- **Análisis de Datos**: `data_analysis/` (notebooks y scripts para análisis de datos)
 
 ### Configuración de LaTeX
 - **Distribución**: TeX Live 2025 (versión básica)
