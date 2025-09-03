@@ -5,7 +5,6 @@
 ### Descripción del Proyecto
 El proyecto "Análisis de la Experiencia del Turista" se centra en investigar cómo los turistas interactúan con aplicaciones web durante sus viajes y cómo estas plataformas afectan su experiencia general. El proyecto comprende:
 
-- **Webscraping**: Recopilación automatizada de opiniones, reseñas y comentarios de turistas en diversas plataformas.
 - **Análisis con IA**: Uso de modelos supervisados y no supervisados para etiquetar, categorizar y analizar datos de experiencias turísticas.
 - **UX Research**: Investigación sobre técnicas para mejorar la experiencia del usuario en aplicaciones turísticas.
 - **Optimización**: Desarrollo de recomendaciones para mejorar las plataformas digitales del sector turístico.
@@ -73,7 +72,6 @@ El objetivo principal es entender los factores que influyen en la satisfacción 
   - `registration_formulation/`: Bases temporales para la presentación inicial del seminario
 
 ### Tecnologías y Métodos de Investigación
-- **Webscraping**: Python con BeautifulSoup, Scrapy
 - **Procesamiento de Lenguaje Natural**: NLTK, spaCy, Transformers
 - **Análisis de Sentimientos**: BERT, RoBERTa
 - **Clustering y Clasificación**: Scikit-learn, TensorFlow
@@ -94,4 +92,4 @@ pdflatex main.tex  # Segunda pasada
 - Visor PDF en pestaña de VS Code
 
 ---
-*Última actualización: 6 de agosto de 2025*
+*Última actualización: 3 de Septiembre de 2025*
