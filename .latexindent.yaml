@@ -1,0 +1,20 @@
+# Configuración de latexindent para envolver líneas a 80 columnas
+# Referencia: perldoc latexindent
+defaultIndent: '    '
+modifyLineBreaks:
+  textWrapOptions:
+    columns: 80
+    removeParagraphLineBreaks: 1
+    multipleSpacesToSingle: 1
+    when: before
+  oneSentencePerLine:
+    manipulateSentences: 0
+noAdditionalIndent:
+  environments:
+    - verbatim
+    - lstlisting
+    - minted
+  commands:
+    - item
+fineTuning:
+  preserveBlankLines: 1
