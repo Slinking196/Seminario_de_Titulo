@@ -20,7 +20,7 @@ El objetivo principal es entender los factores que influyen en la satisfacción 
   - `introduction.tex`
   - `theoretical_framework.tex`
   - `objectives.tex`
-- **Referencias de la tesis**: `tesis/references.bib`
+- **Referencias de la tesis**: `tesis/referencias.bib`
 - **Glosario de la tesis**: `tesis/glossary.tex`
 - **PDFs con reglas de seminario**: `pdfs/seminar_info` (contiene documentos PDF con las reglas del seminario de título)
 - **PDFs de Papers de Referencia**: `pdfs/papers` o `markdowns/papers` (contiene documentos PDF de referencia para el seminario de título)
