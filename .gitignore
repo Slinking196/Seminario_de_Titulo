@@ -16,3 +16,48 @@ __pycache__/
 
 # pdfs/
 main.pdf
+
+# LaTeX intermediate/build artifacts
+**/*.aux
+**/*.bbl
+**/*.bcf
+**/*.blg
+**/*.fdb_latexmk
+**/*.fls
+**/*.log
+**/*.lof
+**/*.lot
+**/*.lol
+**/*.nav
+**/*.out
+**/*.run.xml
+**/*.snm
+**/*.synctex.gz
+**/*.toc
+**/*.vrb
+**/*.idx
+**/*.ilg
+**/*.ind
+**/*.ist
+**/*.glg
+**/*.glo
+**/*.gls
+**/*.acn
+**/*.acr
+**/*.alg
+**/*.nlo
+**/*.nls
+**/*.maf
+**/*.mtc*
+**/*.pdfsync
+**/*.thm
+**/*.xdy
+**/*.tdo
+**/*.loe
+**/*.brf
+**/*Notes.bib
+
+# latexindent temporary/backup files
+**/__latexindent_temp_*
+**/*.bak*
+**/*.backup*
