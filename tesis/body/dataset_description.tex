@@ -1,0 +1,38 @@
+\chapter{Descripción del Conjunto de Datos}
+\label{cha:Descripción del Conjunto de Datos}
+
+En esta sección, veremos una explicación detallada de los datos que utilizaremos como material de investigación, procedencia, trabajo de preprocesamiento que realizaremos, limpieza de los datos y preparación para un posterior análisis y LNU, dando enfasis en que esta sección en particular corresponde a un paso fundamental dentro de la metodología que definimos, además de permitirnos filtrar la información que nos será verdaderamente relevante para este trabajo para finalmente reducir la carga de los modelos LNU y as'i de esta forma finalmente llegar al mejor resultado que podadmos proponer.\\
+
+\section{\textbf{Conjunto de Datos (Dataset)}}
+Para este trabajo utilizaremos un dataset que contiene comentarios de usuarios de la plataforma de TripAdvisor, luego de que estos mismos usuarios opinaran sobre alguna atracción visitada, estadía en residencia, Hotel, etc, en Chile y donde se obtuvieron comentarios de 3 lenguajes distintos principalmente, español, inglés y portugués.\\
+La estructura se compone de 14 columnas, de las cuales solo consideraremos 4 de ellas, debido al valor que estas significan tanto para el trabajo NLU como para en análisis posterior de datos que deberemos realizar en etapas posteriores.\\
+A continuación detallaremos las columnas de interés para nuestro trabajo, que significan y las razones que nos llevan a considerarlas como relevantes para nuestro análisis.
+Las cuales son:\\
+\begin{enumerate}
+    \item \textbf{rating_review:} Valor entre 1 y 5 que contiene el comentario, refiriendonos a una escala likert, donde se asumió que 1 es muy malo y 5 es excelente.
+     
+    \item \textbf{review_text:} Comentario del usuario respecto a su experiencia como turista en determinado servicio de trasfondo turístico (Dato que naturalmente servirá como base para analizar con modelos NLU y determinar si es que existe una intencionalidad de suggerencia en este).
+
+    \item \textbf{sentiment:} Sentimiento del comentario, campo que pudo tomar los valores VERY_POSITIVE, POSITIVE, NEUTRAL, NEGATIVE, VERY_NEGATIVE (aunque pareciendo haberse tratado de un trabajo previo y añadido de los datos solo se tomará como punto de referencia para agilizar la revisión luego del trabajo de NLU).
+    
+    \item \textbf{sentiment_score:} Puntuación del sentimiento valor que se mueve entre [0 y 4] con (0=VERY_NEGATIVE, 1=NEGATIVE, 2=NEUTRAL, 3=POSITIVE, 4=VERY_POSITIVE), sirviendo como un valor numérico que nos podría permitir realizar análisis estadísticos o comparativos mas adelante.
+\end{enumerate}
+
+\section{\textbf{Librerías}}
+
+Para el trabajo de análisis de sentimientos y procesamiento de lenguaje natural, utilizaremos diversas librerías de Python que nos permitirán llevar a cabo la identificación del lenguaje de cada uno de los comentarios, ya que pese a existir la columna de lenguaje en el dataset, existen comentarios que contienen mezclas de idiomas, donde personas de habla hispana hacen comentarios con algunas palabras en inglés y lo mismo con los otros idiomas, por lo que se hace necesario un trabajo de reconocimiento mas elaborado del lenguaje predominante de cada comentario.\\
+
+\begin{itemize}
+    \item \textbf{pandas:} Para la manipulación y análisis de datos. 
+    \item \textbf{numpy:} Para operaciones numéricas y manejo de arreglos.
+    \item \textbf{langdetect:} Para la detección de idiomas en los comentarios tanto en españolcomo en inglés.
+\end{itemize}
+
+\section{\textbf{Resultados Esperados:}}
+
+Luego de realizar este proceso de limpieza y preprocesamiento de los datos, esperamos obtener un dataset limpio, ordenado y con la menor cantidad de ruido posible, que nos permita utilizar modelos NLU de calidad y que finalmente esto nos permita realizar un proceso de análisis y reconocimiento de datos y comentarios respectivamente para llegar al resultado esperado y cumplir con los objetivos propuestos en un inicio.\\
+
+
+
+
+
