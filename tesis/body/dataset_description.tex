@@ -9,13 +9,14 @@ La estructura se compone de 14 columnas, de las cuales solo consideraremos 4 de 
 A continuación detallaremos las columnas de interés para nuestro trabajo, que significan y las razones que nos llevan a considerarlas como relevantes para nuestro análisis.
 Las cuales son:\\
 \begin{enumerate}
-    \item \textbf{rating_review:} Valor entre 1 y 5 que contiene el comentario, refiriendonos a una escala likert, donde se asumió que 1 es muy malo y 5 es excelente.
+    \item \textbf{rating review:} Valor entre 1 y 5 que contiene el comentario, refiriendonos a una escala likert, donde se asumió que 1 es muy malo y 5 es excelente.
      
-    \item \textbf{review_text:} Comentario del usuario respecto a su experiencia como turista en determinado servicio de trasfondo turístico (Dato que naturalmente servirá como base para analizar con modelos NLU y determinar si es que existe una intencionalidad de suggerencia en este).
+    \item \textbf{review text:} Comentario del usuario respecto a su experiencia como turista en determinado servicio de trasfondo turístico (Dato que naturalmente servirá como base para analizar con modelos NLU y determinar si es que existe una intencionalidad de suggerencia en este).
 
-    \item \textbf{sentiment:} Sentimiento del comentario, campo que pudo tomar los valores VERY_POSITIVE, POSITIVE, NEUTRAL, NEGATIVE, VERY_NEGATIVE (aunque pareciendo haberse tratado de un trabajo previo y añadido de los datos solo se tomará como punto de referencia para agilizar la revisión luego del trabajo de NLU).
-    
-    \item \textbf{sentiment_score:} Puntuación del sentimiento valor que se mueve entre [0 y 4] con (0=VERY_NEGATIVE, 1=NEGATIVE, 2=NEUTRAL, 3=POSITIVE, 4=VERY_POSITIVE), sirviendo como un valor numérico que nos podría permitir realizar análisis estadísticos o comparativos mas adelante.
+    \item \textbf{sentiment:} Sentimiento del comentario, campo que pudo tomar los valores VERY POSITIVE, POSITIVE, NEUTRAL, NEGATIVE, VERY NEGATIVE (aunque pareciendo haberse tratado de un trabajo previo y añadido de los datos solo se tomará como punto de referencia para agilizar la revisión luego del trabajo de NLU).
+
+    \item \textbf{sentiment score:} Puntuación del sentimiento valor que se mueve entre [0 y 4] con (0=VERY NEGATIVE, 1=NEGATIVE, 2=NEUTRAL, 3=POSITIVE, 4=VERY POSITIVE), sirviendo como un valor numérico que nos podría permitir realizar análisis estadísticos o comparativos mas adelante.
+
 \end{enumerate}
 
 \section{\textbf{Librerías}}
