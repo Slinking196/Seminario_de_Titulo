@@ -19,6 +19,9 @@ main.pdf
 
 # Data files
 data_analysis/data/Chile_all_csv.csv
+data_analysis/data/test.csv
+
+
 # LaTeX intermediate/build artifacts
 **/*.aux
 **/*.bbl
