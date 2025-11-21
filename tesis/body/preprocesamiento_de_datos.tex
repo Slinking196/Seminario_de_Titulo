@@ -1,24 +1,34 @@
-\chapter{Preprocesamiento de datos}
-\label{cha:Preprocesamiento de datos}
+\chapter{\textbf{Preprocesamiento de datos}}
+\label{cha:preprocesamiento_datos}
 
-En esta sección se describirá el proceso de preprocesamiento de datos llevado a cabo para preparar el conjunto de datos de reseñas de usuarios para su posterior análisis y trabajo con NLU, las técnicas que consideramos pertinentes, y las herramientas utilizadas para lograr una preparación de datos de calidad y de esta forma asegurar una base sólida de trabajo.\\ 
+En esta sección se describirá el proceso de preprocesamiento de datos llevado a cabo para preparar el conjunto de datos de reseñas de usuarios para su posterior análisis y trabajo con NLU, las técnicas que consideramos pertinentes, y las herramientas utilizadas para lograr una preparación de datos de calidad y de esta forma asegurar una base sólida de trabajo.
 
-Como se recomienda de entre distintas fuentes bibliográficas como \cite{Agrawal2024TextPreprocessing}, el preprocesamiento de datos es un paso importante que conlleva distintas técnicas de preparación de datos para la luego utilización de los modelos NLU. A continuación se describirán las técnicas y herramientas utilizadas en esta fase de preprocesamiento del Dataset.
+Como se recomienda en distintas fuentes como \cite{Agrawal2024TextPreprocessing}, el preprocesamiento de datos es un paso importante que conlleva distintas técnicas de preparación de datos para la luego utilización de los modelos NLU. A continuación se describirán las técnicas y herramientas utilizadas en esta fase de preprocesamiento del Dataset.
 
-\section{\textbf{Reconocimiento de lenguaje}}
-Utilizando librerías de Python como \textbf{langdetect} y realizando una previa división del dataset en distintos dataframes/archivos para trabajarlos de manera descentralizada, se procedió con el reconocimiento del lenguaje de los distintos comentarios encontrados ......................................... CONTINUAR EXPLICACION
 
-\section{\textbf{Limpieza y separación de dataset}}
+\section{\textbf{Reconocimiento de lenguaje}} % diccionarios - tokenización
+Utilizando las liberías \textbf{langdetect}, \textbf{enchant} y \textbf{nltk} y realizando una previa división del dataset en distintos dataframes/archivos para tener la posibilidad de trabajarlos de manera descentralizada, se procedió con el reconocimiento del lenguaje de los distintos comentarios, etiquetando los datos de acuerdo al lenguaje predominante y en donde el lenguaje predominante superara o igualara el 50\% de las palabras del comentario, al detectar si la palabra es español o ingles con pyenchant gracias a los diccionarios provistos ocurre el siguiente proceso: En caso de una palabra ambigua (Ej: Doctor) igual en ambos idiomas se genera una ventana de contexto con las 2 palabras anteriores y posteriores para determinar el idioma predominante en las palabras de contexto, y así determinar el idioma de la palabra ambigua, aunque particularmente para casos en los que se encuentran palabras con una ventana de un 50\% Español o un 50\% Inglés, la palabra central es marcada como desconocida. Todo el proceso mencionado es realizado por cada palabra del comentario pero en la mayoría de casos se encontratrán facilmente en los diccionarios de enchant, todo para finalmente determinar el porcentaje de idioma y finalmente el idioma predominante del comentario.
 
-Luego se realizó un trabajo de selección de las columnas ded interés que aportarían verdadera información a las herramientas de NLU, de manera que trabajemos con un fataframe reducido y mas atomizado, pero sin perder información útil, asegurando una mejora de rendimiento de los modelos comparado con un trabajo de todas las columnas del dataset.
+% insertar figura de ejemplo de reconocimiento de lenguaje
+\section{\textbf{Eliminación de columnas}}
+Se eliminan las columnas innecesarias del dataset, quedando solo las columnas relevantes para el análisis posterior, que en nuestro caso son: \textbf{review\_text}, \textbf{tripadvisor\_lenguaje}, \textbf{lenguaje\_percentaje}, \textbf{langdetect\_lenguaje}, \textbf{is\_suggestion\_score}.
 
-\section{\textbf{Lowercasing}}
 
-Al momento de tener que trabajar directamente con la preparación de los \textbf{comentarios}, debimos  
-\section{\textbf{Tokenización}} NO
-\section{\textbf{Lematización}} NO
-\section{\textbf{Eliminación de Stopwords}} NO
-\section{\textbf{Normalización}}
-\section{\textbf{Vectorización}}
-\section{\textbf{ETC.........}}
 
+    
+\section{\textbf{Comparación con etiquetas previas}}
+Es importante además destacar que al momento de seleccionár lo que finalmente será el idioma predominante, es necesario realizar una comparación con la etiqueta de lenguaje ya existente en el dataset, para de esta forma asegurar de manera mas segura el idioma real del comentario y no encontrar un porcentaje de estos simplemente y ya.
+
+\section{\textbf{Filtrado de datos}}
+
+Una vez reconocido el lenguaje de los comentarios, continuamos con la utilización de un diccionario de palabras pre definido por nosotros siguiendo el trabajo realizado por \cite{SuggestionMiningDictionary}, donde se encuentran palabras y frases potencialmente relacionadas con las que debiesen ser sugerencias operativas, ayudandonos a facilitar el trabajo y a modo de complemento del luego modelo NLU, ya que la utilización de un modelo NLU o incluso modelo LLM (mas costoso aun computacionalmente) en la totalidad de los datos podría demorar demasiado tiempo que puede ser evitado gracias a la utililzación de esta técnica (aunque hay que considerar los riesgos de sesgo o de la no consideración de sugerencias que utilicen lenguaje simplificado o fuera de lo común).
+
+\section{\textbf{Etiquetado de datos}}
+Al momento de realizar el filtrado de datos con el diccionario de sugerencias, se comienza por analizar palabra por palabra cada uno de los comentarios, se verifica la cantidad de palabras que coinciden con las del diccionario para un comentario en particular almacenando la cantidad de palabras del diccionario encontradas en la columna \textbf{is\_suggestion\_score}, que servirá como un puntaje preliminar de sugerencia para cada comentario, donde a mayor cantidad de palabras encontradas del diccionario, aumenta la probabilidad de que este mismo sea un comentario.
+
+
+\section{\textbf{Trabajo con embeddings}} 
+
+Se busca identificar a travez de similitud del coseno si el comentario es sugerencia
+
+%\section{\textbf{Psible verificación con Groq}}
