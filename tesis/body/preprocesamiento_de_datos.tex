@@ -11,13 +11,15 @@ Utilizando las liberías \textbf{langdetect}, \textbf{enchant} y \textbf{nltk} y
 
 \textit{Todo este proceso lo detallaremos a continuación en las siguientes figuras:}
 
+En la figura \ref{fig:Reconocimiento de Lenguaje P1} podemos observar como tenemos una oración ejemplo cualquiera, compuesta por siatintas palabras facilmente identificables según los diccionarios de pyenchant.\\
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{assets/Reconocimiento_de_lenguaje_P1.jpeg}
     \caption{Reconocimiento de Lenguaje, oración inicial}
-    \label{fig:Reconocimiento de Lenguaje P1}
-\end{figure}
-
+    \label{fig:Reconocimiento de Lenguaje P1}nos encontramos con un caso particular pero mas común de lo que podriamos esperar, la palabra "Hotel" puede ser reconocida en cualquiera de los dos diccionarios 
+    
+Luego en la figura \ref{fig:Reconocimiento de Lenguaje P2} podemos observar como nos encontramos con un caso particular pero mas común de lo que podriamos esperar, la palabra "Hotel" puede ser reconocida en cualquiera de los dos diccionarios de pyenchant (ya sea Españl o Inglés), por lo que se genera un estado dudativo en el que no se puede dereterminar el idioma de la palabra de primeras, por lo que actuamos según es el caso habilitando una "ventana".\\  
 
 \begin{figure}[H]
     \centering
@@ -26,12 +28,17 @@ Utilizando las liberías \textbf{langdetect}, \textbf{enchant} y \textbf{nltk} y
     \label{fig:Reconocimiento de Lenguaje P2}
 \end{figure}
 
+En la figura \ref{fig:Reconocimiento de Lenguaje P3} ahora que ya tenemos identificada la palabra que genera el estado de inconsistencia o estado en el que no podemos determinar el idioma como tal, procedemos a generar una ventana de contexto que considera dos palabras tanto a la derecha como a la izquierda (aunque este es un parámetro modificable), con el fin de determinar el idioma predominante de ese grupo particular de las palabras, técnica que nos ayudará a determinar el idioma de la palabra ambigua en la mayoría de escenarios.\\
+
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{assets/Reconocimiento_de_lenguaje_P3.1.jpeg}
     \caption{Reconocimiento de Lenguaje, ventana de contexto}
     \label{fig:Reconocimiento de Lenguaje P3}
 \end{figure}
+
+Finalmente,una vez que es determinada la palabra ambigua y se conoce el contexto cercano de la palabra, procedemos a determinar el idioma en base a ese subcontexto particular, manteniendo así la consistencia del idioma predominante y determinando finalmente el estado indeterminado de la palabra ambigua.\\
 
 \begin{figure}[H]
     \centering
