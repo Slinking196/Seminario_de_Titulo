@@ -1,0 +1,15 @@
+services:
+  workspace:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ..:/workspaces/Seminario_de_Titulo:cached
+    command: sleep infinity
+
+  latex:
+    image: texlive/texlive:latest
+    working_dir: /workspaces/Seminario_de_Titulo
+    volumes:
+      - ..:/workspaces/Seminario_de_Titulo:cached
+    command: sleep infinity
