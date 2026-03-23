@@ -1,56 +1,52 @@
 \chapter{Metodología y Puntos a tratar}
 \label{cha:MetodologíayPaT}
 
-En esta sección definiremos la metodología que realizaremos y los pasos que seguiremos para realizar este trabajo como la selección del modelo que utilizaremos, las herramientas, los datos entre otros aspectos relevantes para el desarrollo del trabajo de investigación, pasos correspondientes al trabajo necesario para cumplir con los objetivos específicos y que nos permitirán llegar al objetivo general del proyecto.
+En esta sección definiremos la metodología que realizaremos y los pasos que seguiremos para realizar este trabajo, como las herramientas a utilizar durante todo el proceso de investigación, la selección de modelos Transformers para el preprocesamiento de los datos, hasta la definición de la arquitectura del modelo basado en Transformers para la clasificación de los comentarios, el análisis de los resultados obtenidos, y la descripción del trabajo futuro a realizar.\\
+A continuación se describen los puntos a tratar durante el desarrollo del trabajo:
 
 \begin{enumerate}
     \item Investigación de estado del arte y revisión bibliográfica de conceptos que se tratarán.
     \item Definición del enfoque de investigación.
     \item Descripción del dataset a utilizar.
-    \item Investigación de modelos NLU (Monolingües y Multilingües) y selección de los modelos a utilizar.
+    \item Investigación y selección de modelos Transformers, específicamente aquellos que utilizan un esquema de codificación bidireccional
     \item Definición de las herramientas y técnicas a utilizar.
     \item Preparación de ambientes de desarrollo 
-    \item Preparación y preprocesamiento de datos
-    \item Verificación de la calidad de los datos preprocesados
-    \item Procesamiento de datos con modelo NLU seleccionado
-    \item Análisis de datos obtenidos
+    \item Preprocesamiento y etiquetado de datos
+    \item Definición de arquitectura de modelo basado en Transformers para la clasificación de comentarios
+    \item Análisis de resultados obtenidos
     \item Descripción de trabajo futuro
 \end{enumerate}
 
 \section{\textbf{Investigación de estado del arte:}}
-Primero se comenzó por ingvestigar a fondo las temáticas a tratar, herramientas, contexto, conceptos que luego irian en el marco teórico, modelos NLU, técnicas de preprocesamiento de datos, análisis de datos, entre otros aspectos ecesarios para el desarrollo de la investigación.
+Primero se comenzó por ingvestigar a fondo las temáticas a tratar, como lo son la experiencia del turista, la experiencia de usuario, los modelos de lenguaje natural, los modelos LLM, las técnicas de preprocesamiento de datos, etc. Para esto se realizó una revisión bibliográfica exhaustiva de artículos científicos relacionados con estas temáticas contrando específicamente en la TX, para así poder comprender a fondo cada uno de estos conceptos y poder aplicarlos correctamente en el desarrollo del trabajo. Además se investigó sobre trabajos similares realizados por otros investigadores para poder comparar resultados y técnicas utilizadas, y así poder mejorar el trabajo realizado.
 
 \section{\textbf{Definición del enfoque de investigación:}}
 Se definió si el enfoque iba a ser cualitativo, cuantitativo o mixto, considerando cosas como las características y/o columnas del dataset, los objetivos planteados y las técnicas a utilizar, para poder desarrollar un fundamento mas sólido.
 
 \section{\textbf{Descripción del dataset a utilizar:}}
-Se estudia y describe la estructura del dataset a utilizar, columnas, caracteristicas y todos los datos necesarios para comprender los datos con los que se están trabajando y cuales realmente representan un aporte al trabajo y cuales no.
+Se estudia y describe la estructura del dataset a utilizar, columnas, caracteristicas, fechas de obtención de datos y todos los datos necesarios para comprender con lo que se estará trabajando, también se diferenciará cuales realmente representan un aporte al trabajo y cuales no.
 
+\section{\textbf{Investigación y selección de modelos Transformers:}}
+Se investigan los distintos modelos Transformers disponibles, específicamente aquellos que utilizan un esquema de codificación bidireccional, para poder seleccionar el modelo más adecuado para el etiquetado inicial de los datos, considerando aspectos como la capacidad de procesamiento, la calidad de los resultados obtenidos en trabajos similares, y la compatibilidad con las herramientas a utilizar.
 
-\section{\textbf{Investigación de modelos NLU:}}
-Sección en la que se estudia un pequeño estado del arte de los modelos NLU, origen arquitectura, linea temporal y para que sirven o con que datos están entrenados,
-
-\section{\textbf{Definición de las herramientas y técnicas a utilizar:}}Sección en la que se fedinien las diferenes hjerramientas que utilizaraán para preprocesar los datos, analizar el lenguaje natural y realizar el análisis de datos posterior.
-
+\section{\textbf{Definición de las herramientas y técnicas a utilizar:}}
+Sección en la que se definien las diferenes herramientas que se utilizarán para preprocesar los datos, para el análisis de los resultados obtenidos, para la comparación de técnicas, etc. Además se definirán las técnicas de preprocesamiento de datos a utilizar, como la limpieza de datos, el etiquetado manual/automático, la reducción de ruido, etc. También se definirán las técnicas de análisis de datos a utilizar, como el análisis estadístico, la comparación de resultados, etc.
 
 \section{\textbf{Preparación de ambientes de desarrollo:}}
-Se preparan dependencioas, embnientes, repositorios, y los espacios necesarios oara la realización del trabajo.
+Se preparan dependencias, ambientes de desarrollo, repositorios, y los espacios necesarios para la realización del trabajo.
 
-\section{\textbf{Preparación y preprocesamiento de datos}}
-Etapa en la que realizaremos la limpieza, etiquetado, aseguramiento del mismo y preparación de los datos para que estos puedan ser analizados por el modelo NLU seleccionado posteriormente, además de reducir la cantidad de ruido en los datos y mejorar la calidad de los mismos para obtener mejores resultados (técnica que ya fue mencionada anteriormente).\\
-Además es la sección que determina con los datos finales con los que se deberían trabajar, siendo esta una de las etapas mas significativas e imprescindibles del proyecto, donde se comprenden etapas como el reconocimiento de lenguaje, limpieza de datos, etiquetado o corroboración manual. Resultando todo esto en los datos etiquetados para ya pasar por un modelo mas robusto.
+\section{\textbf{Preprocesamiento y etiquetado de datos:}}
+Etapa en la que realizaremos la limpieza, etiquetado, aseguramiento del mismo y preparación de los datos para que estos puedan ser analizados por el modelo Transformer que se definirá en el transcurso del proyecto, además de reducir la cantidad de ruido en los datos y mejorar la calidad de los mismos para obtener mejores resultados. \\
+Además es la sección que determina los datos finales con los que se deberían trabajar, siendo esta una de las etapas mas significativas e imprescindibles del proyecto, donde se comprenden etapas como el reconocimiento de lenguaje, limpieza de datos, etiquetado o corroboración manual. Resultando todo esto en los datos etiquetados para ya pasar por un modelo mas robusto.
 
-\section{\textbf{Verificación de la calidad de los datos preprocesados}}
-Una vez realizado el proceso de preprocesado de los datos se debe valildar que estos mismos posean cierto grado de fidelidad y que no sean datos aparentemente correctos pero que en realidad no lo sean. Se planteó la idea de revisiones con técnicas como Embeddings con comparación por similitud del coseno o modelos LLM como Groq, modelos que de por si resultan mas robustos y fueron preentrenados con un gran corpus de datos, de manera que (pese a su coste computacional) nos serían posiblemente muy útiles para validar la calidad de los datos preprocesados/etiquetados.
+\section{\textbf{Definición de arquitectura de modelo basado en Transformers:}}
+Una vez realizado el proceso de preprocesado de los datos y teniendo ya los datos etiquetados, se deberá definir la arquitectura del modelo basado en Transformers que se utilizará para la clasificación de los comentarios, considerando aspectos como la cantidad de capas, el tamaño del modelo, la cantidad de parámetros, etc. Además se deberá definir el proceso de entrenamiento del modelo, como la cantidad de épocas, el tamaño del batch, la función de pérdida, etc.
 
-\section{\textbf{Procesamiento de datos con modelo NLU seleccionado}}
+\section{\textbf{Análisis de resultados obtenidos:}}
+Habiendo ya preprocesados los datos y teniendo ya el modelo entrenado, se deberá realizar un análisis de los resultados obtenidos, considerando aspectos como la precisión, la recall, la f1-score, etc. Además se deberá comparar los resultados obtenidos con otros trabajos similares realizados por otros investigadores para poder evaluar la calidad de los resultados obtenidosa nivel de rendimiento y poder mejorar el trabajo realizado.
 
-Habiendo ya preprocesados los datos y determinado que su calidad es la adecuada para poder continuar con la operación, podemos proceder con la utilización de un modelo NLU multilingue que realmente pueda etiquetar los datos correctamente (no trabajando de manera excluyente a lo anterior, si no que complementandolo), siendo este el último y gran filtro para determinar si un comentario es o no una sugerencia operativa, y así finalmente despues de suficientes controles de calidad, obtener los datos finales que nos permitirán realizar el análisis estadístico y comparativo necesario para llegar a conclusiones relevantes.
+\section{\textbf{Análisis de datos obtenidos:}}
+Una vez ya realizadas las pruebas y obtenidos los datos, se deberá realizar un análisis estadístico del rendimiento general, tablas de pruebas donde se demuestre las distintas comparaciones de eficacia de ya sea modelos Transformers (considerados a parte si es que aplica), técnicas de preprocesamiento frente a otros trabajos de investigación y las lecciones aprendidas en el ejercicio del trabajo realizado.
 
-\section{\textbf{Análisis de datos obtenidos}}
-
-Una vez ya realizadas las pruebas y obtenidos los datos, se deberá realizar un análisis estadístico del rendimiento general, tablas de pruebas donde se demuestre las distintas comparaciones de eficacia de ya sea modelos NLU (considerados a parte si es que aplica), técnicas de preprocesamiento frente a otros trabajos de investigación y las lecciones aprendidas en el ejercicio del trabajo realizado.
-
-\section{\textbf{Descripción de trabajo futuro}}
-
-Luego de finiquitado el trabajo como tal y haber dado las respectivas conclusiones respecto al trabajo realizado, se deberá plantear una sección donde se mencione mínimamente lo relacionado a la manera en que se trabajó en la investigación, pero principalmente se deberá plantear el trabajo futuro que podría realizarse a partir de lo ya realizado, otras formas de mejorar la detección de las sugerencias operacionales, nuevas técnicas, nuevos modelos NLU, LLMs, etc.
+\section{\textbf{Descripción de trabajo futuro:}}
+Luego de finiquitado el trabajo como tal y haber dado las respectivas conclusiones respecto al trabajo realizado, se deberá plantear una sección donde se mencione mínimamente lo relacionado a la manera en que se trabajó en la investigación, pero principalmente se deberá plantear el trabajo futuro que podría realizarse a partir de lo ya realizado, otras formas de mejorar la detección de las sugerencias operacionales, nuevas técnicas, nuevos modelos de Inteligencia Artificial, etc. Además se deberá mencionar las limitaciones del trabajo realizado y cómo estas podrían ser superadas en el futuro.
