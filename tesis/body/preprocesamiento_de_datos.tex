@@ -8,11 +8,11 @@ Como se recomienda en distintas fuentes como \cite{Agrawal2024TextPreprocessing}
 
 
 \section{\textbf{Reconocimiento de lenguaje}} % diccionarios - tokenización
-Utilizando las liberías \textbf{langdetect}, \textbf{enchant} y \textbf{nltk} y realizando una previa división del dataset en distintos dataframes/archivos para tener la posibilidad de trabajarlos de manera descentralizada, se procedió con el reconocimiento del lenguaje de los distintos comentarios, etiquetando los datos de acuerdo al lenguaje predominante y en donde el lenguaje predominante superara o igualara el 50\% de las palabras del comentario, al detectar si la palabra es español o ingles con pyenchant gracias a los diccionarios provistos ocurre el siguiente proceso: En caso de una palabra ambigua (Ej: Doctor) igual en ambos idiomas se genera una ventana de contexto con las 2 palabras anteriores y posteriores para determinar el idioma predominante en las palabras de contexto, y así determinar el idioma de la palabra ambigua, aunque particularmente para casos en los que se encuentran palabras con una ventana de un 50\% Español o un 50\% Inglés, la palabra central es marcada como desconocida. Todo el proceso mencionado es realizado por cada palabra del comentario pero en la mayoría de casos se encontratrán facilmente en los diccionarios de enchant, todo para finalmente determinar el porcentaje de idioma y finalmente el idioma predominante del comentario.\\
+Utilizando las liberías \textbf{langdetect}, \textbf{enchant} y \textbf{nltk} y realizando una previa división del dataset en distintos dataframes/archivos para tener la posibilidad de trabajarlos de manera descentralizada, se procedió con el reconocimiento del lenguaje de los distintos comentarios, etiquetando los datos de acuerdo al lenguaje predominante y en donde el lenguaje predominante superara o igualara el 50\% de las palabras del comentario, al detectar si la palabra es español o ingles con pyenchant gracias a los diccionarios provistos ocurre el siguiente proceso: En caso de una palabra ambigua (Ej: Doctor) igual en ambos idiomas se genera una ventana de contexto con las 2 palabras anteriores y posteriores para determinar el idioma predominante en las palabras de contexto, y así determinar el idioma de la palabra ambigua, aunque particularmente para casos en los que se encuentran palabras con una ventana de un 50\% Español o un 50\% Inglés, la palabra central es marcada como desconocida. Todo el proceso mencionado es realizado por cada palabra del comentario pero en la mayoría de casos se encontratrán facilmente en los diccionarios de enchant, todo para finalmente determinar el porcentaje de idioma y finalmente el idioma predominante del comentario.
 
 \textit{Todo este proceso lo detallaremos a continuación en las siguientes figuras:}
 
-En la figura \ref{fig:Reconocimiento de Lenguaje P1} podemos observar como tenemos una oración ejemplo cualquiera, compuesta por siatintas palabras facilmente identificables según los diccionarios de pyenchant.\\
+En la figura \ref{fig:Reconocimiento de Lenguaje P1} podemos observar como tenemos una oración ejemplo cualquiera, compuesta por siatintas palabras facilmente identificables según los diccionarios de pyenchant.
 
 \begin{figure}[H]
     \centering
@@ -23,7 +23,7 @@ En la figura \ref{fig:Reconocimiento de Lenguaje P1} podemos observar como tenem
 
 nos encontramos con un caso particular pero mas común de lo que podriamos esperar, la palabra "Hotel" puede ser reconocida en cualquiera de los dos diccionarios 
 
-Luego en la figura \ref{fig:Reconocimiento de Lenguaje P2} podemos observar como nos encontramos con un caso particular pero mas común de lo que podriamos esperar, la palabra "Hotel" puede ser reconocida en cualquiera de los dos diccionarios de pyenchant (ya sea Españl o Inglés), por lo que se genera un estado dudativo en el que no se puede dereterminar el idioma de la palabra de primeras, por lo que actuamos según es el caso habilitando una "ventana".\\  
+Luego en la figura \ref{fig:Reconocimiento de Lenguaje P2} podemos observar como nos encontramos con un caso particular pero mas común de lo que podriamos esperar, la palabra "Hotel" puede ser reconocida en cualquiera de los dos diccionarios de pyenchant (ya sea Españl o Inglés), por lo que se genera un estado dudativo en el que no se puede dereterminar el idioma de la palabra de primeras, por lo que actuamos según es el caso habilitando una "ventana".
 
 \begin{figure}[H]
     \centering
@@ -32,7 +32,7 @@ Luego en la figura \ref{fig:Reconocimiento de Lenguaje P2} podemos observar como
     \label{fig:Reconocimiento de Lenguaje P2}
 \end{figure}
 
-En la figura \ref{fig:Reconocimiento de Lenguaje P3} ahora que ya tenemos identificada la palabra que genera el estado de inconsistencia o estado en el que no podemos determinar el idioma como tal, procedemos a generar una ventana de contexto que considera dos palabras tanto a la derecha como a la izquierda (aunque este es un parámetro modificable), con el fin de determinar el idioma predominante de ese grupo particular de las palabras, técnica que nos ayudará a determinar el idioma de la palabra ambigua en la mayoría de escenarios.\\
+En la figura \ref{fig:Reconocimiento de Lenguaje P3} ahora que ya tenemos identificada la palabra que genera el estado de inconsistencia o estado en el que no podemos determinar el idioma como tal, procedemos a generar una ventana de contexto que considera dos palabras tanto a la derecha como a la izquierda (aunque este es un parámetro modificable), con el fin de determinar el idioma predominante de ese grupo particular de las palabras, técnica que nos ayudará a determinar el idioma de la palabra ambigua en la mayoría de escenarios.
 
 
 \begin{figure}[H]
@@ -42,7 +42,7 @@ En la figura \ref{fig:Reconocimiento de Lenguaje P3} ahora que ya tenemos identi
     \label{fig:Reconocimiento de Lenguaje P3}
 \end{figure}
 
-Finalmente,una vez que es determinada la palabra ambigua y se conoce el contexto cercano de la palabra, procedemos a determinar el idioma en base a ese subcontexto particular, manteniendo así la consistencia del idioma predominante y determinando finalmente el estado indeterminado de la palabra ambigua.\\
+Finalmente,una vez que es determinada la palabra ambigua y se conoce el contexto cercano de la palabra, procedemos a determinar el idioma en base a ese subcontexto particular, manteniendo así la consistencia del idioma predominante y determinando finalmente el estado indeterminado de la palabra ambigua.
 
 \begin{figure}[H]
     \centering
@@ -54,16 +54,12 @@ Finalmente,una vez que es determinada la palabra ambigua y se conoce el contexto
 
 % insertar figura de ejemplo de reconocimiento de lenguaje
 \section{\textbf{Eliminación de columnas}}
-Se eliminan las columnas innecesarias del dataset, quedando solo las columnas relevantes para el análisis posterior, que en nuestro caso son: \textbf{review\_text}, \textbf{tripadvisor\_lenguaje}, \textbf{lenguaje\_percentaje}, \textbf{langdetect\_lenguaje}, \textbf{is\_suggestion\_score}.
+Se eliminan las columnas innecesarias del dataset, conservando solo aquellas relevantes para el posterior análisis. En nuestro caso, estas columnas son: \textbf{review\_text}, \textbf{tripadvisor\_lenguaje}, \textbf{lenguaje\_percentaje}, \textbf{langdetect\_lenguaje} e \textbf{is\_suggestion\_score}.
 
-
-
-    
 \section{\textbf{Comparación con etiquetas previas}}
 Es importante además destacar que al momento de seleccionár lo que finalmente será el idioma predominante, es necesario realizar una comparación con la etiqueta de lenguaje ya existente en el dataset, para de esta forma asegurar de manera mas segura el idioma real del comentario y no encontrar un porcentaje de estos simplemente y ya.
 
 \section{\textbf{Filtrado de datos}}
-
 Una vez reconocido el lenguaje de los comentarios, continuamos con la utilización de un diccionario de palabras pre definido por nosotros siguiendo el trabajo realizado por \cite{SuggestionMiningDictionary}, donde se encuentran palabras y frases potencialmente relacionadas con las que debiesen ser sugerencias operativas, ayudandonos a facilitar el trabajo y a modo de complemento del luego modelo NLU, ya que la utilización de un modelo NLU o incluso modelo LLM (mas costoso aun computacionalmente) en la totalidad de los datos podría demorar demasiado tiempo que puede ser evitado gracias a la utililzación de esta técnica (aunque hay que considerar los riesgos de sesgo o de la no consideración de sugerencias que utilicen lenguaje simplificado o fuera de lo común).
 
 \section{\textbf{Etiquetado de datos}}
