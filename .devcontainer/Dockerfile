@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/python:3-3.14-trixie
+FROM mcr.microsoft.com/devcontainers/python:3-3.13-trixie
 
 # Install LaTeX toolchain for thesis compilation (pdflatex, biblatex/biber, latexmk).
 RUN apt-get update \
