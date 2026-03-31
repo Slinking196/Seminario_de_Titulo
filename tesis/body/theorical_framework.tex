@@ -96,12 +96,13 @@ Mientras que el feedback \textbf{explícito} se explica como un resumen de opini
 
 Las Sugerencias y Peticiones definidas en conjunto por \cite{tkalich2025user}, corresponden a un caso de feedback explicito, donde el usuario debe tener la intenciòn de expresar caracterìsticas que desean ver implementadas en un producto, marca o servicio.\\  
 
-\section{modelos transformer}
+\section{Modelos Transformer}
 \label{sec:transformer}
-PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE 
+El modelo Transformer, propuesto inicialmente en su artículo \textit{Attention Is All You Need} por \parencite{vaswani2017attention}, es una arquitectura de red neuronal, que a diferencia de los modelos anteriores basados en redes neuronales recurrentes o convolucionales (CNN), es el primer modelo de transducción basado completamente en la auto-atención para generar tanto entradas como salidas sin recurrencia o convoluciones.
+
+El mecanismo de auto-atención característico de transformer permite al modelo relacionar la importancia de las diferentes palabras dentro de una misma secuencia o texto, capturando dependencias globales sin importar la distancia posicional entre ellas en la frase original, gracias a los distintos cabezales de atención utilizados por la arquitectura que se posicionan en distintas partes del texto original leyendo desde diferentes posiciones y subespacios de representación, finalmente mejorando la capacidad de comprensión del lenguaje.
 
 \section{Ajuste fino (Fine-tuning)}
 \label{sec:finetunning}
-PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE 
-
-com
+El ajuste fino, o \textit{fine-tuning}, es el proceso mediante el cual se adapta un modelo de lenguaje que ya ha sido previamente entrenado, hacia una tarea más específica (\textit{downstream task}). En el artículo de \parencite{devlin2018bert} se describe este procedimiento como un paso directo (\textit{straightforward}), debido a que el mecanismo de auto-atención de los modelos Transformer permite modelar distintas tareas simplemente intercambiando las entradas y salidas de forma adecuada.
+Según los autores, a diferencia de la fase de pre-entrenamiento que es computacionalmente exhaustiva, basta con introducir las entradas y salidas específicas de la nueva tarea en el modelo para luego reajustar todos sus parámetros de principio a fin\parencite{devlin2018bert}. 
