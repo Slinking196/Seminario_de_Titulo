@@ -26,7 +26,7 @@ Además, la literatura menciona que el turismo es una actividad multifacética, 
 
 \section{Turista}
 \label{sec:turista}
-En esta tesis, se entiende por \emph{turista} al visitante que se desplaza fuera de su entorno habitual por un periodo limitado (inferior a un año) y que pernocta en el destino fuera de su lugar de residencia habitual \parencite{ortiz2024slr,unwto-glossary}. La pernoctación permite diferenciarlo del excursionista (visitante diario), ya que una estancia nocturna implica una relación más directa con los productos, marcas o servicios relacionados al turismo \parencite{ortiz2024slr}.
+Toda persona puede ser considerada \emph{turista} al volverse un visitante que se desplaza fuera de su entorno habitual por un periodo limitado (inferior a un año) y que pernocta en el destino fuera de su lugar de residencia habitual \parencite{ortiz2024slr,unwto-glossary}. La pernoctación permite diferenciarlo del excursionista (visitante diario), ya que una estancia nocturna implica una relación más directa con los productos, marcas o servicios relacionados al turismo \parencite{ortiz2024slr}.
 
 Al mismo tiempo, el turista puede entenderse como el cliente principal del sistema turístico que, consume servicios, interactúa con organizaciones y, cada vez con mayor frecuencia, toma decisiones mediadas por plataformas digitales como agencias de viaje en línea y comunidades de reseñas \parencite{rusu2023holistic,ortiz2024slr}. Esto es lo relevante, debido a que el turista no solo vive el viaje, sino que también lo interpreta y lo comunica (posteriormente): sus opiniones en línea funcionan como una forma de retroalimentación que orienta a otros viajeros y entrega información útil para mejorar servicios turísticos \parencite{rusu2020hostels}.
 
@@ -71,12 +71,6 @@ Según \parencite{kim2012development} la Experiencia del Turista Memorable se di
 \end{itemize}
 
 
-\textcite{kim2012development}
-kim et. al. (2012)
-[1]
-%\textit{Nota metodológica.} Estas \emph{siete} dimensiones se validan como un \emph{modelo de primer orden}; no conviene colapsarlas en macro-factores (p. ej., “afectivo/cognitivo/conductual”) al evaluar, porque la estructura de segundo orden no mejora el ajuste del modelo.
-%\parencite{kim2012development}
-
 
 \section{Procesamiento de lenguaje natural (NLP)} 
 \label{sec:nlp}
@@ -84,15 +78,12 @@ kim et. al. (2012)
 Definida por \parencite{Khurana_2022},  Procesamiento de lenguaje natural (NLP, por sus siglas en inglés)\textit{''es un campo interdisciplinario que se enfoca en la interacción entre computadoras y el lenguaje humano, con el objetivo de permitir que las máquinas comprendan, interpreten y generen texto o habla de manera significativa.''}. Corresponde a una rama de la inteligencia artificial que se cruza con la lingüística y que busca entre otras cosas, entrenar modelos de Machine Learning (ML) que interpreten el lenguaje humano. 
 
 
+
 \section{Comprensión del lenguaje natural (NLU)}
 \label{sec:nlu}
 
 La comprensión del lenguaje natural (NLU, por sus siglas en inglés) es una subdisciplina del procesamiento del lenguaje natural (NLP) que se centra en la capacidad de las máquinas para entender e interpretar el significado del lenguaje humano de manera contextual y precisa. Según \parencite{navigli2018natural}, el objetivo del NLU es dar sentido al lenguaje, permitiendo a las computadoras leer y comprender los textos de manera similar a como lo hacen los humanos.
 
-\section{Modelos de Lenguaje Largos (LLM)}
-\label{sec:llm}
-
-Modelos de Lenguaje Grandes o LLM's por sus siglas en ingles hacen referencia a los modelos de Inteligencia Artificial estadísticos basados en redes neuronales, preentrenados con grandes cantidades de datos y muchas veces referidos a modelos transformers con cerca de entre decenas y cientos de billones de parámetros como se menciona en públicaciones como \cite{minaee2024large} donde además se mencionan algunos de los distintos modelos y arquitecturas utililzadas a lo largo del tiempo considerando incluso arquitecturas LSTM, Word2Vec o XLM.
 
 \section{Feedback}
 \label{sec:feedback}
@@ -103,7 +94,10 @@ Mientras que el feedback \textbf{explícito} se explica como un resumen de opini
 \section{Sugerencias}
 \label{sec:sugerencias}
 
-Las Sugerencias y Peticiones definidas en conjunto por \cite{tkalich2025user}, corresponden a un caso de feedback explicito, donde el usuario debe tener la intenciòn de expresar caracterìsticas que desean ver implementadas en un producto, marca o servicio.\\  
+Las \emph{sugerencias} (o \emph{peticiones}) pueden entenderse como una forma particular de \textbf{feedback explícito} en la que el usuario manifiesta una intención orientada incorporar características en un producto, marca o servicio, realizando peticiones (comunmente llamadas \textbf{User Requests}). En esta línea, \textcite{tkalich2025user} agrupan las sugerencias y peticiones como un tipo de retroalimentación donde el usuario expresa de manera directa aquello que le gustaría ver implementado, lo que las diferencia de las opiniones que buscan netamente hacer juicios de valor, apreciaciones o pros y contras del producto relacionado.\\
+En términos prácticos, una sugerencia no sólo comunica satisfacción o insatisfacción, sino que propone la \emph{integración} de una nueva característica.
+
+Desde una perspectiva de gestión de la experiencia y del ciclo de vida de la retroalimentación, las sugerencias constituyen una señal explícita que puede ser capturada y utilizada de manera sistemática por las organizaciones para mejorar productos y servicios, convirtiendose en un elemento fundamental para que la experiencia de los clientes mejore con el paso del tiempo. La literatura sobre recolección y uso de feedback destaca que, además de medir satisfacción, las organizaciones buscan extraer \emph{necesidades} y \emph{oportunidades de mejora} a partir de la voz del usuario, integrando múltiples fuentes y canalizando esta información hacia procesos de decisión y desarrollo \parencite{Fabijan-Customer_Feedback_and_Data_Collection,tkalich2025user}. En el contexto turístico (TX), esta distinción es relevante porque las reseñas en línea no sólo relatan experiencias, sino que también pueden incluir peticiones concretas sobre puntos de contacto del viaje. Por ello, en este trabajo se considera \emph{sugerencia} a toda expresión explícita en una reseña que, más allá de describir o evaluar, propone una modificación practicable del servicio o de sus condiciones de entrega; esta definición permite separar sugerencias de otros tipos de feedback textual (p.~ej., elogios o quejas sin propuesta) y fundamenta la tarea de detección automática posterior \parencite{maalej2016data}.
 
 \section{Modelos Transformer}
 \label{sec:transformer}
@@ -114,4 +108,4 @@ El mecanismo de auto-atención característico de transformer permite al modelo 
 \section{Ajuste fino (Fine-tuning)}
 \label{sec:finetunning}
 El ajuste fino, o \textit{fine-tuning}, es el proceso mediante el cual se adapta un modelo de lenguaje que ya ha sido previamente entrenado, hacia una tarea más específica (\textit{downstream task}). En el artículo de \parencite{devlin2018bert} se describe este procedimiento como un paso directo (\textit{straightforward}), debido a que el mecanismo de auto-atención de los modelos Transformer permite modelar distintas tareas simplemente intercambiando las entradas y salidas de forma adecuada.
-Según los autores, a diferencia de la fase de pre-entrenamiento que es computacionalmente exhaustiva, basta con introducir las entradas y salidas específicas de la nueva tarea en el modelo para luego reajustar todos sus parámetros de principio a fin\parencite{devlin2018bert}. 
+Según los autores, a diferencia de la fase de pre-entrenamiento que es computacionalmente exhaustiva, basta con introducir las entradas y salidas específicas de la nueva tarea en el modelo para luego reajustar todos sus parámetros de principio a fin\parencite{devlin2018bert}.
