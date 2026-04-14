@@ -5,5 +5,6 @@ Integrantes:
 - Matias Bugueno
 - Fabrizzio Mura
 
-Profesor Guía: Nicolas Matus
+Profesor Guía: Nicolas Matus 
+
 Profesor correferente: Cristian Rusu
