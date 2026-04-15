@@ -3,6 +3,7 @@
 \label{cha:Metodología}
 
 En esta sección se explicará la metodología de trabajo y los pasos a seguir para realizar la investigación, herramientas a utilizar durante todo el proceso de investigación, la selección de modelos de Inteligencia Artificil para el preprocesamiento y procesamiento de los datos, hasta la definición de la arquitectura del modelo basado en Transformers para la clasificación de los comentarios, el análisis de los resultados obtenidos, y la descripción del trabajo futuro a realizar.\\
+
 A continuación se enumeran los puntos principales que serán tratados durante el desarrollo de la investigación, para luego describir un breve resumen de las tareas realizadas u objetivos de los mismos:\\
 
 \begin{table}[htbp]
@@ -14,55 +15,60 @@ A continuación se enumeran los puntos principales que serán tratados durante e
         \textbf{Etapa} & \textbf{Descripción de la Actividad} \\
         \midrule
 
-        1 & Investigación de estado del arte y revisión bibliográfica. \\
+        1 & Investigación de estado del arte y revisión bibliográfica \\
 
-        2 & Definición del enfoque de investigación. \\
+        2 & Definición del enfoque de investigación \\
 
-        3 & Descripción de los elementos del dataset a utilizar. \\
+        3 & Descripción de los elementos del dataset a utilizar \\
         
-        4 & Investigación y selección de modelos Transformers. \\
+        4 & Investigación y selección de modelos Transformers \\
         
-        5 & Definición de las herramientas y técnicas a utilizar. \\
+        5 & Definición de las herramientas y técnicas a utilizar \\
         
-        6 & Preprocesamiento y etiquetado de datos mediante modelos Transformer. \\
+        6 & Preprocesamiento y etiquetado de datos de entrenamiento mediante modelos Transformers \\
         
-        7 & Definición de arquitectura de modelo Transformer para la clasificación de comentarios. \\
+        7 & Definición de arquitectura de modelo Transformer para la clasificación de comentarios \\
 
-        8 & Ejecución de modelo Transformer sobre el dataset de comentarios. \\
+        8 & Ejecución de modelo Transformer sobre el dataset de comentarios \\
         
         
         \bottomrule
     \end{tabularx}
 \end{table}
 
-\section{\textbf{Investigación de estado del arte:}}
+\section{\textbf{Investigación de estado del arte:}} Listo
 La investigación del estado del arte, conceptos e interiorización a fondo de las temáticas a tratar, como lo son la experiencia del turista, la experiencia de usuario, los modelos de lenguaje natural, los modelos LLM, las técnicas de preprocesamiento de datos, etc, son fundamentales para poder determinar con rigurosidad las ventajas y desventajas de distintos modelos de Inteligencia Artificial, limitaciones técnicas y formas de trabajar con estos mismos. Para esto se realizó una revisión bibliográfica exhaustiva de artículos científicos relacionados principalmente al area de la Experiencia del Turista y modelos de Transformers, para así poder comprender a fondo cada uno de los conceptos relacionados y poder aplicarlos correctamente en el desarrollo de la investigación. \\
 
 Resultando una necesidad fundamental, aunque especifica, la investigación de artículos relacionados a la minería de sugerencias representa un area de estudio que busca resolver problemáticas relacionadas al estado de los sistemas tradicionales que se dedicaban a clasificar los comentarios de los usuarios como positivols o negativos, gracias a técnicas de análisis de sentimientos, pero se pasaban por alto el feedback de los usuarios que apuntaba a sugerencias de mejora del producto \textcite{SuggestionMiningDictionary} por lo que se vuelve fundamental comprender la necesidad real del area de estudio así como interiorizarla propia definición formal de lo que corresponde a una sugerencia y que la difiere de un simple comentario de expresión de opinión o feedback, ya que es estrictamente necesaria cuando se quiere trabajar con modelos de lenguaje grandes o transformer que necesitan mucho contexto y comprender mucha información para poder llegar a realizar una detección a nivel humano.\\ 
 
-\section{\textbf{Definición del enfoque de investigación:}}
+\section{\textbf{Definición del enfoque de investigación:}} Listo
 Resulta necesario tener que definir si el enfoque debe a ser cualitativo, cuantitativo o mixto, para poder trazar la ruta metodológica que seguir durante el desarrollo de la investigación, dependiendo ya sea de un enfoque cuantitativo, basado en datos, números, estadísticas, etc, o un enfoque cualitativo, basado en la interpretación de los datos, la comprensión del lenguaje natural presente en comentarios, etc, o un enfoque mixto, que combina ambos enfoques anteriores. Es necesario definir el enfoque de la investigación para saber el tipo de análisis y relaciones que se tendrán al final, que datos considerar, la forma de trabajar estos mismos y a resumidas cuentas, definir un poco del alcance de la investigación.\\ 
 
-\section{\textbf{Descripción de los elementos del dataset a utilizar:}}
-MMMMMMMMM
-Se estudia y describe la estructura del dataset a utilizar, columnas, caracteristicas, fechas de obtención de datos y todos los datos necesarios para comprender con lo que se estará trabajando, también se diferenciará cuales realmente representan un aporte al trabajo y cuales no.
+\section{\textbf{Descripción de los elementos del dataset a utilizar:}} Listo
 
-\section{\textbf{Investigación y selección de modelos Transformers:}}
-Se investigan los distintos modelos Transformers disponibles, específicamente aquellos que utilizan un esquema de codificación bidireccional, para poder seleccionar el modelo más adecuado para el etiquetado inicial de los datos, considerando aspectos como la capacidad de procesamiento, la calidad de los resultados obtenidos en trabajos similares, y la compatibilidad con las herramientas a utilizar.
+Es necesario comprender en su totalidad el dataset o datos que se tienen a disposición para poder trabajar, ya que estos determinarán las técnicas, calidad y resultados que se podrán obtener, por lo que luego de observarlos con detenimiento y conocer los enfoques o técnicas preliminares para trabajar, es necesario describir con rigurosidad que elementos del dataset serán necesarios para poder alimentar las futuras técnicas que permitirán cumplir con el objetivo general de la investigación mencionado en \ref{cha:objetivos}.\\
+Es necesario comprender cuales son los datos relevantes para trabajar, tales como: Titulo del comentario, comentario (feedback/review/opinion/sugerencia), fecha del comentario, idioma, etc.\\
 
-\section{\textbf{Definición de las herramientas y técnicas a utilizar:}}
-Sección en la que se definien las diferenes herramientas que se utilizarán para preprocesar los datos, para el análisis de los resultados obtenidos, para la comparación de técnicas, etc. Además se definirán las técnicas de preprocesamiento de datos a utilizar, como la limpieza de datos, el etiquetado manual/automático, la reducción de ruido, etc. También se definirán las técnicas de análisis de datos a utilizar, como el análisis estadístico, la comparación de resultados, etc.
+\section{\textbf{Investigación y selección de modelos Transformers:}} Listo
 
-\section{\textbf{Preprocesamiento y etiquetado de datos mendiante modelos Transformers:}}
-Etapa en la que realizaremos la limpieza, etiquetado, aseguramiento del mismo y preparación de los datos para que estos puedan ser analizados por el modelo Transformer que se definirá en el transcurso del proyecto, además de reducir la cantidad de ruido en los datos y mejorar la calidad de los mismos para obtener mejores resultados. \\
-Además es la sección que determina los datos finales con los que se deberían trabajar, siendo esta una de las etapas mas significativas e imprescindibles del proyecto, donde se comprenden etapas como el reconocimiento de lenguaje, limpieza de datos, etiquetado o corroboración manual. Resultando todo esto en los datos etiquetados para ya pasar por un modelo mas robusto.
+Se deben investigar los distintos modelos de Inteligencia Artificial o Transformers disponibles y de código abierto, específicamente aquellos que utilizan un esquema de codificación bidireccional, para poder seleccionar el modelo más adecuado para el etiquetado inicial de los datos, considerando aspectos como la capacidad de procesamiento, la calidad de los resultados obtenidos en trabajos similares, la compatibilidades, cantidad de parámetros, datos de preentrenamiento (que tambien deben ser públicos), además de realizar pruebas con distintos modelos para lograr entender el razonamiento que utiliza cada modelo. Además es necesario determinar quye función deberá cumplir el modelo seleccionado y en caso de ser mas de un modelo, realizar pruebas con cada uno de ellos, realizando comparaciones entre costo, eficiencia y precisión.\\
+
+
+\section{\textbf{Definición de las herramientas y técnicas a utilizar:}} Listo
+Se definen las diferenes herramientas que se utilizarán para preprocesar los datos, etiquetado de datos y análisis de los resultados obtenidos. Además se definirán las técnicas y herramientas del preprocesamiento de datos a utilizar, limpieza de datos, etiquetado automático y un resumen de los modelos seleccionados.
+
+
+\section{\textbf{Preprocesamiento y etiquetado de datos de entrenamiento mediante modelos Transformers:}} Listo
+
+Una vez seleccionado el o los modelos a utilizar en el proceso tanto de previo como del etiquetado de datos, se deberá definir las tareas necesarias para limpiar, identificar y etiquetar los datos, para así poder eliminar datos nulos o innecesarios, corregir errores como idioma del comentario mal identificado, etc. y que de esta forma el futuro modelo pueda nutrirse de datos de calidad para poder aprender a detectar las sugerencias presentes en el dataset.\\
+Corresponde a una etapa necesaria para aumentar la calidad de los datos, sobre todo teniendo en cuenta pequeños errores de consistencia o deteccion erronea dentro del dataset.\\
+
 
 \section{\textbf{Definición de arquitectura de modelo Transformer para la clasificación de comentarios:}}
 Una vez realizado el proceso de preprocesado de los datos y teniendo ya los datos etiquetados, se deberá definir la arquitectura del modelo basado en Transformers que se utilizará para la clasificación de los comentarios, considerando aspectos como la cantidad de capas, el tamaño del modelo, la cantidad de parámetros, etc. Además se deberá definir el proceso de entrenamiento del modelo, como la cantidad de épocas, el tamaño del batch, la función de pérdida, etc.
 
 
 \section{\textbf{Ejecución de modelo Transformer sobre el dataset de comentarios:}}
-
 Al tener el modelo ya entrenado y los datos preprocesados, es necesaria la etapa de ejecución del procesamiento de etiquetado masivo de datos frente a los aproximadamente 560.000 comentarios disponibles en el dataset provenientes de TripAdvisor \textcite{tripadvisor-website}, proceso que permite cumplir con el objetivo de lograr la clasificación (y en consecuencia la detección) de las sugerencias presentes en el dataset, además de obtener los datos que permitirán realizar los análisis y conclusiones correspondientes tanto para la investigación como para el trabajo futuro, problemas o problemáticas detectadas y potencial del proyecto como tal.
 
 
