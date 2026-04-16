@@ -1,30 +1,50 @@
 % !TEX root = ../main.tex
-\chapter{Metodología y Puntos a tratar}
-\label{cha:MetodologíayPaT}
+\chapter{Metodología}
+\label{cha:Metodología}
 
-En esta sección definiremos la metodología que realizaremos y los pasos que seguiremos para realizar este trabajo, como las herramientas a utilizar durante todo el proceso de investigación, la selección de modelos Transformers para el preprocesamiento de los datos, hasta la definición de la arquitectura del modelo basado en Transformers para la clasificación de los comentarios, el análisis de los resultados obtenidos, y la descripción del trabajo futuro a realizar.\\
-A continuación se describen los puntos a tratar durante el desarrollo del trabajo:
+En esta sección se explicará la metodología de trabajo y los pasos a seguir para realizar la investigación, herramientas a utilizar durante todo el proceso de investigación, la selección de modelos de Inteligencia Artificil para el preprocesamiento y procesamiento de los datos, hasta la definición de la arquitectura del modelo basado en Transformers para la clasificación de los comentarios, el análisis de los resultados obtenidos, y la descripción del trabajo futuro a realizar.\\
+A continuación se enumeran los puntos principales que serán tratados durante el desarrollo de la investigación, para luego describir un breve resumen de las tareas realizadas u objetivos de los mismos:\\
 
-\begin{enumerate}
-    \item Investigación de estado del arte y revisión bibliográfica de conceptos que se tratarán.
-    \item Definición del enfoque de investigación.
-    \item Descripción del dataset a utilizar.
-    \item Investigación y selección de modelos Transformers, específicamente aquellos que utilizan un esquema de codificación bidireccional
-    \item Definición de las herramientas y técnicas a utilizar.
-    \item Preparación de ambientes de desarrollo 
-    \item Preprocesamiento y etiquetado de datos
-    \item Definición de arquitectura de modelo basado en Transformers para la clasificación de comentarios
-    \item Análisis de resultados obtenidos
-    \item Descripción de trabajo futuro
-\end{enumerate}
+\begin{table}[htbp]
+    \centering
+    \caption{Secuencia metodológica de la investigación}
+    \label{tab:metodologia}
+    \begin{tabularx}{\textwidth}{@{} c X @{}}
+        \toprule
+        \textbf{Etapa} & \textbf{Descripción de la Actividad} \\
+        \midrule
+
+        1 & Investigación de estado del arte y revisión bibliográfica. \\
+
+        2 & Definición del enfoque de investigación. \\
+
+        3 & Descripción de los elementos del dataset a utilizar. \\
+        
+        4 & Investigación y selección de modelos Transformers. \\
+        
+        5 & Definición de las herramientas y técnicas a utilizar. \\
+        
+        6 & Preprocesamiento y etiquetado de datos mediante modelos Transformer. \\
+        
+        7 & Definición de arquitectura de modelo Transformer para la clasificación de comentarios. \\
+
+        8 & Ejecución de modelo Transformer sobre el dataset de comentarios. \\
+        
+        
+        \bottomrule
+    \end{tabularx}
+\end{table}
 
 \section{\textbf{Investigación de estado del arte:}}
-Primero se comenzó por ingvestigar a fondo las temáticas a tratar, como lo son la experiencia del turista, la experiencia de usuario, los modelos de lenguaje natural, los modelos LLM, las técnicas de preprocesamiento de datos, etc. Para esto se realizó una revisión bibliográfica exhaustiva de artículos científicos relacionados con estas temáticas contrando específicamente en la TX, para así poder comprender a fondo cada uno de estos conceptos y poder aplicarlos correctamente en el desarrollo del trabajo. Además se investigó sobre trabajos similares realizados por otros investigadores para poder comparar resultados y técnicas utilizadas, y así poder mejorar el trabajo realizado.
+La investigación del estado del arte, conceptos e interiorización a fondo de las temáticas a tratar, como lo son la experiencia del turista, la experiencia de usuario, los modelos de lenguaje natural, los modelos LLM, las técnicas de preprocesamiento de datos, etc, son fundamentales para poder determinar con rigurosidad las ventajas y desventajas de distintos modelos de Inteligencia Artificial, limitaciones técnicas y formas de trabajar con estos mismos. Para esto se realizó una revisión bibliográfica exhaustiva de artículos científicos relacionados principalmente al area de la Experiencia del Turista y modelos de Transformers, para así poder comprender a fondo cada uno de los conceptos relacionados y poder aplicarlos correctamente en el desarrollo de la investigación. \\
+
+Resultando una necesidad fundamental, aunque especifica, la investigación de artículos relacionados a la minería de sugerencias representa un area de estudio que busca resolver problemáticas relacionadas al estado de los sistemas tradicionales que se dedicaban a clasificar los comentarios de los usuarios como positivols o negativos, gracias a técnicas de análisis de sentimientos, pero se pasaban por alto el feedback de los usuarios que apuntaba a sugerencias de mejora del producto \textcite{SuggestionMiningDictionary} por lo que se vuelve fundamental comprender la necesidad real del area de estudio así como interiorizarla propia definición formal de lo que corresponde a una sugerencia y que la difiere de un simple comentario de expresión de opinión o feedback, ya que es estrictamente necesaria cuando se quiere trabajar con modelos de lenguaje grandes o transformer que necesitan mucho contexto y comprender mucha información para poder llegar a realizar una detección a nivel humano.\\ 
 
 \section{\textbf{Definición del enfoque de investigación:}}
-Se definió si el enfoque iba a ser cualitativo, cuantitativo o mixto, considerando cosas como las características y/o columnas del dataset, los objetivos planteados y las técnicas a utilizar, para poder desarrollar un fundamento mas sólido.
+Resulta necesario tener que definir si el enfoque debe a ser cualitativo, cuantitativo o mixto, para poder trazar la ruta metodológica que seguir durante el desarrollo de la investigación, dependiendo ya sea de un enfoque cuantitativo, basado en datos, números, estadísticas, etc, o un enfoque cualitativo, basado en la interpretación de los datos, la comprensión del lenguaje natural presente en comentarios, etc, o un enfoque mixto, que combina ambos enfoques anteriores. Es necesario definir el enfoque de la investigación para saber el tipo de análisis y relaciones que se tendrán al final, que datos considerar, la forma de trabajar estos mismos y a resumidas cuentas, definir un poco del alcance de la investigación.\\ 
 
-\section{\textbf{Descripción del dataset a utilizar:}}
+\section{\textbf{Descripción de los elementos del dataset a utilizar:}}
+MMMMMMMMM
 Se estudia y describe la estructura del dataset a utilizar, columnas, caracteristicas, fechas de obtención de datos y todos los datos necesarios para comprender con lo que se estará trabajando, también se diferenciará cuales realmente representan un aporte al trabajo y cuales no.
 
 \section{\textbf{Investigación y selección de modelos Transformers:}}
@@ -33,18 +53,33 @@ Se investigan los distintos modelos Transformers disponibles, específicamente a
 \section{\textbf{Definición de las herramientas y técnicas a utilizar:}}
 Sección en la que se definien las diferenes herramientas que se utilizarán para preprocesar los datos, para el análisis de los resultados obtenidos, para la comparación de técnicas, etc. Además se definirán las técnicas de preprocesamiento de datos a utilizar, como la limpieza de datos, el etiquetado manual/automático, la reducción de ruido, etc. También se definirán las técnicas de análisis de datos a utilizar, como el análisis estadístico, la comparación de resultados, etc.
 
-\section{\textbf{Preparación de ambientes de desarrollo:}}
-Se preparan dependencias, ambientes de desarrollo, repositorios, y los espacios necesarios para la realización del trabajo.
-
-\section{\textbf{Preprocesamiento y etiquetado de datos:}}
+\section{\textbf{Preprocesamiento y etiquetado de datos mendiante modelos Transformers:}}
 Etapa en la que realizaremos la limpieza, etiquetado, aseguramiento del mismo y preparación de los datos para que estos puedan ser analizados por el modelo Transformer que se definirá en el transcurso del proyecto, además de reducir la cantidad de ruido en los datos y mejorar la calidad de los mismos para obtener mejores resultados. \\
 Además es la sección que determina los datos finales con los que se deberían trabajar, siendo esta una de las etapas mas significativas e imprescindibles del proyecto, donde se comprenden etapas como el reconocimiento de lenguaje, limpieza de datos, etiquetado o corroboración manual. Resultando todo esto en los datos etiquetados para ya pasar por un modelo mas robusto.
 
-\section{\textbf{Definición de arquitectura de modelo basado en Transformers:}}
+\section{\textbf{Definición de arquitectura de modelo Transformer para la clasificación de comentarios:}}
 Una vez realizado el proceso de preprocesado de los datos y teniendo ya los datos etiquetados, se deberá definir la arquitectura del modelo basado en Transformers que se utilizará para la clasificación de los comentarios, considerando aspectos como la cantidad de capas, el tamaño del modelo, la cantidad de parámetros, etc. Además se deberá definir el proceso de entrenamiento del modelo, como la cantidad de épocas, el tamaño del batch, la función de pérdida, etc.
 
-\section{\textbf{Análisis de resultados obtenidos:}}
-Habiendo ya preprocesados los datos y teniendo ya el modelo entrenado, se deberá realizar un análisis de los resultados obtenidos, considerando aspectos como la precisión, la recall, la f1-score, etc. Además se deberá comparar los resultados obtenidos con otros trabajos similares realizados por otros investigadores para poder evaluar la calidad de los resultados obtenidosa nivel de rendimiento y poder mejorar el trabajo realizado.
 
-\section{\textbf{Descripción de trabajo futuro:}}
-Luego de finiquitado el trabajo como tal y haber dado las respectivas conclusiones respecto al trabajo realizado, se deberá plantear una sección donde se mencione mínimamente lo relacionado a la manera en que se trabajó en la investigación, pero principalmente se deberá plantear el trabajo futuro que podría realizarse a partir de lo ya realizado, otras formas de mejorar la detección de las sugerencias operacionales, nuevas técnicas, nuevos modelos de Inteligencia Artificial, etc. Además se deberá mencionar las limitaciones del trabajo realizado y cómo estas podrían ser superadas en el futuro.
+\section{\textbf{Ejecución de modelo Transformer sobre el dataset de comentarios:}}
+
+Al tener el modelo ya entrenado y los datos preprocesados, es necesaria la etapa de ejecución del procesamiento de etiquetado masivo de datos frente a los aproximadamente 560.000 comentarios disponibles en el dataset provenientes de TripAdvisor \textcite{tripadvisor-website}, proceso que permite cumplir con el objetivo de lograr la clasificación (y en consecuencia la detección) de las sugerencias presentes en el dataset, además de obtener los datos que permitirán realizar los análisis y conclusiones correspondientes tanto para la investigación como para el trabajo futuro, problemas o problemáticas detectadas y potencial del proyecto como tal.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%\section{\textbf{Análisis de resultados obtenidos:}}
+%Habiendo ya preprocesados los datos y teniendo ya el modelo entrenado, se deberá realizar un análisis de los resultados obtenidos, considerando aspectos como la precisión, la recall, la f1-score, etc. Además se deberá comparar los resultados obtenidos con otros trabajos similares realizados por otros investigadores para poder evaluar la calidad de los resultados obtenidosa nivel de rendimiento y poder mejorar el trabajo realizado.
+
+%\section{\textbf{Descripción de trabajo futuro:}}
+%Luego de finiquitado el trabajo como tal y haber dado las respectivas conclusiones respecto al trabajo realizado, se deberá plantear una sección donde se mencione mínimamente lo relacionado a la manera en que se trabajó en la investigación, pero principalmente se deberá plantear el trabajo futuro que podría realizarse a partir de lo ya realizado, otras formas de mejorar la detección de las sugerencias operacionales, nuevas técnicas, nuevos modelos de Inteligencia Artificial, etc. Además se deberá mencionar las limitaciones del trabajo realizado y cómo estas podrían ser superadas en el futuro.
