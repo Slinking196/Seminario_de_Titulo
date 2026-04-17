@@ -91,8 +91,3 @@ Se eliminan las columnas innecesarias del dataset, conservando solo aquellas rel
 \section{\textbf{Filtrado de datos}}
 Una vez reconocido el lenguaje de los comentarios continuaremos con el filtrado de idioma de los datos, por lo cuál pasaremos principalmente por dos criteríos, el primero de ellos es que el lenguaje detectado con la fase de detección global de idioma \ref{cha:global_detection_lang} y el detectado por la fase de análisis micro-simántica \ref{cha:micro-semantic analysis} deben coincidir, ya que si estos no coinciden, esto puede generar una inconsistencia en el idioma del comentario, y adicionalmente el valor de majority\_percentage obtenido en la tercera fase \ref{cha:Aggregation by Statistical Majority} debe ser mayor a un 0.5, lo que nos asegura que el idioma predominante en el comentario es realmente predominante en base a su mayoría estadística.
 
-%\section{\textbf{Trabajo con embeddings}} 
-
-%Se busca identificar a travez de similitud del coseno si el comentario es sugerencia o no.
-
-%\section{\textbf{Psible verificación con Groq}}

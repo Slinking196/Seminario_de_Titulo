@@ -10,16 +10,16 @@
 
 %% TEX CON PORTADA DEL INFORME
 % Portada para informes en asignaturas
-\include{front-page/portada_principal}
+%\include{front-page/portada_principal}
 
 % Portada para informes de TFT a excepción del final de Proyecto
-%\include{Portadas/portada_TFT_nofinal.tex}
+\include{front-page/portada_TFT_nofinal.tex}
 
 % Portada informe final de proyecto 
-%\include{Portadas/portada_TFT_final.tex}
+%\include{front-page/portada_TFT_final.tex}
 
 % Portada para informe de Tesis de Posgrado
-%\include{Portadas/portada_Tesis.tex}
+%\include{front-page/portada_Tesis.tex}
 
 %% DEDICATORIA (incluir solo en TFT y TFG, sino comentar)
 %\include{Dedicatoria/dedicatoria.tex}
@@ -74,7 +74,11 @@
 % Limitaciones del estudio
 % Trabajo realizado
 % Analisis de datos
+\include{body/data_procesing}
+\newpage
 \include{body/future_work}
+\newpage
+\include{body/result_analysis}
 \newpage
 \include{body/conclusion}
 \newpage
