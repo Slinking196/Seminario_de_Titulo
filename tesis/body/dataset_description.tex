@@ -14,8 +14,7 @@ A continuación detallaremos las columnas de interés para nuestro trabajo, que 
 \begin{enumerate}
     \item \textbf{rating review:} Valor entre 1 y 5 que contiene el comentario, refiriendonos a una escala likert, donde se asumió que 1 es muy malo y 5 es excelente.
     \item \textbf{review text:} Comentario del usuario respecto a su experiencia como turista en determinado servicio de trasfondo turístico (Dato que naturalmente servirá como base para analizar con modelos Transformers y determinar si es que existe una intencionalidad de sugerencia en este).
-    \item \textbf{language:} Idioma del comentario, que puede ser español, inglés, portugués, , aunque como se mencionó anteriormente, existen comentarios con mezcla de idiomas, por lo que se hace necesario un trabajo de reconocimiento de lenguaje mas elaborado para determinar el idioma predominante de cada comentario.
-
+    \item \textbf{language:} Idioma del comentario, que puede ser español, inglés, portugués, aunque como se mencionó anteriormente, existen comentarios con mezcla de idiomas, por lo que se hace necesario un trabajo de reconocimiento de lenguaje mas elaborado para determinar el idioma predominante de cada comentario. Además de esto, el lenguaje detectado por tripadvisor depende de la configuración del usuario, por lo que es posible que existan comentarios en español con idioma detectado como inglés, o viceversa, lo que hace necesario un trabajo de reconocimiento de lenguaje mas elaborado para determinar el idioma predominante de cada comentario.
 \end{enumerate}
 
 Cabe destacar que esta es una descripción de los datos que consideramos \textbf{fundamentales} para que el preprocesamiento de los datos sea el mejor y nos den la mejor respuesta para que luego el trabajo de NLU sea efectivo y posea la menor cantidad de ruido posible.
