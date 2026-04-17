@@ -1,5 +1,5 @@
 {
-	"name": "Seminario de Titulo - Python 3.14 + LaTeX",
+	"name": "Seminario de Titulo - Python 3.13 + LaTeX",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "workspace",
 	"runServices": ["workspace", "latex"],
