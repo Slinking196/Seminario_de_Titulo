@@ -20,6 +20,8 @@ main.pdf
 # Data files
 data_analysis/data/Chile_all_csv.csv
 data_analysis/data/test.csv
+data_analysis/data/Chile_all1_clean_labeled.csv
+data_analysis/data/Chile_all1_clean.csv
 
 
 # LaTeX intermediate/build artifacts
