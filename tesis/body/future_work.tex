@@ -4,7 +4,31 @@
 
 En esta sección veremos el estado actual de la investigación, a que apuntan los resultados obtenidos, limitaciones del proyecto tanto técnicas como de estado del arte, posibles mejoras, continuaciones de la investigación, cambios, pruebas o modificaciones posibles a la metodología que pueden ser realizadas para mejorar los resultados obtenidos o cambiar los resultados para guiar la investigación hacia otros rumbos, etc.\\
 
-
 \section{Limitaciones del proyecto}
 
-El proyecto ha presentado limitaciones en cuanto a la disponibilidad de modelos abiertos y con sus datos de entrenamiento públicos,
+\begin{itemize}
+    \item El proyecto ha presentado limitaciones en cuanto a la disponibilidad de modelos abiertos y con sus datos de entrenamiento públicos, la busqueda constante de modelos puramente de codigo abierto y con datos de entrenamiento publicos ha sido un gran desafio, limitando el espacio de busqueda y limitandonos a solo poder correr modelos en infraestructura propia (sin tener en cuenta el arriendo o compra de hardware debido a la viabilidad económica del proyecto).
+
+    \item Existen claras limitaciones en cuanto a la infraestructura y hardware disponibles, sobre todo debido a que no se posee ni el hardware ni los fondos para poder financiar uno (ni arrendado ni comprado), por lo que existieron limitantes que provocaron la necesidad forzada de modelos cuantizados cercanos a los 4 bits y (de entre las opciones disponibles) 7B de parámetros. 
+    \item Baja presencia de modelos multilinguales eficientes que podamos correr y que cumplan con las restricciones requeridas (abioerto, datos públicos y que pueda correr en hardware local).
+    
+\end{itemize}
+
+\section{Puntos a mejorar}
+
+\begin{itemize}
+    \item Optimización de hiperparámetros de los modelos, sobre todo de OLMO 3 (XLM y OLLAMA), para mejorar su desempeño en la tarea de clasificación binaria de sugerencias.
+    
+    \item Iteraciones y Refinamiento del prompt utilizado para ambos modelos, con el objetivo de lograr una mejor (u ojalá absoluta) comprensión del tpérmino sugerencia, ya que esto determina la verdadera precisión del modelo, y corresponde a un punto clave para mejorar los resultados finales demostrados en una matriz de confusión.
+     
+    \item Creación de un modelo desde cero completamente entrenado para la tarea que se requiere y no utilizar un modelo pre-entrenado, requiriendo por un lado una mayor cantidad de tiempo de entrenamiento y recursos, pero logrando un modelo totalmente "experto" y especializado en el tema a tratar.
+\end{itemize}
+
+\section{Posible dirección de la investigación futura}
+
+\begin{itemize}
+    \item Continuar con la investigación de modelos multilinguales eficientes, abiertos y con datos de entrenamiento públicos, pero realizando pequeñas pruebas comparativas para evaluar que modelo se adapta mejor a la tarea de clasificación binaria de sugerencias.
+    \item Enfoque en una aplicación en la industria, ofreciendo el producto para validar con posibles clientes y usuarios finales, de manera que se realicen pruebas de usuario y se tenga certeza del alcance real del mismo.
+    \item Entrenar el modelo con datos de otros idiomas que no sean ni español ni inglés
+\end{itemize}
+    
