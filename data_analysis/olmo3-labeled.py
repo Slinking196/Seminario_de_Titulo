@@ -74,7 +74,7 @@ Reply ONLY with this JSON, no additional text:
 }"""
 
 INPUT_CSV = Path("data_analysis/data/Chile_all1_clean.csv")
-OUTPUT_CSV = Path("data_analysis/data/Chile_all1_clean_labeled.csv")
+OUTPUT_CSV = Path("data_analysis/data/Chile_all1_clean_labeled2.csv")
 CHECKPOINT_EVERY = 100
 
 # Interruptores de preprocesamiento para pruebas A/B.
@@ -360,14 +360,14 @@ def label_reviews() -> None:
     log_progress(f"Leyendo dataset desde {INPUT_CSV}", total_start)
     df = pd.read_csv(INPUT_CSV, sep=";", encoding="utf-8-sig")
     df = df[df["language_detected_full"] == "en"]  # Filtrar solo reseñas en inglés
-    df = df[:250]  # Limitar a 10000 filas para pruebas iniciales
+    df = df[1500:3000]  # Limitar a 10000 filas para pruebas iniciales
     required_columns = {"review_text", "language_majority_lang"}
     missing = required_columns - set(df.columns)
     if missing:
         raise ValueError(f"Faltan columnas requeridas en el CSV: {sorted(missing)}")
 
     log_progress("Cargando modelo OLMo3 en memoria", total_start)
-    model_id = "mlx-community/olmo-3-7b-instruct-4bit"
+    model_id = "mlx-community/olmo-3-7b-think-4bit"
     model, tokenizer = load(model_id)
 
     text_cache: dict[str, dict | None] = {}
