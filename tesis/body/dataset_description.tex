@@ -2,20 +2,19 @@
 \chapter{Descripción del Conjunto de Datos}
 \label{cha:Descripción del Conjunto de Datos}
 
-En esta sección, veremos una explicación detallada de los datos que utilizaremos como material de investigación, procedencia, trabajo de preprocesamiento que realizaremos, limpieza de los datos y preparación para un posterior análisis y LNU, dando enfasis en que esta sección en particular corresponde a un paso fundamental dentro de la metodología que definimos, además de permitirnos filtrar la información que nos será verdaderamente relevante para este trabajo para finalmente reducir la carga de los modelos LNU y as'i de esta forma finalmente llegar al mejor resultado que podadmos proponer.
+En esta sección, veremos una explicación detallada de los datos que utilizaremos como material de investigación, procedencia, trabajo de preprocesamiento que realizaremos, limpieza de los datos y preparación para un posterior análisis y uso de modelos transformers para el etiquetado de datos, dando enfasis en que esta sección en particular corresponde a un paso fundamental dentro de la metodología que definimos, además de permitirnos filtrar la información que nos será verdaderamente relevante para este trabajo y de esta forma buscamos reducir la carga de los modelos Transformers a la hora del etiquetado de datos.
 
 \section{\textbf{Conjunto de Datos (Dataset)}}
-Para este trabajo utilizaremos un dataset que contiene comentarios de usuarios de la plataforma de TripAdvisor, luego de que estos mismos usuarios opinaran sobre alguna atracción visitada, estadía en residencia, Hotel, etc, en Chile y donde se obtuvieron comentarios de 3 lenguajes distintos principalmente, español, inglés y portugués.
+Para este trabajo se utilizaremos un dataset que contiene comentarios dirigidos directamente a los servicios turísticos de Chile utilizados por usuarios de la plataforma de TripAdvisor. Este dataset contiene comentarios en tres idiomas principales: español, inglés y portugués, a pesar de que algunos comentarios pueden contener mezclas de idiomas.
 
-La estructura se compone de 14 columnas, de las cuales solo consideraremos 4 de ellas como relevantes, debido al valor que estas significan tanto para el trabajo NLU como para el análisis posterior de datos que deberemos realizar en etapas posteriores.
+La estructura se compone de 14 columnas, de las cuales solo consideraremos 3 de ellas como relevantes, debido al valor que estas significan tanto para el trabajo de los modelos Transformers como para el análisis posterior de datos que deberemos realizar en etapas posteriores.
 
 A continuación detallaremos las columnas de interés para nuestro trabajo, que significan y las razones que nos llevan a considerarlas como relevantes para nuestro análisis.
 
 \begin{enumerate}
     \item \textbf{rating review:} Valor entre 1 y 5 que contiene el comentario, refiriendonos a una escala likert, donde se asumió que 1 es muy malo y 5 es excelente.
-    \item \textbf{review text:} Comentario del usuario respecto a su experiencia como turista en determinado servicio de trasfondo turístico (Dato que naturalmente servirá como base para analizar con modelos NLU y determinar si es que existe una intencionalidad de sugerencia en este).
-    \item \textbf{sentiment:} Sentimiento del comentario, campo que puede tomar los valores VERY POSITIVE, POSITIVE, NEUTRAL, NEGATIVE o VERY NEGATIVE (aunque al parecer se trata de un trabajo previo añadido a los datos, por lo que solo se tomará como referencia para agilizar la revisión posterior al cálculo NLU).
-    \item \textbf{sentiment score:} Puntuación del sentimiento valor que se mueve entre [0 y 4] con (0=VERY NEGATIVE, 1=NEGATIVE, 2=NEUTRAL, 3=POSITIVE, 4=VERY POSITIVE), sirviendo como un valor numérico que nos podría permitir realizar análisis estadísticos o comparativos mas adelante.
+    \item \textbf{review text:} Comentario del usuario respecto a su experiencia como turista en determinado servicio de trasfondo turístico (Dato que naturalmente servirá como base para analizar con modelos Transformers y determinar si es que existe una intencionalidad de sugerencia en este).
+    \item \textbf{language:} Idioma del comentario, que puede ser español, inglés, portugués, , aunque como se mencionó anteriormente, existen comentarios con mezcla de idiomas, por lo que se hace necesario un trabajo de reconocimiento de lenguaje mas elaborado para determinar el idioma predominante de cada comentario.
 
 \end{enumerate}
 
