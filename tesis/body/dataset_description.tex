@@ -5,39 +5,58 @@
 En esta sección, veremos una explicación detallada de los datos que utilizaremos como material de investigación, procedencia, trabajo de preprocesamiento que realizaremos, limpieza de los datos y preparación para un posterior análisis y uso de modelos transformers para el etiquetado de datos, dando enfasis en que esta sección en particular corresponde a un paso fundamental dentro de la metodología que definimos, además de permitirnos filtrar la información que nos será verdaderamente relevante para este trabajo y de esta forma buscamos reducir la carga de los modelos Transformers a la hora del etiquetado de datos.
 
 \section{\textbf{Conjunto de Datos (Dataset)}}
-Para este trabajo se utilizaremos un dataset que contiene comentarios dirigidos directamente a los servicios turísticos de Chile utilizados por usuarios de la plataforma de TripAdvisor. Este dataset contiene comentarios en tres idiomas principales: español, inglés y portugués, a pesar de que algunos comentarios pueden contener mezclas de idiomas.
+Para este trabajo se utilizaremos un dataset que contiene comentarios dirigidos directamente a los servicios turísticos de Chile utilizados por usuarios de la plataforma de TripAdvisor. La estructura se compone de 14 columnas las cuales son:
 
-La estructura se compone de 14 columnas, de las cuales solo consideraremos 3 de ellas como relevantes, debido al valor que estas significan tanto para el trabajo de los modelos Transformers como para el análisis posterior de datos que deberemos realizar en etapas posteriores.
+\begin{tabularx}{\textwidth}{|l|X|}
+\hline
+\textbf{Columna} & \textbf{Descripción} \\ \hline
+\texttt{region\_name} & Nombre de la región donde se encuentra el servicio turístico \\ \hline
+\texttt{attraction\_name} & Nombre del servicio turístico \\ \hline
+\texttt{language} & Idioma del comentario identificado por TripAdvisor a través de la configuración del usuario, considerando 3 idiomas principales los cuales son español, inglés y portugués \\ \hline
+\texttt{username} & Nombre de usuario del autor del comentario \\ \hline
+\texttt{rating\_review} & Valor entre 1 y 5 que contiene el comentario, refiriendonos a una escala likert, donde se asumió que 1 es muy mal servicio y 5 es excelente \\ \hline
+\texttt{title} & Título del comentario creado por el usuario \\ \hline
+\texttt{review\_text} & Comentario del usuario respecto a su experiencia como turista en determinado servicio de trasfondo turístico \\ \hline
+\texttt{written\_date} & Fecha en la que se escribió el comentario \\ \hline
+\texttt{visit\_date} & Fecha en la que el usuario visitó o hizo uso del servicio turístico \\ \hline
+\texttt{companion\_type} & Tipo de acompañante con el que el usuario realizó su visita al servicio turístico (Ejemplo: solo, pareja, familia, amigos, etc.) \\ \hline
+\texttt{contribution} & Contribuciones que ha realizado el usuario dentro de la plataforma de TripAdvisor. \\ \hline
+\texttt{sentiment} & Sentimiento del comentario, que puede ser estar entre 5 opciones: muy negativo, negativo, neutral, positivo o muy positivo. \\ \hline
+\texttt{sentiment\_score} & Puntaje del sentimiento del comentario, que puede ser un valor numérico entre 0 y 4, donde 0 representa un sentimiento negativo, 2 representa un sentimiento neutral y 4 representa un sentimiento positivo \\ \hline
+\texttt{location} & Ubicación del usuario que realizó el comentario \\ \hline
+\end{tabularx}
+
+A partir de todas estas columnas hemos considerado quedarnos con 3 de ellas, debido al valor que estas significan tanto para el trabajo de los modelos Transformers como para el análisis posterior de datos que deberemos realizar en etapas posteriores.
 
 A continuación detallaremos las columnas de interés para nuestro trabajo, que significan y las razones que nos llevan a considerarlas como relevantes para nuestro análisis.
 
 \begin{enumerate}
-    \item \textbf{rating review:} Valor entre 1 y 5 que contiene el comentario, refiriendonos a una escala likert, donde se asumió que 1 es muy malo y 5 es excelente.
+    \item \textbf{title:} Título del comentario creado por el usuario, que puede contener información relevante para la detección de sugerencias, ya que es común que los usuarios utilicen el título para destacar aspectos específicos de su experiencia, lo que puede incluir sugerencias o recomendaciones relacionadas con el servicio turístico.
     \item \textbf{review text:} Comentario del usuario respecto a su experiencia como turista en determinado servicio de trasfondo turístico (Dato que naturalmente servirá como base para analizar con modelos Transformers y determinar si es que existe una intencionalidad de sugerencia en este).
     \item \textbf{language:} Idioma del comentario, que puede ser español, inglés, portugués, aunque como se mencionó anteriormente, existen comentarios con mezcla de idiomas, por lo que se hace necesario un trabajo de reconocimiento de lenguaje mas elaborado para determinar el idioma predominante de cada comentario. Además de esto, el lenguaje detectado por tripadvisor depende de la configuración del usuario, por lo que es posible que existan comentarios en español con idioma detectado como inglés, o viceversa, lo que hace necesario un trabajo de reconocimiento de lenguaje mas elaborado para determinar el idioma predominante de cada comentario.
 \end{enumerate}
 
-Cabe destacar que esta es una descripción de los datos que consideramos \textbf{fundamentales} para que el preprocesamiento de los datos sea el mejor y nos den la mejor respuesta para que luego el trabajo de NLU sea efectivo y posea la menor cantidad de ruido posible.
-
 \section{\textbf{Librerías}}
+\label{cha:OLLAMA}
+\label{cha:MLX}
 
-Para el trabajo de Comprensión de Lenguaje Natural y reconocimiento de lenguaje, utilizaremos diversas librerías que nos permitirán llevar a cabo la identificación del lenguaje de cada uno de los comentarios, ya que pese a existir la columna de lenguaje en el dataset, existen comentarios que contienen mezclas de idiomas, donde personas de habla hispana hacen comentarios con algunas palabras en inglés y lo mismo con los otros idiomas, por lo que se hace necesario un trabajo de reconocimiento mas elaborado del lenguaje predominante de cada comentario.
+Para el trabajo de Comprensión de Lenguaje Natural, reconocimiento de idiomas e análisis de datos, utilizaremos diversas librerías del lenguaje Python que nos permitirán llevar a cabo nuestros objetivos, como lo son el identificar el contenido que posee cada columna de nuestro conjunto de datos, reconocer el idioma predominante en cada comentario, hacer limpieza de datos repetidos, eliminación de filas con datos nulos, hasta el uso de modelos Transformers para el etiquetado de datos, entre otras tareas que se irán detallando a lo largo del desarrollo de esta investigación. Las librerías más relevantesque utilizaremos son las siguientes:
 
 \begin{itemize}
-    \item \textbf{pandas:} Para la manipulación y análisis de datos. 
-    \item \textbf{langdetect:} Para la detección de idiomas en los comentarios tanto en español como en inglés.
-    \item \textbf{pyenchant:} Librería para la corrección ortográfica y detección de palabras en diferentes idiomas, útil para identificar el idioma predominante en comentarios con mezcla de lenguajes.
-    \item \textbf{nltk:} Para procesamiento de lenguaje natural.
-          %groq?
-    \item \textbf{RE:} Para manejo y operaciones con expresiones regulares.
-    \item \textbf{Unicode data:} Para el manejo y manipulación de caracteres.
-    \item \textbf{Os:} Para manipulacion de archivos y manejo de rutas de directorio.
+    \item \textbf{pandas:} Librería que proporciona estructuras de datos y herramientas de análisis de datos, que nos permitirá manipular y analizar los datos de nuestro conjunto de datos de manera eficiente.
+    \item \textbf{langdetect:} Librería que se utiliza para detectar el idioma de un texto, lo que nos permitirá identificar el idioma predominante en cada comentario de nuestro conjunto de datos.
+    \item \textbf{lingua-py:} Librería de detección de idiomas que utiliza un enfoque basado en n-gramas para identificar el idioma de un texto, lo que nos permitirá complementar la detección de idiomas realizada por langdetect y mejorar la precisión en la identificación del idioma predominante en palabras individuales de cada comentario de nuestro conjunto de datos.
+    \item \textbf{re:} Librería de expresiones regulares que nos permitirá realizar tareas de limpieza de datos, como eliminar caracteres no deseados, normalizar el texto, entre otras tareas de preprocesamiento.
+    \item \textbf{collections:} Librería que proporciona contenedores de datos especializados, como diccionarios ordenados, que nos permitirá organizar y contar la frecuencia de palabras o frases en nuestros comentarios, lo que puede ser útil para el análisis de datos y la detección de sugerencias.
+    \item \textbf{mlx\_lm:} Librería que hace uso del framework MLX que proporciona modelos de lenguaje preentrenados configurados especialmente para ser ejecutados en dispositivos Apple Silicon, que nos permitirá utilizar modelos Transformers para el etiquetado de datos y la detección de sugerencias en los comentarios de nuestro conjunto de datos.
+    \item \textbf{nltk:} Librería de procesamiento de lenguaje natural que nos permitirá realizar tareas de tokenización, lematización, eliminación de stop words, entre otras tareas de preprocesamiento de texto que serán necesarias para preparar nuestros datos para el entrenamiento y etiquetado de los modelos Transformers a utilizar.
+    \item \textbf{simplemma:} Librería de lematización que nos permitirá reducir las palabras a su forma base o raíz, lo que puede ser útil para mejorar la precisión de los modelos Transformers al trabajar con texto en diferentes formas gramaticales.
+    \item \textbf{ollama:} Librería que nos permitirá interactuar con la API del framework Ollama que proporciona modelos de lenguaje preentrenados alojados en local, lo que nos facilitará el proceso de etiquetado de datos y la detección de sugerencias en los comentarios de nuestro conjunto de datos.
 \end{itemize}
-
 
 \section{\textbf{Objetivo del conjunto:}}
 
-Debido a que el objetivo de la investigación se basa en la detección de sugerencias operacionales, el dataset de comentarios de TripAdvisor resulta  particularmente útil, definir las herramientas para trabajar y analizar preeviamente los datos con los que disponemos nos permitirán desarrollar un trabajo mas especializado y que potencialmente nos podrá llevar a mejores resultados en lo que es nuestro objetivo principal de la detección de sugerencias.
+Debido a que el objetivo de la investigación se basa en la detección de sugerencias, el dataset de comentarios de TripAdvisor resulta particularmente útil, definir las herramientas para trabajar y analizar preeviamente los datos con los que disponemos nos permitirán desarrollar un trabajo mas especializado y que potencialmente nos podrá llevar a mejores resultados en lo que es nuestro objetivo principal de la detección de sugerencias.
 
 
 
