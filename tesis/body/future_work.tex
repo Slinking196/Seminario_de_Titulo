@@ -10,6 +10,7 @@ En esta sección veremos el estado actual de la investigación, a que apuntan lo
     \item El proyecto ha presentado limitaciones en cuanto a la disponibilidad de modelos abiertos y con sus datos de entrenamiento públicos, la busqueda constante de modelos puramente de codigo abierto y con datos de entrenamiento publicos ha sido un gran desafio, limitando el espacio de busqueda y limitandonos a solo poder correr modelos en infraestructura propia (sin tener en cuenta el arriendo o compra de hardware debido a la viabilidad económica del proyecto).
 
     \item Existen claras limitaciones en cuanto a la infraestructura y hardware disponibles, sobre todo debido a que no se posee ni el hardware ni los fondos para poder financiar uno (ni arrendado ni comprado), por lo que existieron limitantes que provocaron la necesidad forzada de modelos cuantizados cercanos a los 4 bits y (de entre las opciones disponibles) 7B de parámetros. 
+    
     \item Baja presencia de modelos multilinguales eficientes que podamos correr y que cumplan con las restricciones requeridas (abioerto, datos públicos y que pueda correr en hardware local).
     
 \end{itemize}
@@ -19,9 +20,9 @@ En esta sección veremos el estado actual de la investigación, a que apuntan lo
 \begin{itemize}
     \item Optimización de hiperparámetros de los modelos, sobre todo de OLMO 3 (XLM y OLLAMA), para mejorar su desempeño en la tarea de clasificación binaria de sugerencias.
     
-    \item Iteraciones y Refinamiento del prompt utilizado para ambos modelos, con el objetivo de lograr una mejor (u ojalá absoluta) comprensión del tpérmino sugerencia, ya que esto determina la verdadera precisión del modelo, y corresponde a un punto clave para mejorar los resultados finales demostrados en una matriz de confusión.
+    \item Iteraciones y Refinamiento del prompt utilizado para ambos modelos, con el objetivo de lograr una mejor comprensión del término sugerencia, ya que esto determina la verdadera precisión de la detección, y corresponde a un punto clave para mejorar los resultados finales.
      
-    \item Creación de un modelo desde cero completamente entrenado para la tarea que se requiere y no utilizar un modelo pre-entrenado, requiriendo por un lado una mayor cantidad de tiempo de entrenamiento y recursos, pero logrando un modelo totalmente "experto" y especializado en el tema a tratar.
+    \item Una posible creación de un modelo desde cero, completamente entrenado para la tarea que se requiere y no depender de un modelo pre-entrenado, requiriendo por un lado una mayor inversión de recursos de entrenamiento, pero logrando un modelo totalmente "especializado" en la tarea de detección.
 \end{itemize}
 
 \section{Posible dirección de la investigación futura}
