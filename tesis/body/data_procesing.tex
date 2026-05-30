@@ -1,7 +1,7 @@
 \chapter{\textbf{Procesamiento de datos}}
 \label{cha:procesamiento_datos}
 
-En esta sección describiremos el proceso que realiza el modelo tanto para el etiquetado de datos de entrenamiento con OLMO 3 así como para el procesamiento de etiquetado de datos realizado por ModernBERT, sus arquitecturas, ventajas sobre otros modelos, parametros, diferencias con las arquitecturas tradicionales, entre otros aspectos.\\
+En esta sección describiremos el proceso que realiza el modelo tanto para el etiquetado de datos (Silver Label) de entrenamiento con OLMO 3 así como para el procesamiento de etiquetado de datos realizado por ModernBERT, sus arquitecturas, ventajas sobre otros modelos, parametros, diferencias con las arquitecturas tradicionales, entre otros aspectos.\\
 
 
 \section{Modelo OLMO 3 base}
@@ -81,7 +81,7 @@ ModernBERT modelo desarrollado por Answer.AI, LightOn, entre otros, de la misma 
 
 Entrenado con 2T de tokens y una longitud de secuencia de 8192 tokens, a diferencia de BERT tradicional, que fue entrenado tan solo con 512 tokens, fue implementada la característica de atención alternada global + local, donde la atención globnal provoca que cada token atienda a los demás, mientras que el local provoca que los tokens solo atiendan a un rango limitado de tokens cercanos, lo que permite a ModernBERT manejar secuencias más largas sin utilizar excesiva memoria, volviéndose mas eficiente en textos largos \cite{warner2024modernbert}.\\
 
-Como se puede observar en la figura \ref{fig:ModernBERTComparison}, ModernBERT ofrece un rendimiento competitivo en comparación con otros modelos de lenguaje, tanto en su versión BASE como en su version LARGE, volviendose en una opcion competitiva en el mercado de modelos de código abierto, sobre todo ya que se preparó en el orden de los cientos de millones de tokens.\\
+Como se puede observar en la figura \ref{fig:ModernBERTComparison}, ModernBERT ofrece un rendimiento significativo incluso frente a otros modelos de lenguaje, tanto en su versión BASE como en su version LARGE, volviendose en una opcion competitiva en el mercado de modelos de código abierto.\\
 
 En \ref{fig:ModernBERTEfficiency} poidemos observar como se cumple lo prometido pór los desarrolladores de ModernBERT, observamos pruebas realizadas con una tarjeta gráfica de uso diario como es la RTX 4090, pudiendo observar como en la mayoría de casos presenta los mayores puntajes con gran diferencia, inclusive en ambos modelos, solo con la excepción de su modelo Short con las pruebas BS, cumpliendo la promesa de ser un modelo concentrado en utilizar técnicas de eficiencia, sin perder calidad de respuesta.\\
 
