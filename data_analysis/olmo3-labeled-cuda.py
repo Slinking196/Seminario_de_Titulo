@@ -432,7 +432,7 @@ def label_reviews() -> None:
     log_progress(f"Leyendo dataset desde {INPUT_CSV}", total_start)
     df = pd.read_csv(INPUT_CSV, sep=";", encoding="utf-8-sig")
     df = df[df["language_detected_full"] == "en"]  # Filtrar solo reseñas en inglés
-    df = df[:250]  # Limitar a 10000 filas para pruebas iniciales
+    df = df[3000:8000]  # Limitar a 10000 filas para pruebas iniciales
     required_columns = {"review_text", "language_majority_lang"}
     missing = required_columns - set(df.columns)
     if missing:
