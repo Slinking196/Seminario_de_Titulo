@@ -457,6 +457,8 @@ def label_reviews() -> None:
     parse_error_count = 0
     empty_after_preprocess_count = 0
 
+    import gc
+
     total_rows = len(df)
     log_progress(f"Comenzando inferencia para {total_rows} comentarios", total_start)
 
@@ -471,6 +473,16 @@ def label_reviews() -> None:
                 df[["review_text", "language_majority_lang"]].itertuples(index=True, name=None),
                 start=1,
             ):
+                # Limpiar cache de Python periódicamente y forzar recolección de basura
+                if processed_count % 500 == 0:
+                    text_cache.clear()
+                    gc.collect()
+                    # Forzar a Ollama a descargar el modelo de la RAM y volverlo a cargar
+                    try:
+                        client.generate(model=OLLAMA_MODEL_ID, prompt="", keep_alive=0)
+                    except:
+                        pass
+
                 raw_text = "" if pd.isna(review_text) else str(review_text)
                 lang = normalize_lang(None if pd.isna(lang_value) else str(lang_value))
 
