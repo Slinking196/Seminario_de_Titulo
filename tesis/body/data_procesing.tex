@@ -1,91 +1,67 @@
 \chapter{\textbf{Procesamiento de datos}}
 \label{cha:procesamiento_datos}
 
-En esta sección describiremos el proceso que realiza el modelo tanto para el etiquetado de datos (Silver Label) de entrenamiento con OLMO 3 así como para el procesamiento de etiquetado de datos realizado por ModernBERT, sus arquitecturas, ventajas sobre otros modelos, parametros, diferencias con las arquitecturas tradicionales, entre otros aspectos.\\
-
+En esta sección describiremos el proceso que realiza el modelo tanto para el etiquetado de datos (Silver Label) de entrenamiento con OLMO 3 así como para el procesamiento de etiquetado de datos realizado por ModernBERT, sus arquitecturas, ventajas sobre otros modelos, parametros, diferencias con las arquitecturas tradicionales, entre otros aspectos.
 
 \section{Modelo OLMO 3 base}
-OlMO 3, Modelo de lenguaje y pensamiento completamente abierto, con un modelo BASE y versiones mas complejas de THINK, INSTRUCT y RL-Zero, y con variaciones de 7B y 32B de parámetros, es un modelo de lenguaje desarrollado por Team OLMO \cite{olmo2025olmo3} aproximadamente 1 año de publicado el modelo OLMO 2 \textcite{groeneveld2025olmo2} en 2024. OLMO 3 posee capacidades, tales como rasonamiento de largo contexto, código, seguimiento de insdtrucciones, etc. mantiene rendimiento de longitudes de contexto extendidas sobre los 65.000 tokens, todas características conseguidas gracias a un entrenamiento con configuraciones como Data Paralelism Replication y shard (DP-rep y DP-shard), Cantidad de Cabezales de atención, etc. \ref{fig:ConfiguracionesEntrenamientoOLMO} \\
+OlMO 3, Modelo de lenguaje y pensamiento completamente abierto, con un modelo BASE y versiones mas complejas de THINK, INSTRUCT y RL-Zero, y con variaciones de 7B y 32B de parámetros, es un modelo de lenguaje desarrollado por Team OLMO \cite{olmo2025olmo3} aproximadamente 1 año de publicado el modelo OLMO 2 \textcite{groeneveld2025olmo2} en 2024. OLMO 3 posee capacidades, tales como rasonamiento de largo contexto, código, seguimiento de insdtrucciones, etc. mantiene rendimiento de longitudes de contexto extendidas sobre los 65.000 tokens, todas características conseguidas gracias a un entrenamiento con configuraciones como Data Paralelism Replication y shard (DP-rep y DP-shard), Cantidad de Cabezales de atención, etc. \ref{fig:ConfiguracionesEntrenamientoOLMO} 
 
-\begin{figure}[H]
-    \centering
-   
-    \includegraphics[width=0.8\textwidth]{assets/Configuraciones de entrenamiento OLMO BASE 7B 32B.png}
-    \caption{Configuraciones de entrenamiento OLMO BASE 7B 32B. Imagen extraída de \textcite{olmo2025olmo3}}
-    \label{fig:ConfiguracionesEntrenamientoOLMO}
-\end{figure}
+OLMO 3 corresponde a un tipo de modelo que adopta la arquitectura de Transformers \ref{fig:ResumenArquitecturaOLMO}, de Solo Decodificadores (Decoder-Only Transformer por su traducción al inglés) definida en \textcite{vaswani2017attention}, donde el modelo de 7B de parámetros utiliza atencion de multiples cabezales (Multi Head Attention) siendo este el metodo estandar de trabajo de Transformers tradicionales para la \textit{"Atención"}, mientras que el modelo de 32B utiliza attencion a consultas agrupadas (grouped query attention) \textcite{ainslie-etal-2023-gqa} que a diferencia de la atención de múltiples cabezales, reduce el uso de memoria (enfocado a modelos grandes) al compartir cada grupo de cabezales un único par key/value por conjunto. Ambos modelos solo con diferencias en cuanto a cantidad de características como podemos observar en \ref{fig:Arquitectura7Bvs32B} 
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{assets/Ejemplo Arquitectura OLMO 7 32.jpg}
-    \caption{Resumen de arquitectura OLMO 3 7B vs 32B Similar a Transformers de \textcite{vaswani2017attention}. Imagen extraida de \textcite{wolfe2025olmo3}}
-    \label{fig:ResumenArquitecturaOLMO}
-\end{figure}
-
-
-OLMO 3 corresponde a un tipo de modelo que adopta la arquitectura de Transformers \ref{fig:ResumenArquitecturaOLMO}, de Solo Decodificadores (Decoder-Only Transformer por su traducción al inglés) definida en \textcite{vaswani2017attention}, donde el modelo de 7B de parámetros utiliza atencion de multiples cabezales (Multi Head Attention) siendo este el metodo estandar de trabajo de Transformers tradicionales para la \textit{"Atención"}, mientras que el modelo de 32B utiliza attencion a consultas agrupadas (grouped query attention) \textcite{ainslie-etal-2023-gqa} que a diferencia de la atención de múltiples cabezales, reduce el uso de memoria (enfocado a modelos grandes) al compartir cada grupo de cabezales un único par key/value por conjunto. Ambos modelos solo con diferencias en cuanto a cantidad de características como podemos observar en \ref{fig:Arquitectura7Bvs32B} \\
-
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{assets/Arquitectura 7B vs 32B.png}
-    \caption{Arquitectura de OLMO 3 7B vs 32B. Imagen extraida de \textcite{olmo2025olmo3}}
-    \label{fig:Arquitectura7Bvs32B}
-\end{figure}
-
-Como se puede observar en la figura \ref{fig:MHeadGQuery}, la diferencia entre Multi Head Attention (MHA) y Grouped Query Attention (GQA) radica en los pares key/value, mencionado previamente, mientras que en MHA cada cabeza de atención tiene su propio par key/value, en GQA cada grupo de cabezas comparte un único par key/value. Esto permite a GQA reducir el uso de memoria, lo que es especialmente beneficioso para modelos grandes como el OLMO 3 de 32B de parámetros. Sin embargo, es importante destacar que esta reducción en el uso de memoria puede llegar a ser perjudicial para el rendimiento del modelo.\\
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{assets/MultiHead-GroupedQuery.jpg}
-    \caption{Multi Head Attention vs Grouped Query Attention. Imagen extraida de \textcite{olmo2025olmo3}}
-    \label{fig:MHeadGQuery}
-\end{figure}
-
-
+Como se puede observar en la figura \ref{fig:MHeadGQuery}, la diferencia entre Multi Head Attention (MHA) y Grouped Query Attention (GQA) radica en los pares key/value, mencionado previamente, mientras que en MHA cada cabeza de atención tiene su propio par key/value, en GQA cada grupo de cabezas comparte un único par key/value. Esto permite a GQA reducir el uso de memoria, lo que es especialmente beneficioso para modelos grandes como el OLMO 3 de 32B de parámetros. Sin embargo, es importante destacar que esta reducción en el uso de memoria puede llegar a ser perjudicial para el rendimiento del modelo.
 
 \section{Modelo OLMO 3 THINKING}
 
-Pese a que el modelo OLMO 3 BASE posee un diseño de arquitectura similar, el modelo OLMO 3 Thinking (Considerando que comparamos ambos con la misma cantidad de parámetros), no posee diferencias de arquitectura como tal, si no que el modelo Thinking recibie un post-entrenamiento para poder otorgarle la capacidad de "Pensar".\\
+Pese a que el modelo OLMO 3 BASE posee un diseño de arquitectura similar, el modelo OLMO 3 Thinking (Considerando que comparamos ambos con la misma cantidad de parámetros), no posee diferencias de arquitectura como tal, si no que el modelo Thinking recibie un post-entrenamiento para poder otorgarle la capacidad de "Pensar".
 
-Mientra que la arquitectura física, cabezales, parámetros, capas, neuronas, etc, se definen en el modelo OLMO 3 BASE mencionado en la figura \ref{fig:Arquitectura7Bvs32B}, el modelo OLMO 3 THINKING recibe un post-entrenamiento especializado, donde se le otorgan tareas de razonamiento complejo, como por ejemplo, razonamiento de múltiples pasos, razonamiento de largo contexto, razonamiento de código, etc. Esto permite que el modelo THINKING pueda comprender y procesar información de manera más profunda y compleja, lo que es especialmente útil para tareas que requieren un alto nivel de comprensión y análisis.\\
+Mientra que la arquitectura física, cabezales, parámetros, capas, neuronas, etc, se definen en el modelo OLMO 3 BASE mencionado en la figura \ref{fig:Arquitectura7Bvs32B}, el modelo OLMO 3 THINKING recibe un post-entrenamiento especializado, donde se le otorgan tareas de razonamiento complejo, como por ejemplo, razonamiento de múltiples pasos, razonamiento de largo contexto, razonamiento de código, etc. Esto permite que el modelo THINKING pueda comprender y procesar información de manera más profunda y compleja, lo que es especialmente útil para tareas que requieren un alto nivel de comprensión y análisis.
 
 \section{Selección del modelo}
 
-Se ha optado por utilizar el modelo Thinking de OLMO 3 de 7B de parámetros debido a la necesidad "pensamiento" por parte del modelo, para que este comprenda cuando está en presencia de una sugerencia y sea capaz de identificar tanto patrones linguísticos o relaciones semánticas, así como realizar inferencias sobre su propio pensamiento.\\
+Se ha optado por utilizar el modelo Thinking de OLMO 3 de 7B de parámetros debido a la necesidad "pensamiento" por parte del modelo, para que este comprenda cuando está en presencia de una sugerencia y sea capaz de identificar tanto patrones linguísticos o relaciones semánticas, así como realizar inferencias sobre su propio pensamiento.
 
+Pese a que la selección del modelo se vió restringida por el hardware que se tuvo a disposición al momento de la realización de las pruebas de etiquetado, no se descarta, si no que se espera poder realizar pruebas con una infraestructura significativamente mas potente, capaz de poder etiquetar con el modelo Thinking de 32B de parámetros, todos los datos disponibles dentro del dataset (Aproximdamente 560K de comentarios), lo que permitiría comparar los resultados obtenidos, con distintas combinaciones de modelos e infraestructura.
 
-Pese a que la selección del modelo se vió restringida por el hardware que se tuvo a disposición al momento de la realización de las pruebas de etiquetado, no se descarta, si no que se espera poder realizar pruebas con una infraestructura significativamente mas potente, capaz de poder etiquetar con el modelo Thinking de 32B de parámetros, todos los datos disponibles dentro del dataset (Aproximdamente 560K de comentarios), lo que permitiría comparar los resultados obtenidos, con distintas combinaciones de modelos e infraestructura.\\
+Para poder "enseñar" al modelo a reconocer patrones linguísticos o relaciones semánticas y además saber que inferir en base a su propio pensamiento, fue necesario definir un "prompt" o "instrucción", para poder entregarle toda la información de contexto necesaria para que este se adecue a la tarea de etiquetado especificamente de Sugerencias. Fue especialmente relevante la definir estas de manera formal, ya que como se puede apreciar en \ref{sec:sugerencias}, la literatura la describe formalmente como un desglose del feedback explicito de los usuarios, pero en el "prompt" se debió aclarar esta definición de una manera mas clara y completa, sin dudas y de tal manera que tanto el modelo como los lectores puedan llegar a los mismos resultados en el mejor caso (ya que deberían comprender lo mismo como contexto). Se optó por entregarle una definición parafraseada pero consistente con la actual definida en el marco teórico de la investigación.
 
-Para poder "enseñar" al modelo a reconocer patrones linguísticos o relaciones semánticas y además saber que inferir en base a su propio pensamiento, fue necesario definir un "prompt" o "instrucción", para poder entregarle toda la información de contexto necesaria para que este se adecue a la tarea de etiquetado especificamente de Sugerencias. Fue especialmente relevante la definir estas de manera formal, ya que como se puede apreciar en \ref{sec:sugerencias}, la literatura la describe formalmente como un desglose del feedback explicito de los usuarios, pero en el "prompt" se debió aclarar esta definición de una manera mas clara y completa, sin dudas y de tal manera que tanto el modelo como los lectores puedan llegar a los mismos resultados en el mejor caso (ya que deberían comprender lo mismo como contexto). Se optó por entregarle una definición parafraseada pero consistente con la actual definida en el marco teórico de la investigación.\\
-
-A raiz de que la infraestructura disponible determina que modelos son posibles de utilizar, fue necesario recurrir a 2 modelos abierto y con datos públicos disponibles en HuggingFace, ambos variantes del mismo modelo OLMO 3 Thinking, pero con modificaciones en sus parametros para adecuarse al hardware correspondiente.\\
+A raiz de que la infraestructura disponible determina que modelos son posibles de utilizar, fue necesario recurrir a 2 modelos abierto y con datos públicos disponibles en HuggingFace, ambos variantes del mismo modelo OLMO 3 Thinking, pero con modificaciones en sus parametros para adecuarse al hardware correspondiente.
 
 \subsection{MLX - Apple Silicon}
 \label{sec:mlx}
-El primer modelo utilizado y el mas recurrido inicialmente fue el modelo mlx-community/Olmo-3-7B-Think-4bit que puede ser encontrado en \textcite{olmo3-7b-think-mlx}, modelo de 4 bits debido a una adaptación por medio de una técnica de compresión de modelos de Inteligencia Artificial llamada cuantización de 4 bits (Q4) reduciendo tanto el támaño del modelo (al limitar los valores flotantes a solo 4 bits) a costa de una probable pérdida de precisión, lo que permite que el modelo pueda ser ejecutado en hardware con limitaciones de memoria, como es el caso de Apple Silicon (MackBook Air Chip M4 con 16 GB de RAM, 10 Nucleos de 10 CPU y 10 Nucleos de GPU).\\ 
+El primer modelo utilizado y el mas recurrido inicialmente fue el modelo mlx-community/Olmo-3-7B-Think-4bit que puede ser encontrado en \textcite{olmo3-7b-think-mlx}, modelo de 4 bits debido a una adaptación por medio de una técnica de compresión de modelos de Inteligencia Artificial llamada cuantización de 4 bits (Q4) reduciendo tanto el támaño del modelo (al limitar los valores flotantes a solo 4 bits) a costa de una probable pérdida de precisión, lo que permite que el modelo pueda ser ejecutado en hardware con limitaciones de memoria, como es el caso de Apple Silicon (MackBook Air Chip M4 con 16 GB de RAM, 10 Nucleos de 10 CPU y 10 Nucleos de GPU).
 
 \subsection{OLLAMA - CUDA}
 \label{sec:ollama}
 
-Al igual que MLX de la sección \ref{sec:mlx}, este modelo tambien posee características en común como la cuantización de 4 bits (Q4) para reducir el modelo a un tamaño manejable por hardware limitado, además de seguir siendo una variante del modelo OLMO 3 Thinking, por lo que hablamos del mismo modelo con la misma cantidad de bits en ambos, pero con diferencias en cuanto a la preparación para la infraestructura en la que se ejecutará, ya que el modelo $bartowski/allenai$ de OLLAMA \textcite{olmo3-7b-think-gguf} se encuentra preparado para ser ejecutado en hardware con soporte CUDA, como es el caso de la tarjeta gráfica disponible Grafica 4070 Ti Super con 16 GB de VRAM.\\
+Al igual que MLX de la sección \ref{sec:mlx}, este modelo tambien posee características en común como la cuantización de 4 bits (Q4) para reducir el modelo a un tamaño manejable por hardware limitado, además de seguir siendo una variante del modelo OLMO 3 Thinking, por lo que hablamos del mismo modelo con la misma cantidad de bits en ambos, pero con diferencias en cuanto a la preparación para la infraestructura en la que se ejecutará, ya que el modelo $bartowski/allenai$ de OLLAMA \textcite{olmo3-7b-think-gguf} se encuentra preparado para ser ejecutado en hardware con soporte CUDA, como es el caso de la tarjeta gráfica disponible Grafica 4070 Ti Super con 16 GB de VRAM.
 
 Para cada uno de los modelos fue necesario generar un prompt (se optó por utilizar el mismo para ambos) para otorgarles contexto, definiciones, cual es su rol y misión (que es realizar una seleccion binaria de comentarios, otorgando etiqueta solamente a las sugerencias) y toda la información necesaria para lograr que este "comprendiera" realmente que es una sugerencia.
 
-Se ha optado por utilizar el mismo prompt para ambos modelos, debido a que ambos se basan en el mismo modelo y están cuantizados con la misma cantidad de bits (Q4), por lo que se refinó un solo prompt con la información necesaria, iterando hasta que el etiquetado resultante de este prompt junto con el modelo fueron satisfactorios según una matriz de confusión.\\
+Se ha optado por utilizar el mismo prompt para ambos modelos, debido a que ambos se basan en el mismo modelo y están cuantizados con la misma cantidad de bits (Q4), por lo que se refinó un solo prompt con la información necesaria, iterando hasta que el etiquetado resultante de este prompt junto con el modelo fueron satisfactorios según una matriz de confusión.
+
+\section{Prompt para Clasificación de Reseñas con OLMO 3 THINKING}
+\label{sec:Prompt OLMO 3 para detección de sugerencias}
+
+Para que el modelo de OLMO 3 en su versión Thinking sea capaz de detectar sugerencias segun la definición formal dada en el marco teórico \ref{sec:sugerencias}, fue necesario definir un prompt o instrucción completa con todas las características y condiciones necesarias para que cualquiera comprenda que es lo que se debe entender por una sugerencia, ya que es un concepto que puede llevar a diferencias en cuanto a su interpretación.
+
+Este mismo prompt \ref{fig:Prompt OLMO 3 para detección de sugerencias} define el rol que debe tomar el modelo, algunos ejemplos de sugerencias, características particulares que estas poseen como la intención del usuario, el objetivo de la misma, que es y no es una sugerencia con ejemplos especificos para cada caso, la diferencia entre una inferencia especulativa y las antes mencionadas y los pasos (en forma de arbol de decisión) que el modelo debe seguir para reconocerlas respondiendo a las siguientes preguntas en oreden secuencial: ¿De quien está hablando el turista? (a quien va dirigido el comentario, si otros turistas o a la organización/proveedor del servicio), ¿Existe algun estado furuto deseado? (haciendo referencia a que el producto marca o servicio cambie a un estado mejor en el futuro) y ¿Puede la organización actuar sobre eso? (ya que a veces se piden cosas imposibles o que no conciernen a la organización).
+
+%%%
+%\section{ModernBERT}
+%\label{sec:ModernBERT}
+%ModernBERT modelo desarrollado por Answer.AI, LightOn, entre otros, de la misma manera que los modelos Transformers Encoder-Only (Solo Codificadores) como BERT, ofrece un buen rendimiento en una relacion Tamaño-Rendimiento, lo que lo hace una buena opción como modelo para correr en local bajo la arquitectura y hardware disponibles \textcite{warner2024modernbert}.
+
+%Entrenado con 2T de tokens y una longitud de secuencia de 8192 tokens, a diferencia de BERT tradicional, que fue entrenado tan solo con 512 tokens, fue implementada la característica de atención alternada global + local, donde la atención globnal provoca que cada token atienda a los demás, mientras que el local provoca que los tokens solo atiendan a un rango limitado de tokens cercanos, lo que permite a ModernBERT manejar secuencias más largas sin utilizar excesiva memoria, volviéndose mas eficiente en textos largos \cite{warner2024modernbert}.
+
+%Como se puede observar en la figura \ref{fig:ModernBERTComparison}, ModernBERT ofrece un rendimiento significativo incluso frente a otros modelos de lenguaje, tanto en su versión BASE como en su version LARGE, volviendose en una opcion competitiva en el mercado de modelos de código abierto.
+
+%En \ref{fig:ModernBERTEfficiency} poidemos observar como se cumple lo prometido pór los desarrolladores de ModernBERT, observamos pruebas realizadas con una tarjeta gráfica de uso diario como es la RTX 4090, pudiendo observar como en la mayoría de casos presenta los mayores puntajes con gran diferencia, inclusive en ambos modelos, solo con la excepción de su modelo Short con las pruebas BS, cumpliendo la promesa de ser un modelo concentrado en utilizar técnicas de eficiencia, sin perder calidad de respuesta.
+%%%
 
 
-\section{ModernBERT}
+\section{roBERTa}
+\label{sec:roBERTa}
 
-ModernBERT modelo desarrollado por Answer.AI, LightOn, entre otros, de la misma manera que los modelos Transformers Encoder-Only (Solo Codificadores) como BERT, ofrece un buen rendimiento en una relacion Tamaño-Rendimiento, lo que lo hace una buena opción como modelo para correr en local bajo la arquitectura y hardware disponibles \textcite{warner2024modernbert}.\\
+Luego de realizar el etiquetado y conseguir datos de nivel de plata gracias al modelo OLMO 3 THINKING, se obtuvieron cerca de 30.000 datos etiquetados como sugerencias o no sugerencias, aunque con tan solo 2.500 sugerencias etiquetadas por el modelo, ya que este solo reconoció al rededor de un 7\% a 8 \% de estas, permitiendonos predecir al rededor de unas 10.000 sugerencias dentro de los aproximadamente 150.000 comentarios en el idioma que maneja el modelo (Inglés). Pero debido al poder de computo del hardware a disposición, no resultó factible realizar un etiquetado másivo con dicho modelo.
 
-Entrenado con 2T de tokens y una longitud de secuencia de 8192 tokens, a diferencia de BERT tradicional, que fue entrenado tan solo con 512 tokens, fue implementada la característica de atención alternada global + local, donde la atención globnal provoca que cada token atienda a los demás, mientras que el local provoca que los tokens solo atiendan a un rango limitado de tokens cercanos, lo que permite a ModernBERT manejar secuencias más largas sin utilizar excesiva memoria, volviéndose mas eficiente en textos largos \cite{warner2024modernbert}.\\
-
-Como se puede observar en la figura \ref{fig:ModernBERTComparison}, ModernBERT ofrece un rendimiento significativo incluso frente a otros modelos de lenguaje, tanto en su versión BASE como en su version LARGE, volviendose en una opcion competitiva en el mercado de modelos de código abierto.\\
-
-En \ref{fig:ModernBERTEfficiency} poidemos observar como se cumple lo prometido pór los desarrolladores de ModernBERT, observamos pruebas realizadas con una tarjeta gráfica de uso diario como es la RTX 4090, pudiendo observar como en la mayoría de casos presenta los mayores puntajes con gran diferencia, inclusive en ambos modelos, solo con la excepción de su modelo Short con las pruebas BS, cumpliendo la promesa de ser un modelo concentrado en utilizar técnicas de eficiencia, sin perder calidad de respuesta.\\
-
-
-
-
-
+Para poder conseguir un etiquetado de datos masivo de al rededor de 150.000 datos con un hardware y en un tiempo ambos razonables, fue necesario realizar distintas pruebas con modelos disponibles en la plataforma de Hugging Face \cite{hf_roberta}, para poder conseguir un modelo que, mediante el uso de la técnica zero-shot, aprendiera con una cantidad muy pequeña de datos, a reconocer las sugerencias con una cantidad muy pequeña de contexto y en un tiempo razonable para un entorno de pruebas, logrando unos puntajes satisfactorios de: dhjsakdhjaskdjas, con tan solo 2100 sugerencias y 5000 no sugerencias

@@ -2,13 +2,15 @@
 \chapter{Anexos}
 \label{cha:Anexos}
 
+\section{Tipos de supervisión débil}
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{assets/tres tipos de supervision debil.png}
-    \caption{ Tipos de supervisión débil según Zhi-Hua Zhou \cite{WeaklySupervisedLearning2017}.}
+    \caption{Tipos de supervisión débil según Zhi-Hua Zhou \cite{WeaklySupervisedLearning2017}.}
     \label{fig:3 tipos de supervisión débil}
 \end{figure}
 
+\section{Carta Gantt}
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{assets/gantt/Gantt1.png}
@@ -100,7 +102,6 @@
     \label{fig:gantt13}
 \end{figure}
 
-
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{assets/gantt/Gantt14.png}
@@ -108,6 +109,43 @@
     \label{fig:gantt14}
 \end{figure}
 
+
+
+
+% Seccion de modelos OLMO 3 y el resto de modelos 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/Configuraciones de entrenamiento OLMO BASE 7B 32B.png}
+    \caption{Configuraciones de entrenamiento OLMO BASE 7B 32B. Imagen extraída de \textcite{olmo2025olmo3}}
+    \label{fig:ConfiguracionesEntrenamientoOLMO}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{assets/Ejemplo Arquitectura OLMO 7 32.jpg}
+    \caption{Resumen de arquitectura OLMO 3 7B vs 32B Similar a Transformers de \textcite{vaswani2017attention}. Imagen extraida de \textcite{wolfe2025olmo3}}
+    \label{fig:ResumenArquitecturaOLMO}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{assets/Arquitectura 7B vs 32B.png}
+    \caption{Arquitectura de OLMO 3 7B vs 32B. Imagen extraida de \textcite{olmo2025olmo3}}
+    \label{fig:Arquitectura7Bvs32B}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{assets/MultiHead-GroupedQuery.jpg}
+    \caption{Multi Head Attention vs Grouped Query Attention. Imagen extraida de \textcite{olmo2025olmo3}}
+    \label{fig:MHeadGQuery}
+\end{figure}
+
+
+
+
+\section{Comparaciones de ModernBERT frente a otros modelos}
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{assets/modernbert_comparativas con otros modelos.png}
@@ -115,6 +153,7 @@
     \label{fig:ModernBERTComparison}
 \end{figure}
 
+\section{Eficiencia de ModernBERT}
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{assets/modernbert_efficiency_table.png}
@@ -122,3 +161,62 @@
     \label{fig:ModernBERTEfficiency}
 \end{figure}
 
+
+
+
+\section{System Prompt para Clasificación de Reseñas con OLMO 3 THINKING}
+\label{fig:Prompt OLMO 3 para detección de sugerencias}
+
+\begin{lstlisting}[caption={System Prompt utilizado en el módulo de clasificación}, label=lst:systemprompt, basicstyle=\ttfamily\small, frame=single, backgroundcolor=\color{lightgray!10}]
+
+SYSTEM_PROMPT = """You are a writer specializing in travel reviews in Spanish or English.
+Classify ONLY the tourist review text as SUGGESTION or NON-SUGGESTION.
+IMPORTANT: If the text includes a management response (e.g., "Dear traveler...", "Thank you for your visit..."), ignore only these sections, focus on the remaining review text.
+
+## DEFINITIONS
+1. **SUGGESTION**:
+    - Must be an **EXPLICIT** request for change, addition, or removal of a feature of the product/service offered.
+    - The recipient is the **MANAGEMENT/ADMINISTRATION**.
+    - It is a concrete, actionable request to improve the TOURIST EXPERIENCE.
+2. **NON-SUGGESTION**:
+    - **Descriptive complaints**: "The bed was hard" or "Service was slow" (Past facts, not requests for change).
+    - **Compliments**: "Everything was excellent."
+    - **Advice to third parties (CRITICAL)**: "Go early," "Ask for table 4," "I don't recommend it for families." This is NOT a suggestion to management; it is advice for other tourists.
+3. SPECULATIVE INFERENCES vs. SUGGESTIONS: Phrases expressing high probability or assumptions about the place's beauty (e.g., "It must be beautiful at night," "It must be spectacular in the evening") are INFERENCES, not suggestions. These are compliments based on potential, not requests for management action. A suggestion requires a "gap" between the current state and a desired future state.
+
+## DECISION TREE
+
+STEP 1 - WHO IS THE TOURIST TALKING TO?
+Read the fragment and ask: is the tourist addressing other visitors,
+or expressing something toward the service itself?
+- Describing the place or experience for other readers -> NON-SUGGESTION.
+- Describing personal feelings or reactions without addressing management -> NON-SUGGESTION.
+- Advising other tourists what to do, bring, or expect -> NON-SUGGESTION.
+- Expressing how the service could or should be different -> continue to Step 2.
+- Feelings, experiences, or suggestions to other tourists about other attractions or products -> NON-SUGGESTION.
+- [IMPORTANT] "You" in English reviews is usually impersonal (= "one" / "a visitor"),
+  not a direct address to management. "You would enjoy it more if..." or
+  "Perhaps you could..." are tourist-facing observations, not management requests.
+  
+
+STEP 2 - IS THERE A DESIRED FUTURE STATE?
+Does the tourist express a gap between how the service IS and how they WANT it to be?
+- Only describes what happened (past facts, complaints) -> NON-SUGGESTION.
+- Expresses praise, satisfaction, or intent to return -> NON-SUGGESTION.
+- Expresses a wish, desire or expectation for something different -> continue to Step 3.
+- [IMPORTANT] Speculative or hypothetical framing ("perhaps", "maybe", "might", "could", "quizas", "tal vez") signals an observation, not a request. A genuine desire for change uses direct framing: "they should", "I wish they had", "it would
+  help if", "falta", "seria bueno que", "deberian".
+- Expresses a concrete wish or expectation for something different -> continue to Step 3.
+
+STEP 3 - CAN MANAGEMENT ACT ON IT?
+Could the service's management implement a concrete change based on this?
+- Vague feeling or emotional reaction without actionable content -> NON-SUGGESTION.
+- Concrete change in offering, communication, pricing policy, or operations -> SUGGESTION.
+
+## RESPONSE
+Reply ONLY with this JSON, no additional text:
+{
+  "razonamiento_corto": "Step 1: [tourists/management]. Step 2: [future gap/no]. Step 3: [actionable/no]. [1 sentence conclusion]",
+  "etiqueta": "SUGGESTION" or "NON-SUGGESTION"
+}"""
+\end{lstlisting}

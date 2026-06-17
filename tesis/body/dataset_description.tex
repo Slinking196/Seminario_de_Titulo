@@ -5,15 +5,16 @@
 En esta sección, veremos una explicación detallada de los datos que utilizaremos como material de investigación, procedencia, trabajo de preprocesamiento que realizaremos, limpieza de los datos y preparación para un posterior análisis y uso de modelos transformers para el etiquetado de datos, dando enfasis en que esta sección en particular corresponde a un paso fundamental dentro de la metodología que definimos, además de permitirnos filtrar la información que nos será verdaderamente relevante para este trabajo y de esta forma buscamos reducir la carga de los modelos Transformers a la hora del etiquetado de datos.
 
 \section{\textbf{Conjunto de Datos (Dataset)}}
-Para este trabajo se utilizaremos un dataset que contiene comentarios dirigidos directamente a los servicios turísticos de Chile utilizados por usuarios de la plataforma de TripAdvisor. La estructura se compone de 14 columnas las cuales son:
+Para este trabajo se utilizaremos un dataset que contiene comentarios dirigidos directamente a los servicios turísticos de Chile utilizados por usuarios de la plataforma de TripAdvisor. La estructura se compone de 14 columnas:\\
 
-\begin{tabularx}{\textwidth}{|l|X|}
+\noindent % Evita que la sangría normal del párrafo empuje la tabla a la derecha
+\begin{tabularx}{\dimexpr\textwidth\tabcolsep+10\arrayrulewidth\relax}{|l|X|}
 \hline
 \textbf{Columna} & \textbf{Descripción} \\ \hline
-\texttt{region\_name} & Nombre de la región donde se encuentra el servicio turístico \\ \hline
-\texttt{attraction\_name} & Nombre del servicio turístico \\ \hline
-\texttt{language} & Idioma del comentario identificado por TripAdvisor a través de la configuración del usuario, considerando 3 idiomas principales los cuales son español, inglés y portugués \\ \hline
-\texttt{username} & Nombre de usuario del autor del comentario \\ \hline
+\texttt{region\_name} &  Nombre de la región donde se encuentra el servicio turístico \\ \hline
+\texttt{attraction\_name} &  Nombre del servicio turístico \\ \hline
+\texttt{language} &  Idioma del comentario identificado por TripAdvisor a través de la configuración del usuario, considerando 3 idiomas principales los cuales son español, inglés y portugués \\ \hline
+\texttt{username} &  Nombre de usuario del autor del comentario \\ \hline
 \texttt{rating\_review} & Valor entre 1 y 5 que contiene el comentario, refiriendonos a una escala likert, donde se asumió que 1 es muy mal servicio y 5 es excelente \\ \hline
 \texttt{title} & Título del comentario creado por el usuario \\ \hline
 \texttt{review\_text} & Comentario del usuario respecto a su experiencia como turista en determinado servicio de trasfondo turístico \\ \hline
