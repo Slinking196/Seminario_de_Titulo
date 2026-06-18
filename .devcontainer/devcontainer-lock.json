@@ -1,0 +1,14 @@
+{
+  "features": {
+    "ghcr.io/devcontainers/features/git-lfs:1": {
+      "version": "1.2.5",
+      "resolved": "ghcr.io/devcontainers/features/git-lfs@sha256:71c2b371cf12ab7fcec47cf17369c6f59156100dad9abf9e4c593049d789de72",
+      "integrity": "sha256:71c2b371cf12ab7fcec47cf17369c6f59156100dad9abf9e4c593049d789de72"
+    },
+    "ghcr.io/devcontainers/features/nvidia-cuda:3": {
+      "version": "3.0.0",
+      "resolved": "ghcr.io/devcontainers/features/nvidia-cuda@sha256:144e3c199d51688baea43ff20e5d931381a5990cb7b323bade9f4d6d67876ee3",
+      "integrity": "sha256:144e3c199d51688baea43ff20e5d931381a5990cb7b323bade9f4d6d67876ee3"
+    }
+  }
+}
