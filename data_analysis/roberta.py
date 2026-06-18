@@ -12,6 +12,7 @@ from datasets import Dataset
 from transformers import AutoTokenizer
 from transformers import AutoModelForSequenceClassification, Trainer, TrainingArguments
 from sklearn.utils.class_weight import compute_class_weight
+from sklearn.metrics import confusion_matrix
 import torch.nn as nn
 
 
@@ -126,6 +127,8 @@ def proccess_dataset(df: pd.DataFrame) -> pd.DataFrame:
 
     before_labels = len(df)
     df = df[df["etiqueta"].isin(["NON-SUGGESTION", "SUGGESTION"])]
+    logger.info(f"Cantidad de filas totales después de filtrar por etiquetas válidas: {len(df)}.")
+    logger.info(f"NON-SUGGESTION: {len(df[df['etiqueta'] == 'NON-SUGGESTION'])}, SUGGESTION: {len(df[df['etiqueta'] == 'SUGGESTION'])}.")
     df = pd.concat([df[df["etiqueta"] == "NON-SUGGESTION"].head(5000), df[df["etiqueta"] == "SUGGESTION"]], ignore_index=True) # Oversampling de la clase minoritaria
     logger.info(f"Filas descartadas por etiqueta no válida: {before_labels - len(df)}.")
 
@@ -287,6 +290,23 @@ if __name__ == "__main__":
     weights = compute_class_weight("balanced", classes=np.unique(temp_labels), y=temp_labels)
     logger.info(f"Pesos calculados: NON-SUGGESTION={weights[0]:.4f}, SUGGESTION={weights[1]:.4f}")
 
+    # -----------------------------------------------------------------
+    # Conteo corregido para vectores One-Hot [NON-SUGGESTION, SUGGESTION]
+    # -----------------------------------------------------------------
+    logger.info("Cantidad de ejemplos por clase en el dataset de entrenamiento:")
+    train_labels = np.array(tokenized_dataset['train']['label'])
+    # Como [1, 0] es NON-SUGGESTION, sumamos la primera columna. Para SUGGESTION [0, 1], la segunda.
+    non_sug_train = int(train_labels[:, 0].sum())
+    sug_train = int(train_labels[:, 1].sum())
+    logger.info(f"NON-SUGGESTION: {non_sug_train}, SUGGESTION: {sug_train}")
+
+    logger.info("Cantidad de ejemplos por clase en el dataset de evaluación:")
+    test_labels = np.array(tokenized_dataset['test']['label'])
+    non_sug_test = int(test_labels[:, 0].sum())
+    sug_test = int(test_labels[:, 1].sum())
+    logger.info(f"NON-SUGGESTION: {non_sug_test}, SUGGESTION: {sug_test}")
+    # -----------------------------------------------------------------
+
     logger.info("Inicializando CustomTrainer con pesos balanceados...")
     trainer = CustomTrainer(
         class_weights=weights,
@@ -304,6 +324,31 @@ if __name__ == "__main__":
     logger.info("Evaluando el mejor modelo en el conjunto de prueba...")
     resultados = trainer.evaluate()
     logger.info(f"Resultados finales: {resultados}")
+    
+    logger.info("Evaluando el modelo en el conjunto de prueba para obtener predicciones detalladas...")
+    # 1. Ejecutamos trainer.predict sobre el conjunto de evaluación para obtener predicciones y etiquetas
+    predicciones_finales = trainer.predict(tokenized_dataset["test"])
+    
+    # 2. Extraemos las métricas resumidas para el log (como hacías antes)
+    resultados = predicciones_finales.metrics
+    logger.info(f"Resultados finales: {resultados}")
+    
+    # =================================================================
+    # 📊 MATRIZ DE CONFUSIÓN (CORREGIDA)
+    # =================================================================
+    y_real = np.argmax(predicciones_finales.label_ids, axis=-1)
+    y_pred = np.argmax(predicciones_finales.predictions, axis=-1)
+    
+    df_matriz = pd.DataFrame(
+        confusion_matrix(y_real, y_pred), 
+        index=["Real: NON-SUG", "Real: SUG"], 
+        columns=["Pred: NON-SUG", "Pred: SUG"]
+    )
+    print("\n🧩 MATRIZ DE CONFUSIÓN:\n", df_matriz)
+    # =================================================================
+
+    logger.info("Guardando modelo final...")
+    trainer.save_model("./matusalem")
     
     logger.info("Guardando modelo final...")
     trainer.save_model("./matusalem")

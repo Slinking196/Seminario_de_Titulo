@@ -1,4 +1,5 @@
 # Visual Studio Code settings
+.devcontainer/devcontainer-lock.json
 .vscode/
 
 # Ignore any 'out' folder across the repo (e.g., tesis/out)
