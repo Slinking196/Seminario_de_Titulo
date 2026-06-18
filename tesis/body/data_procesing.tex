@@ -33,11 +33,20 @@ El primer modelo utilizado y el mas recurrido inicialmente fue el modelo mlx-com
 \subsection{OLLAMA - CUDA}
 \label{sec:ollama}
 
-Al igual que MLX de la sección \ref{sec:mlx}, este modelo tambien posee características en común como la cuantización de 4 bits (Q4) para reducir el modelo a un tamaño manejable por hardware limitado, además de seguir siendo una variante del modelo OLMO 3 Thinking, por lo que hablamos del mismo modelo con la misma cantidad de bits en ambos, pero con diferencias en cuanto a la preparación para la infraestructura en la que se ejecutará, ya que el modelo $bartowski/allenai$ de OLLAMA \textcite{olmo3-7b-think-gguf} se encuentra preparado para ser ejecutado en hardware con soporte CUDA, como es el caso de la tarjeta gráfica disponible Grafica 4070 Ti Super con 16 GB de VRAM.
+Al igual que MLX de la sección \ref{sec:mlx}, este modelo tambien posee características en común como la cuantización de 4 bits (Q4) para reducir el modelo a un tamaño manejable por hardware limitado, además de seguir siendo una variante del modelo OLMO 3 Thinking, por lo que hablamos del mismo modelo con la misma cantidad de bits en ambos, pero con diferencias en cuanto a la preparación para la infraestructura en la que se ejecutará, ya que el modelo $bartowski/allenai$ de OLLAMA \textcite{olmo3-7b-think-gguf} se encuentra preparado para ser ejecutado en hardware con soporte CUDA, como es el caso de la tarjeta gráfica disponible Nvidia 4070 Ti Super con 16 GB de VRAM y también se hicieron uso de los siguientes parámetros para intentar obtener resultados cercanos al modelo mlx-community/Olmo-3-7B-Think-4bit.
+
+Parámetros utilizados para el modelo OLLAMA:
+\begin{itemize}
+    \item \textbf{Temperature:} 1 (Parámetro que controla la aleatoriedad de las respuestas generadas por el modelo, donde un valor más alto produce respuestas más diversas y creativas, mientras que un valor más bajo genera respuestas más conservadoras y predecibles)
+    \item \textbf{Top P:} 0.9 (Parámetro que controla la diversidad de las respuestas generadas por el modelo, donde un valor más alto permite una mayor variedad de respuestas al considerar un conjunto más amplio de opciones, mientras que un valor más bajo limita las respuestas a las opciones más probables)
+    \item \textbf{Repetition Penalty:} 1.15 (Parámetro que controla la repetición de texto en las respuestas generadas por el modelo, donde un valor más alto reduce la probabilidad de repetir palabras o frases)
+    \item \textbf{Num CTX:} 4096 (Parámetro que controla el tamaño del contexto utilizado por el modelo, donde un valor más alto permite considerar más información previa en la generación de respuestas)
+    \item \textbf{Stop:} \texttt{"<|im\_end|>"} (Token de parada que indica explícitamente al modelo cuando debe detener la generación de texto)
+\end{itemize}
 
 Para cada uno de los modelos fue necesario generar un prompt (se optó por utilizar el mismo para ambos) para otorgarles contexto, definiciones, cual es su rol y misión (que es realizar una seleccion binaria de comentarios, otorgando etiqueta solamente a las sugerencias) y toda la información necesaria para lograr que este "comprendiera" realmente que es una sugerencia.
 
-Se ha optado por utilizar el mismo prompt para ambos modelos, debido a que ambos se basan en el mismo modelo y están cuantizados con la misma cantidad de bits (Q4), por lo que se refinó un solo prompt con la información necesaria, iterando hasta que el etiquetado resultante de este prompt junto con el modelo fueron satisfactorios según una matriz de confusión.
+Se ha optado por utilizar el mismo prompt para ambos, debido a que estos se basan en el mismo modelo y están cuantizados con la misma cantidad de bits (Q4), por lo que se refinó un solo prompt con la información necesaria, iterando hasta que el etiquetado resultante de este prompt junto con el modelo fueron satisfactorios según una matriz de confusión.
 
 \section{Prompt para Clasificación de Reseñas con OLMO 3 THINKING}
 \label{sec:Prompt OLMO 3 para detección de sugerencias}
