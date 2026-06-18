@@ -48,28 +48,26 @@ En el caso de que esta diferencia sea menor a 0.25, se considera que la palabra 
     \label{fig:Reconocimiento de Lenguaje P3}
 \end{figure}
 
-Una vez tenemos identificado el idioma de cada una de las palabras "anclas", tenemos que proceder a identificar el idioma de las palabras ambiguas, para esto se genera una ventana de contexto variable (para este ejemplo se usará una ventana de 2 palabras y para nuestra investigación se aplicó un contexto de 3 palabras) alrededor de la palabra ambigua, con esta ventana se llevará a cabo un calculo de peso para cada palabra excluyendo la palabra ambigua, en donde se considerará la probabilidad de idioma que obtuvo la palabra "ancla" adyacente y adicionalmente la posición que tiene esta dentro del texto, con el fin de determinar el idioma predominante en esta ventana de contexto y así asignar el idioma a la palabra ambigua.
+Una vez tenemos identificado el idioma de cada una de las palabras "anclas", tenemos que proceder a identificar el idioma de las palabras ambiguas, para esto haremos uso de la siguiente formula que nos permitirá darle un puntaje a cada uno de los idiomas para cada una de las palabras ambiguas y así poder seleccionar la mejor:
 
-La formula de peso de la palabra vecina destinada para este proceso es la siguiente:
+\begin{equation}
+    \displaystyle S(L, i) = \sum_{j \in N(i)} \left(\frac{P_{\text{max}}(t_{j})^{2}}{|j - i|} \cdot P(L | t_{j})\right) + \beta_{L} \quad ; \quad len(t_{j}) > 2
+\end{equation}
 
-\begin{math}
-\displaystyle W_{neighbor} = P(neighbor)_{best}^{2} \times \left(\frac{1}{|pos_{neighbor} - pos_{target}|} \right)
-\end{math}
+Donde:
+\begin{itemize}
+    \item $S(L, i) = \text{Puntaje del idioma } L \text{ para el token de la posición } i$
+    \item $L = \text{Lenguaje Objetivo para el análisis}$
+    \item $i = \text{Índice de la palabra en estudio}$
+    \item $j = \text{Índice de la palabra vecina}$
+    \item $t_{j} = \text{Token (palabra) que se encuentra en la posición } j$
+    \item $N(i) = \text{Ventana de apertura de tamaño } n \text{ centrado alrededor } i$
+    \item $P_{\text{max}}(t_{j})^{2}$ = Factor de ponderación Cuadrático, usado para amplificar la influencia lingüística del idioma con mayor probabilidad del token ancla
+    \item $P(L | t_{j}) = \text{Probabilidad de que el token } t_{j} \text{ pertenezca al idioma } L$
+    \item $\beta_{L} = \text{Sesgo del lenguaje Global; donde } \beta_{L} = 0.8 \text{ si } L = L_{\text{global}} \text{, en otro caso } \beta_{L} = 0$
+\end{itemize}
 
-Donde $P(neighbor)_{best}$ es la probabilidad más alta obtenida por la palabra vecina para un idioma específico, y $pos_{neighbor}$ y $pos_{target}$ son las posiciones de la palabra vecina y la palabra objetivo (palabra ambigua) respectivamente. Con esta formula se busca asignar un peso mayor a las palabras vecinas que tengan una probabilidad de idioma más alta y que estén más cercanas a la palabra ambigua, con el fin de determinar el idioma predominante en esta ventana de contexto y así asignar el idioma a la palabra ambigua.
-
-Cabe recalcar que en el caso de que una de las palabras del contexto haya sido descartada por tener una cantidad de caracteres menor a 3 caracteres, esta no será considerada para el calculo de peso, ya que como se mencionó anteriormente, estas pueden generar ruido en la detección de idiomas.
-
-Como se puede ver en la figura \ref{fig:Reconocimiento de Lenguaje P4}, tenemos una palabra ambigua "hotel" que se encuentra entre dos palabras "ancla" con probabilidades de idioma muy altas, por lo que se procede a calcular el peso de cada una de estas palabras vecinas para determinar el idioma predominante en esta ventana de contexto, qudando la palabra "llegamos" con un peso de 0.416 y la palabra "everything" con un peso de 0.468, por lo que al tener un peso muy parecido, esta palabra se mantine como ambigua y se deberá considerar un último criterio.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{assets/Reconocimiento_de_lenguaje_P3.2.png}
-    \caption{Reconocimiento de Lenguaje, idioma reconocido por contexto}
-    \label{fig:Reconocimiento de Lenguaje P4}
-\end{figure}
-
-Para este punto en donde tenemos una palabra ambigua con pesos muy similares en su contexto, se procederá a aumentar la probabilidad del mismo idioma que tenga esta palabra en comparación con el idioma detectado globalmente, con el fin de favorecer el idioma que tenga una mayor probabilidad global en el comentario, lo que nos ayudará a determinar el idioma predominante en esta ventana de contexto y así asignar el idioma a la palabra ambigua, por ejemplo en nuestro ejemplo procederemos a darle un peso adicional al idioma español +0.8 lo cuál termina quedando una competecia del español con 0.416 + 0.8 = 1.216 vs en inglés con 0.468, quedando finalmente esta palabra como parte del idioma español, lo que nos ayuda a mejorar la precisión de la detección de idiomas en nuestro dataset y así obtener una mejor aproximación del idioma predominante en cada comentario.
+En esta formula, se calcula un puntaje para cada idioma $L$ basado en la influencia de los tokens vecinos dentro de una ventana de contexto alrededor del token ambiguo. El factor de ponderación cuadrático amplifica la influencia de los tokens ancla con alta probabilidad, mientras que el sesgo del lenguaje global favorece el idioma detectado en la etapa de detección global. Al comparar los puntajes calculados para cada idioma, se puede determinar cuál es el idioma más probable para el token ambiguo, mejorando así la precisión de la detección de idiomas en nuestro dataset.
 
 \subsection{\textbf{Detección 3: Agregación por Mayoría Estadística}}
 \label{cha:Aggregation by Statistical Majority}
@@ -78,9 +76,9 @@ Una vez se ha identificado el idioma de cada una de las palabras presentes en el
 
 La formula que se utiliza para este proceso es la siguiente:
 
-\begin{math}
+\begin{equation}
 \displaystyle \text{Majority\_Percentage} = \frac{\sum P(lang_{best})}{\sum P(all\_langs)}
-\end{math}
+\end{equation}
 
 Donde $\sum P(lang_{best})$ es la suma de las probabilidades del idioma predominante de cada una de las palabras "anclas" para el comentario, y $\sum P(all\_langs)$ es la suma total de probabilidades de todos los idomas de todas las palabras "anclas" para el comentario. Con esta formula se busca obtener un porcentaje de predominancia del idioma, lo que nos ayudará a determinar si realmente el idioma detectado es predominante en base a su mayoría estadística, y así mejorar la precisión de la detección de idiomas en nuestro dataset.
 
@@ -90,4 +88,3 @@ Se eliminan las columnas innecesarias del dataset, conservando solo aquellas rel
 
 \section{\textbf{Filtrado de datos}}
 Una vez reconocido el lenguaje de los comentarios continuaremos con el filtrado de idioma de los datos, por lo cuál pasaremos principalmente por dos criteríos, el primero de ellos es que el lenguaje detectado con la fase de detección global de idioma \ref{cha:global_detection_lang} y el detectado por la fase de análisis micro-simántica \ref{cha:micro-semantic analysis} deben coincidir, ya que si estos no coinciden, esto puede generar una inconsistencia en el idioma del comentario, y adicionalmente el valor de majority\_percentage obtenido en la tercera fase \ref{cha:Aggregation by Statistical Majority} debe ser mayor a un 0.5, lo que nos asegura que el idioma predominante en el comentario es realmente predominante en base a su mayoría estadística.
-

@@ -1,0 +1,33 @@
+\chapter{\textbf{Fine-tuning de RoBERTa Base}}
+\label{cha:Fine-tuning de RoBERTa Base}
+
+Una vez que se obtuvo un dataset de nivel de plata con el modelo OLMO 3 THINKING de 4 bits con 31.295 datos etiquetados, donde 29.151 comentarios son considerados como no sugerencias y 2.144 comentarios son considerados como sugerencias, hemos decidido proceder a realizar el proceso de fine-tuning del modelo RoBERTa Base, con el objetivo de obtener un modelo que pueda clasificar de la manera más precisa posible los comentarios que realicen turistas a los diversos productos/marcas o servicios turísticos lo más rápido posible.
+
+Para realizar el proceso de fine-tuning hemos hecho uso de las librerías nltk para aplicar lematización a los comentarios turistas, transformers para poder cargar el modelo pre-entrenado de RoBERTa Base desde Hugging Face, PyTorch para realizar el proceso de entrenamiento del modelo y scikit-learn para realizar la evaluación del modelo a través de una matriz de confusión, además de otras métricas como Precision, Recall, F1-score y Accuracy.
+
+Considerando la disparidad de los datos obtenidos en el proceso de etiquetado hemos tenido que disminuir la cantidad de datos de no sugerencias para poder realizar un entrenamiento balanceado, por lo que hemos optado por utilizar un total de 5000 datos de no sugerencias y 2144 datos de sugerencias, obteniendo un total de 7144 datos para el proceso de fine-tuning del modelo RoBERTa Base. Además, se ha optado por utilizar una proporción de 80\% para el conjunto de entrenamiento y 20\% para el conjunto de prueba, obteniendo un total de 5715 datos para el conjunto de entrenamiento (4005 etiquetados como no sugerencia y 1710 etiquetados como sugerencia) y 1429 datos para el conjunto de prueba (995 etiquetados como no sugerencia y 434 etiquetados como sugerencia). Con esta separación de los datos realizada, hemos procedido a la carga del modelo pre-entrenado, congelando todas sus capas para el proceso fine-tuning pero solo descogelando las últimas 2, obteniendo un total de 14.767.874 parámetros entrenables, y luego de esto se ha procedido a realizar el proceso de entrenamiento del modelo con una tasa de aprendizaje de 2e-5, un batch size de 32, un largo de secuencia máxima de 512 tokens, un número de épocas de 5 y como función de pérdida se ha optado por utilizar Binary Cross Entropy con Logits, obteniendo un modelo con los siguientes valores en sus métricas de evaluación:
+
+\begin{itemize}
+    \item Accuracy $\approx$ 0.862
+    \item Precision $\approx$ 0.814
+    \item Recall $\approx$ 0.709
+    \item F1-score $\approx$ 0.758
+\end{itemize}
+
+Y la siguiente matriz de confusión:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{} & \textbf{Pred: No Sugerencia} & \textbf{Pred: Sugerencia} \\ \hline
+\textbf{Real: No Sugerencia} & 925 & 70 \\ \hline
+\textbf{Real: Sugerencia} & 126 & 308 \\ \hline
+\end{tabular}
+\caption{Matriz de Confusión del modelo RoBERTa Base después del proceso de fine-tuning}
+\label{tab:matriz_confusion_roberta}
+\end{table}
+
+Con esto podemos concluir que el modelo RoBERTa Base después del proceso de fine-tuning ha logrado obtener un buen rendimiento en la clasificación de los comentarios turistas, acercandose en un 81\% en precisión a la clasificación que fue brindada por el modelo OLMO 3 THINKING. Además, el modelo ha logrado obtener un buen equilibrio entre precisión y recall, lo que se refleja en un F1-score de 0.758, lo que indica que el modelo es capaz de identificar correctamente tanto las sugerencias como las no sugerencias con una buena tasa de acierto. Sin embargo, es importante mencionar que el modelo aún tiene margen de mejora, especialmente en la identificación de sugerencias, ya que el recall es de 0.709, lo que indica que hay un porcentaje de sugerencias que el modelo no está identificando correctamente. Esto podría ser debido a la cantidad limitada de datos de sugerencias disponibles para el entrenamiento, como también, a los fallos que el modelo OLMO 3 THINKING pudo haber cometido en el proceso de etiquetado, lo que podría haber introducido ruido en el dataset de nivel de plata utilizado para el entrenamiento del modelo RoBERTa Base. 
+
+A pesar de esto hemos podido presenciar una mejora significativa en los tiempos de ejecución del modelo RoBERTa Base en comparación con el modelo OLMO 3 THINKING, ya que el modelo RoBERTa al ser mucho más pequeño y no requiere tokens extras para el razonamiento y análisis de los comentarios, hemos logrado reducir el tiempo de ejecución etiquetando 10000 comentarios en 118 horas con OLMO 3 THINKING a tan solo 30 minutos con el modelo RoBERTa Base ejecutando el programa en un Macbook Air con chip M4, 16 GB de RAM, 10 Nucleos de CPU y 10 Nucleos de GPU, lo que representa una mejora significativa en términos de eficiencia y escalabilidad para el proceso de clasificación de los comentarios turistas.
