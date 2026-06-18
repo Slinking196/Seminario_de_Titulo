@@ -1,7 +1,7 @@
 \chapter{\textbf{Procesamiento de datos}}
 \label{cha:procesamiento_datos}
 
-En esta sección describiremos el proceso que realiza el modelo tanto para el etiquetado de datos (Silver Label) de entrenamiento con OLMO 3 así como para el procesamiento de etiquetado de datos realizado por ModernBERT, sus arquitecturas, ventajas sobre otros modelos, parametros, diferencias con las arquitecturas tradicionales, entre otros aspectos.
+En esta sección describiremos el proceso que realiza el modelo tanto para el etiquetado de datos (Silver Label) de entrenamiento con OLMO 3 así como para el procesamiento de etiquetado de datos realizado por RoBERTa Base, sus arquitecturas, ventajas sobre otros modelos, parametros, diferencias con las arquitecturas tradicionales, entre otros aspectos.
 
 \section{Modelo OLMO 3 base}
 OlMO 3, Modelo de lenguaje y pensamiento completamente abierto, con un modelo BASE y versiones mas complejas de THINK, INSTRUCT y RL-Zero, y con variaciones de 7B y 32B de parámetros, es un modelo de lenguaje desarrollado por Team OLMO \cite{olmo2025olmo3} aproximadamente 1 año de publicado el modelo OLMO 2 \textcite{groeneveld2025olmo2} en 2024. OLMO 3 posee capacidades, tales como rasonamiento de largo contexto, código, seguimiento de insdtrucciones, etc. mantiene rendimiento de longitudes de contexto extendidas sobre los 65.000 tokens, todas características conseguidas gracias a un entrenamiento con configuraciones como Data Paralelism Replication y shard (DP-rep y DP-shard), Cantidad de Cabezales de atención, etc. \ref{fig:ConfiguracionesEntrenamientoOLMO} 
