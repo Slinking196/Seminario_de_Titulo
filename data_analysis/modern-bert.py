@@ -30,7 +30,7 @@ DATA_DIR = Path("./data_analysis/data/labeled")
 OUTPUT_FILE = DATA_DIR / "Chile_all1_clean.csv"
 PART_FILE_PATTERN = "Chile_all1_clean_labeled_*.csv"
 
-MODEL_ID = "roberta-base" # Puedes cambiar a "roberta-large" si tu hardware lo soporta, pero ten en cuenta que será mucho más lento y requerirá más memoria.
+MODEL_ID = "answerdotai/ModernBERT-base"
 MAX_LENGTH = 512
 BATCH_SIZE = 32
 EPOCHS = 5
@@ -242,8 +242,9 @@ if __name__ == "__main__":
 
     # 2. Descongelamos las últimas 2 capas del encoder para que se adapten a nuestro dominio
     capas_a_entrenar = 2
-    for layer in model.roberta.encoder.layer[-capas_a_entrenar:]:
-        for param in layer.parameters():
+    num_capas = len(model.model.layers)
+    for layer in [num_capas - i for i in range(1, capas_a_entrenar + 1)]:
+        for param in model.model.layers[layer].parameters():
             param.requires_grad = True
 
     # 3. Descongelamos el cabezal de clasificación (pooler y classifier)
@@ -267,7 +268,7 @@ if __name__ == "__main__":
 
     logger.info("Configurando argumentos de entrenamiento...")
     training_args = TrainingArguments(
-        output_dir="./resultados_nlu",
+        output_dir="./resultados_nlu_modern_bert",
         eval_strategy="epoch",
         save_strategy="epoch",
         learning_rate=LR,
@@ -348,11 +349,11 @@ if __name__ == "__main__":
     # =================================================================
 
     logger.info("Guardando modelo final...")
-    trainer.save_model("./matusalem")
+    trainer.save_model("./matusalem_v2")
     
     logger.info("Guardando modelo final...")
-    trainer.save_model("./matusalem")
-    tokenizer.save_pretrained("./matusalem")
+    trainer.save_model("./matusalem_v2")
+    tokenizer.save_pretrained("./matusalem_v2")
     logger.info("Proceso completado exitosamente.")
 
     # Lista de ejemplos representativos para poner a prueba tu NLU
