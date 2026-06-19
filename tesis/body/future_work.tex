@@ -2,16 +2,16 @@
 \chapter{Trabajo Futuro}
 \label{cha:trabajo_futuro}
 
-En esta sección veremos el estado actual de la investigación, a que apuntan los resultados obtenidos, limitaciones del proyecto tanto técnicas como de estado del arte, posibles mejoras, continuaciones de la investigación, cambios, pruebas o modificaciones posibles a la metodología que pueden ser realizadas para mejorar los resultados obtenidos o cambiar los resultados para guiar la investigación en otra dirección, etc.
+En esta sección veremos el estado actual de la investigación, a que apuntan los resultados obtenidos, limitaciones del proyecto tanto técnicas como de estado del arte, posibles mejoras, continuaciones de la investigación, cambios, pruebas o modificaciones a la metodología e investigación.
 
 \section{Limitaciones del proyecto}
-
+\label{sec:limitaciones}
 \begin{itemize}
     \item El proyecto ha presentado limitaciones en cuanto a la disponibilidad de modelos abiertos y con sus datos de entrenamiento públicos, la busqueda constante de modelos con estas características ha sido un gran desafio, limitando el espacio de busqueda y a solo poder correr modelos en infraestructura propia (sin tener en cuenta el arriendo o compra de hardware debido a la viabilidad económica del proyecto).
 
     \item Existen claras limitaciones en cuanto a la infraestructura y hardware disponibles, sobre todo debido a que no se posee ni el hardware ni los fondos para poder financiar uno (ni arrendado ni comprado), por lo que existieron limitantes que provocaron la necesidad forzada de modelos cuantizados cercanos a los 4 bits y (de entre las opciones disponibles) 7B de parámetros.
     
-    \item Baja presencia de modelos multilinguales eficientes que podamos correr y que cumplan con las restricciones requeridas (abiertos, datos públicos y que pueda correr en hardware local).
+    \item Baja presencia de modelos multilinguales eficientes que podamos correr y que cumplan con las restricciones requeridas (abierto, datos públicos y que pueda correr en hardware local).
     
 \end{itemize}
 
@@ -22,9 +22,12 @@ En esta sección veremos el estado actual de la investigación, a que apuntan lo
     
     \item Iteraciones y Refinamiento del prompt utilizado para el modelo  OLMO 3 THINKING, con el objetivo de lograr una mejor comprensión del término sugerencia, ya que esto determina la verdadera precisión de la detección y el futuro entranmiento de modelos NLU, y corresponde a un punto clave para mejorar los resultados finales.
      
-    \item Una posible creación de un modelo desde cero, completamente entrenado para la tarea que se requiere y no depender de un modelo pre-entrenado, requiriendo por un lado una mayor inversión de recursos de entrenamiento, pero logrando un modelo totalmente "especializado" y peuqeño en la tarea de detección.
+    \item Una posible creación de un modelo desde cero, completamente entrenado para la tarea que se requiere y no depender de un modelo pre-entrenado, requiriendo por un lado una mayor inversión de recursos de entrenamiento, pero logrando un modelo totalmente "especializado" en la tarea de detección.
     
-    \item Etiquetado de datos con supervisión humana, esto para obtener datos considerado como etiquetas de oro y con esto disminuir el ruido dentro de los datos de entrenamiento de los modelos NLU seleccionados.
+    \item Pruebas mas exhaustivas y en mayor cantidad, con distintos modelos tanto variantes de RoBERTa como similares, con arquitecturas, hiperparametros y Tokens similares que compitan de manera teórica y poder comparar sus desempeños en la misma tarea.
+    
+    \item Mejora en la calidad de los datos de plata, realizando ya sea un etiquetado a mano de estos o supervisando el etiquetado de plata con un modelo mas robusto o mejor entrenado para la tarea, de tal foprma que se consigan datos sin ruido.
+    
 \end{itemize}
 
 \section{Posible dirección de la investigación futura}
@@ -35,5 +38,6 @@ En esta sección veremos el estado actual de la investigación, a que apuntan lo
     \item Enfoque en una aplicación en la industria, ofreciendo el producto para validar con posibles clientes y usuarios finales, de manera que se realicen pruebas de usuario y se tenga certeza del alcance real del mismo.
     \item Probar distintos modelos de NLU como ModernBERT, XLM-RoBERTa, Deberta V3, etc. para evaluar su desempeño en la tarea de clasificación binaria de sugerencias en terminos de velocidad, precisión, F1-Score, entre otras métricas en hardware local.
     \item Entrenar el modelo con datos de otros idiomas que no sean ni español ni inglés
+     
 \end{itemize}
     
