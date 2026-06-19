@@ -123,7 +123,32 @@
     \label{fig:gantt16}
 \end{figure}
 
+\newpage
+\section{Descripción del dataset}
+\begin{table}[htbp] % [htbp] ayuda a LaTeX a posicionar la tabla de forma óptima
+\centering % Centra la tabla en la página
+\caption{Descripción de las variables del conjunto de datos de TripAdvisor.} % Tu título aquí
+\label{tab:variables_tripadvisor} % Tu etiqueta para citar con \ref{tab:variables_tripadvisor}
 
+\begin{tabularx}{\textwidth}{|l|X|}
+\hline
+\textbf{Columna} & \textbf{Descripción} \\ \hline
+\texttt{region\_name} &  Nombre de la región donde se encuentra el servicio turístico \\ \hline
+\texttt{attraction\_name} &  Nombre del servicio turístico \\ \hline
+\texttt{language} &  Idioma del comentario identificado por TripAdvisor a través de la configuración del usuario, considerando 3 idiomas principales los cuales son español, inglés y portugués \\ \hline
+\texttt{username} &  Nombre de usuario del autor del comentario \\ \hline
+\texttt{rating\_review} & Valor entre 1 y 5 que contiene el comentario, refiriéndonos a una escala Likert, donde se asumió que 1 es muy mal servicio y 5 es excelente \\ \hline
+\texttt{title} & Título del comentario creado por el usuario \\ \hline
+\texttt{review\_text} & Comentario del usuario respecto a su experiencia como turista en determinado servicio de trasfondo turístico \\ \hline
+\texttt{written\_date} & Fecha en la que se escribió el comentario \\ \hline
+\texttt{visit\_date} & Fecha en la que el usuario visitó o hizo uso del servicio turístico \\ \hline
+\texttt{companion\_type} & Tipo de acompañante con el que el usuario realizó su visita al servicio turístico (Ejemplo: solo, pareja, familia, amigos, etc.) \\ \hline
+\texttt{contribution} & Contribuciones que ha realizado el usuario dentro de la plataforma de TripAdvisor. \\ \hline
+\texttt{sentiment} & Sentimiento del comentario, que puede estar entre 5 opciones: muy negativo, negativo, neutral, positivo o muy positivo. \\ \hline
+\texttt{sentiment\_score} & Puntaje del sentimiento del comentario, que puede ser un valor numérico entre 0 y 4, donde 0 representa un sentimiento negativo, 2 representa un sentimiento neutral y 4 representa un sentimiento positivo \\ \hline
+\texttt{location} & Ubicación del usuario que realizó el comentario \\ \hline
+\end{tabularx}
+\end{table}
 
 
 \section{Tipos de enfoques de investigación}
@@ -272,6 +297,6 @@ Reply ONLY with this JSON, no additional text:
     \end{tabular}
     \vspace{0.5em}
     \begin{minipage}{\linewidth}
-        \small \textit{*Todos se ejecutaron con un batch size de 16, una tasa de aprendizaje de 2e-5, un número máximo de 5 épocas y en general los mismos parámetros*}
+        \small \textit{*Todos se ejecutaron con un batch size de 32, una tasa de aprendizaje de 2e-5, un número máximo de 5 épocas y en general los mismos parámetros*}
     \end{minipage}
 \end{table}
