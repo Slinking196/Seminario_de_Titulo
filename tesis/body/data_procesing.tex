@@ -11,7 +11,7 @@ OLMO 3 corresponde a un tipo de modelo que adopta la arquitectura de Transformer
 Como se puede observar en la figura \ref{fig:MHeadGQuery}, la diferencia entre Multi Head Attention (MHA) y Grouped Query Attention (GQA) radica en los pares key/value, mencionado previamente, mientras que en MHA cada cabeza de atención tiene su propio par key/value, en GQA cada grupo de cabezas comparte un único par key/value. Esto permite a GQA reducir el uso de memoria, lo que es especialmente beneficioso para modelos grandes como el OLMO 3 de 32B de parámetros. Sin embargo, es importante destacar que esta reducción en el uso de memoria puede llegar a ser perjudicial para el rendimiento del modelo.
 
 \section{Modelo OLMO 3 THINKING}
-
+\label{sec:olmo3thinking}
 Pese a que el modelo OLMO 3 BASE posee un diseño de arquitectura similar, el modelo OLMO 3 Thinking (Considerando que comparamos ambos con la misma cantidad de parámetros), no posee diferencias de arquitectura como tal, si no que el modelo Thinking recibie un post-entrenamiento para poder otorgarle la capacidad de "Pensar".
 
 Mientra que la arquitectura física, cabezales, parámetros, capas, neuronas, etc, se definen en el modelo OLMO 3 BASE mencionado en la figura \ref{fig:Arquitectura7Bvs32B}, el modelo OLMO 3 THINKING recibe un post-entrenamiento especializado, donde se le otorgan tareas de razonamiento complejo, como por ejemplo, razonamiento de múltiples pasos, razonamiento de largo contexto, razonamiento de código, etc. Esto permite que el modelo THINKING pueda comprender y procesar información de manera más profunda y compleja, lo que es especialmente útil para tareas que requieren un alto nivel de comprensión y análisis.
@@ -73,3 +73,38 @@ Es necesario considerar de igual forma la arquitectura del modelo, que pese a no
 Además se presentaron algunos problemas de rendimiento con modernBERT en la misma tarea que RoBERTa, que demostraron empíricamente como este último modelo es el que debió ser seleccionado para la tarea, por lo que se opta por RoBERTa para el etiquetado masivo de datos finalmente.
 
 Pese a lo anterior, no se descartan pruebas con modelos como BERT que, pese a su subentrenamiento según \cite{DBLP:journals/corr/abs-1907-11692}, pueden teóricamente funcionar bien frente a contextos reducidos (abriendo la posibilidad de utilizar distintos modelos dependiendo del tamaño del comentario/contexto), por lo que es algo a discutir en la sección \ref{cha:trabajo_futuro} o en futuras investigaciones relacionadas al trabajo o similares.
+
+Una vez que se obtuvo un dataset de nivel de plata con el modelo OLMO 3 THINKING (previamente mencionado en la sección \ref{sec:olmo3thinking}) de 4 bits con 31.295 datos etiquetados, donde 29.151 comentarios son considerados como no sugerencias y 2.144 comentarios son considerados como sugerencias, hemos decidido proceder a realizar el proceso de fine-tuning del modelo RoBERTa Base, con el objetivo de obtener un modelo que pueda clasificar de la manera más precisa posible los comentarios que realicen turistas a los diversos productos/marcas o servicios turísticos lo más rápido posible.
+
+Para realizar el proceso de fine-tuning hemos hecho uso de las librerías nltk para aplicar lematización a los comentarios turistas, transformers para poder cargar el modelo pre-entrenado de RoBERTa Base desde Hugging Face, PyTorch para realizar el proceso de entrenamiento del modelo y scikit-learn para realizar la evaluación del modelo a través de una matriz de confusión, además de otras métricas como Precision, Recall, F1-score y Accuracy.
+
+Fue necesario todo este proceso de entrenamiento por medio de fine-tuning concentrándonos en un enfoque zero-shot, debido a las limitaciones que serán más detalladas en la sección \ref{sec:limitaciones}. Dada la ausencia de datos etiquetados y como se optó por un modelo LLM relativamente pesado para el etiquetado de datos iniciales (en vez de realizar un etiquetado manual), solo se pudieron conseguir poco más de 30.000 datos de nivel de plata, pero esto demostró ser suficiente tanto para el entrenamiento de RoBERTa Base, así como para cumplir con los objetivos de la investigación al conseguir una precisión de 81\% y exactitud de un 86\%.
+
+\section{Resultados de RoBERTa}
+Considerando la disparidad de los datos obtenidos en el proceso de etiquetado hemos tenido que disminuir la cantidad de datos de no sugerencias para poder realizar un entrenamiento balanceado, por lo que hemos optado por utilizar un total de \textbf{5000} datos de \textbf{no sugerencias} y \textbf{2144} datos de \textbf{sugerencias}, obteniendo un total de 7144 datos para el proceso de fine-tuning del modelo RoBERTa Base. Además, se ha optado por utilizar una proporción de 80\% para el conjunto de entrenamiento y 20\% para el conjunto de prueba, obteniendo un total de 5715 datos para el conjunto de entrenamiento (4005 etiquetados como no sugerencia y 1710 etiquetados como sugerencia) y 1429 datos para el conjunto de prueba (995 etiquetados como no sugerencia y 434 etiquetados como sugerencia). Con esta separación de los datos realizada, hemos procedido a la carga del modelo pre-entrenado, congelando todas sus capas para el proceso fine-tuning pero solo descogelando las últimas 2, obteniendo un total de 14.767.874 parámetros entrenables, y luego de esto se ha procedido a realizar el proceso de entrenamiento del modelo con una tasa de aprendizaje de 2e-5, un batch size de 32, un largo de secuencia máxima de 512 tokens, un número de épocas de 5 y como función de pérdida se ha optado por utilizar Binary Cross Entropy con Logits, obteniendo un modelo con los siguientes valores en sus métricas de evaluación:
+
+
+\begin{align*}
+\text{Accuracy} &\approx 0.867 & \text{Precision} &\approx 0.802 \\
+\text{Recall}   &\approx 0.748 & \text{F1-score}  &\approx 0.774
+\end{align*}
+
+
+Y la siguiente matriz de confusión:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{} & \textbf{Pred: No Sugerencia} & \textbf{Pred: Sugerencia} \\ \hline
+\textbf{Real: No Sugerencia} & 915 & 80 \\ \hline
+\textbf{Real: Sugerencia} & 109 & 325 \\ \hline
+\end{tabular}
+\caption{Matriz de Confusión del modelo RoBERTa Base después del proceso de fine-tuning}
+\label{tab:matriz_confusion_roberta}
+\end{table}
+
+
+En conclusión, el proceso de \textit{fine-tuning} aplicado a RoBERTa Base demostró ser una solución eficaz frente a la situación actual y el etiquetado masivo. A pesar de haber partido con un conjunto de datos sin etiquetar y luego  haber conseguido uno pequeño de nivel plata, la estrategia de balanceo de clases y la adaptación de las últimas capas del modelo permitieron alcanzar un desempeño aceptable, destacando una exactitud del 86\% y una precisión del 80\%. 
+
+Como se observa en la matriz de confusión \ref{tab:matriz_confusion_roberta}, el modelo logra identificar las clases sin excesivos falsos positivos. Estos resultados validan la elección metodológica de esta arquitectura y confirman que el modelo entrenado cuenta con la robustez necesaria para escalar y automatizar la clasificación de los 150.000 comentarios restantes, cumpliendo con los objetivos de esta fase de la investigación.
