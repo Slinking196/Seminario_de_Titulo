@@ -7,9 +7,9 @@ En esta sección veremos el estado actual de la investigación, a que apuntan lo
 \section{Limitaciones del proyecto}
 \label{sec:limitaciones}
 \begin{itemize}
-    \item El proyecto ha presentado limitaciones en cuanto a la disponibilidad de modelos abiertos y con sus datos de entrenamiento públicos, la busqueda constante de modelos puramente de codigo abierto y con datos de entrenamiento publicos ha sido un gran desafio, limitando el espacio de busqueda y limitandonos a solo poder correr modelos en infraestructura propia (sin tener en cuenta el arriendo o compra de hardware debido a la viabilidad económica del proyecto).
+    \item El proyecto ha presentado limitaciones en cuanto a la disponibilidad de modelos abiertos y con sus datos de entrenamiento públicos, la busqueda constante de modelos con estas características ha sido un gran desafio, limitando el espacio de busqueda y a solo poder correr modelos en infraestructura propia (sin tener en cuenta el arriendo o compra de hardware debido a la viabilidad económica del proyecto).
 
-    \item Existen claras limitaciones en cuanto a la infraestructura y hardware disponibles, sobre todo debido a que no se posee ni el hardware ni los fondos para poder financiar uno (ni arrendado ni comprado), por lo que existieron limitantes que provocaron la necesidad forzada de modelos cuantizados cercanos a los 4 bits y (de entre las opciones disponibles) 7B de parámetros. 
+    \item Existen claras limitaciones en cuanto a la infraestructura y hardware disponibles, sobre todo debido a que no se posee ni el hardware ni los fondos para poder financiar uno (ni arrendado ni comprado), por lo que existieron limitantes que provocaron la necesidad forzada de modelos cuantizados cercanos a los 4 bits y (de entre las opciones disponibles) 7B de parámetros.
     
     \item Baja presencia de modelos multilinguales eficientes que podamos correr y que cumplan con las restricciones requeridas (abierto, datos públicos y que pueda correr en hardware local).
     
@@ -18,9 +18,9 @@ En esta sección veremos el estado actual de la investigación, a que apuntan lo
 \section{Puntos a mejorar}
 
 \begin{itemize}
-    \item Optimización de hiperparámetros de los modelos, sobre todo de OLMO 3 (XLM y OLLAMA), para mejorar su desempeño en la tarea de clasificación binaria de sugerencias.
+    \item Optimización de hiperparámetros de los modelos OLMO 3 THIKING de OLLAMA y RoBERTa, para mejorar su desempeño en la tarea de clasificación binaria de sugerencias.
     
-    \item Iteraciones y Refinamiento del prompt utilizado para ambos modelos, con el objetivo de lograr una mejor comprensión del término sugerencia, ya que esto determina la verdadera precisión de la detección, y corresponde a un punto clave para mejorar los resultados finales.
+    \item Iteraciones y Refinamiento del prompt utilizado para el modelo  OLMO 3 THINKING, con el objetivo de lograr una mejor comprensión del término sugerencia, ya que esto determina la verdadera precisión de la detección y el futuro entranmiento de modelos NLU, y corresponde a un punto clave para mejorar los resultados finales.
      
     \item Una posible creación de un modelo desde cero, completamente entrenado para la tarea que se requiere y no depender de un modelo pre-entrenado, requiriendo por un lado una mayor inversión de recursos de entrenamiento, pero logrando un modelo totalmente "especializado" en la tarea de detección.
     
@@ -34,9 +34,9 @@ En esta sección veremos el estado actual de la investigación, a que apuntan lo
 
 \begin{itemize}
     \item Continuar con la investigación de modelos multilinguales eficientes, abiertos y con datos de entrenamiento públicos, pero realizando pequeñas pruebas comparativas para evaluar que modelo se adapta mejor a la tarea de clasificación binaria de sugerencias.
-    
+    \item Realización de pruebas con traducción de los datos de entrenamiento a los idiomas de los modelos seleccionados (ej: Inglés), para evaluar si permite al modelo una mejor comprensión del comentario sin perder información relevante en el proceso de traducción.
     \item Enfoque en una aplicación en la industria, ofreciendo el producto para validar con posibles clientes y usuarios finales, de manera que se realicen pruebas de usuario y se tenga certeza del alcance real del mismo.
-    
+    \item Probar distintos modelos de NLU como ModernBERT, XLM-RoBERTa, Deberta V3, etc. para evaluar su desempeño en la tarea de clasificación binaria de sugerencias en terminos de velocidad, precisión, F1-Score, entre otras métricas en hardware local.
     \item Entrenar el modelo con datos de otros idiomas que no sean ni español ni inglés
      
 \end{itemize}

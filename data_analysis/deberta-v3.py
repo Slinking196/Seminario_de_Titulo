@@ -30,7 +30,7 @@ DATA_DIR = Path("./data_analysis/data/labeled")
 OUTPUT_FILE = DATA_DIR / "Chile_all1_clean.csv"
 PART_FILE_PATTERN = "Chile_all1_clean_labeled_*.csv"
 
-MODEL_ID = "roberta-base" # Puedes cambiar a "roberta-large" si tu hardware lo soporta, pero ten en cuenta que será mucho más lento y requerirá más memoria.
+MODEL_ID = "microsoft/deberta-v3-base" # Modelo base de DeBERTa v3 pequeño, ideal para tareas de clasificación con recursos limitado
 MAX_LENGTH = 512
 BATCH_SIZE = 32
 EPOCHS = 5
@@ -75,7 +75,7 @@ class CustomTrainer(Trainer):
         labels_one_hot = labels.to(torch.float32)
         
         # Pasamos ambos tensores que ahora tienen la misma forma [Batch_Size, 2]
-        loss_fct = nn.BCEWithLogitsLoss()
+        loss_fct = nn.BCEWithLogitsLoss(weight=self.class_weights)
         loss = loss_fct(logits, labels_one_hot)
         
         return (loss, outputs) if return_outputs else loss
@@ -240,13 +240,13 @@ if __name__ == "__main__":
     for param in model.parameters():
         param.requires_grad = False
 
-    # 2. Descongelamos las últimas 2 capas del encoder para que se adapten a nuestro dominio
+    # 2. DESCONGELAR CAPAS (Cambiar model.roberta por model.deberta)
     capas_a_entrenar = 2
-    for layer in model.roberta.encoder.layer[-capas_a_entrenar:]:
+    for layer in model.deberta.encoder.layer[-capas_a_entrenar:]:  # <--- CAMBIO AQUÍ
         for param in layer.parameters():
             param.requires_grad = True
 
-    # 3. Descongelamos el cabezal de clasificación (pooler y classifier)
+    # 3. Descongelamos el cabezal de clasificación
     for param in model.classifier.parameters():
         param.requires_grad = True
         
@@ -267,7 +267,7 @@ if __name__ == "__main__":
 
     logger.info("Configurando argumentos de entrenamiento...")
     training_args = TrainingArguments(
-        output_dir="./resultados_nlu",
+        output_dir="./resultados_nlu_deberta_v3",
         eval_strategy="epoch",
         save_strategy="epoch",
         learning_rate=LR,
@@ -348,11 +348,11 @@ if __name__ == "__main__":
     # =================================================================
 
     logger.info("Guardando modelo final...")
-    trainer.save_model("./matusalem")
+    trainer.save_model("./matusalem_v3")
     
     logger.info("Guardando modelo final...")
-    trainer.save_model("./matusalem")
-    tokenizer.save_pretrained("./matusalem")
+    trainer.save_model("./matusalem_v3")
+    tokenizer.save_pretrained("./matusalem_v3")
     logger.info("Proceso completado exitosamente.")
 
     # Lista de ejemplos representativos para poner a prueba tu NLU

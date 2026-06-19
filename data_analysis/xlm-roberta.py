@@ -30,7 +30,7 @@ DATA_DIR = Path("./data_analysis/data/labeled")
 OUTPUT_FILE = DATA_DIR / "Chile_all1_clean.csv"
 PART_FILE_PATTERN = "Chile_all1_clean_labeled_*.csv"
 
-MODEL_ID = "roberta-base" # Puedes cambiar a "roberta-large" si tu hardware lo soporta, pero ten en cuenta que será mucho más lento y requerirá más memoria.
+MODEL_ID = "xlm-roberta-base"
 MAX_LENGTH = 512
 BATCH_SIZE = 32
 EPOCHS = 5
@@ -346,13 +346,10 @@ if __name__ == "__main__":
     )
     print("\n🧩 MATRIZ DE CONFUSIÓN:\n", df_matriz)
     # =================================================================
-
-    logger.info("Guardando modelo final...")
-    trainer.save_model("./matusalem")
     
     logger.info("Guardando modelo final...")
-    trainer.save_model("./matusalem")
-    tokenizer.save_pretrained("./matusalem")
+    trainer.save_model("./matusalem_xlm_roberta")
+    tokenizer.save_pretrained("./matusalem_xlm_roberta")
     logger.info("Proceso completado exitosamente.")
 
     # Lista de ejemplos representativos para poner a prueba tu NLU
